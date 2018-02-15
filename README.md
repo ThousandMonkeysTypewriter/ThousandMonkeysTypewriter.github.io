@@ -1,39 +1,29 @@
-## Program synthesis using neural nets (Neural Programmer-Interpreter ([1])(#1))
+## Program synthesis using neural nets ([Neural Programmer-Interpreter](https://arxiv.org/abs/1511.06279)) in Domain-specific language
 
-S. Reed and N. de Freitas. “Neural Programmer-Interpreters”. In: Proceedings of ICLR (2016).
+### What is neural program synthesis?
 
-You can use the [editor on GitHub](https://github.com/ThousandMonkeysTypewriter/ThousandMonkeysTypewriter.github.io/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+In recent years, [deep learnig](https://en.wikipedia.org/wiki/Deep_learning) has made [considerable progress](https://arxiv.org/ftp/arxiv/papers/1801/1801.00631.pdf) in areas such as speech recognition, image recognition, and game playing.  The success of neural nets lets us to change the view on the way the software itself is being created. We can use neural nets to gradualy increase automation in the process oft programm creation, and help engineers to get more results with less efforts.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+### What is Thousnad Monkeys Typewriter?
 
-### Markdown
+Using the deep learning technique, called Neural Programmer-Interpreter, we create the system, that first [learns by examples] (https://arxiv.org/pdf/1802.02353.pdf)
+and then is ready generate simple scripts in the [language](https://en.wikipedia.org/wiki/Domain-specific_language), that is created cpecially for that case.
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+![NPI illustration](https://thousandmonkeystypewriter.github.io/npi.gif)
 
-```markdown
-Syntax highlighted code block
+### Why do you need Thousnad Monkeys Typewriter?
 
-# Header 1
-## Header 2
-### Header 3
+Being software engineer, sometimes you have to create simple scripts (service, testing, integrational, parsing etc.) that just slightly deviates one from another. Instead writing countles conditions for each case, it's usefull to let AI to learn all cases for you, and to create each script for each case;
 
-- Bulleted
-- List
 
-1. Numbered
-2. List
+### Where do we go with all this AI?
 
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/ThousandMonkeysTypewriter/ThousandMonkeysTypewriter.github.io/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+Hopefully, with the progress of AI, in near future it will take less dull manual work to create software for every day use.
 
 ### References
 
 <a name="1"></a> [1] S. Reed and N. de Freitas. “Neural Programmer-Interpreters”. In: Proceedings of ICLR (2016).
+
+<a name="2"></a> [2] Deep Learning: A Critical Appraisal (https://arxiv.org/ftp/arxiv/papers/1801/1801.00631.pdf)
+
+<a name="3"></a> [3] Deep Learning: A Critical Appraisal ()
