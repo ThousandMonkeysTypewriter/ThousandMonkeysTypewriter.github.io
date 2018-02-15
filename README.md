@@ -1,4 +1,4 @@
-## Program synthesis using neural nets ([Neural Programmer-Interpreter](https://arxiv.org/abs/1511.06279)) in Domain-specific language
+## Program synthesis using neural nets ([Neural Programmer-Interpreter](https://arxiv.org/abs/1511.06279)) in [Domain-specific language](https://en.wikipedia.org/wiki/Domain-specific_language)
 
 ### What is neural program synthesis?
 
