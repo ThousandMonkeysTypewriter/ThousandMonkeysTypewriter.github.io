@@ -1,4 +1,4 @@
-## Program synthesis using neural nets (Neural Programmer-Interpreter [1](#1))
+## Program synthesis using neural nets (Neural Programmer-Interpreter ([1])(#1))
 
 S. Reed and N. de Freitas. “Neural Programmer-Interpreters”. In: Proceedings of ICLR (2016).
 
@@ -34,8 +34,6 @@ For more details see [GitHub Flavored Markdown](https://guides.github.com/featur
 
 Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/ThousandMonkeysTypewriter/ThousandMonkeysTypewriter.github.io/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
 
-### Support or Contact
+### References
 
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
-
-<a name="1"></a>S. Reed and N. de Freitas. “Neural Programmer-Interpreters”. In: Proceedings of ICLR (2016).
+<a name="1"></a> [1] S. Reed and N. de Freitas. “Neural Programmer-Interpreters”. In: Proceedings of ICLR (2016).
