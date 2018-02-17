@@ -11,13 +11,22 @@ without human effort.
 
 ### What is Thousnad Monkeys Typewriter?
 
-TMT is the system for [program induction]() that generates simple scripts in a [Domain-specifil language]. The system combines [supervised] and [unsupervised] learning. The core is the Neural Programmer-Interpreter, is capable of abstraction and higher-order controls over the program. The model realizes conception of  to let functions call sub-functions in new stack frames
+TMT is the system for [program induction]() that generates simple scripts in a [Domain-specifil language]. The system combines [supervised] and [unsupervised] learning. The core is the Neural Programmer-Interpreter, is capable of abstraction and higher-order controls over the program.
 
-Using the deep learning technique, called Neural Programmer-Interpreter, we create the system, that first [learns by examples](https://arxiv.org/pdf/1802.02353.pdf)
-and then is ready generate simple scripts in the [language](https://github.com/ThousandMonkeysTypewriter/DomainSpecificLanguage), that is created cpecially for that case.
+TMT also incorporates most common conceprions used today in a field of program synthesis are [satisfiability modulo theories (SMT) and [counter-example-guided inductive synthesis (CEGIS)](http://rsta.royalsocietypublishing.org/content/375/2104/20150403).
 
-The system core ([LSTM](https://en.wikipedia.org/wiki/Long_short-term_memory))
+NPI core consists of:
+1. RNN controller that takes sequential state encodings built from (a) the world environment
+(changes with actions), (b) the program call (actions) and (c) the arguments for the called
+program. The entirety of the input is fed in the first timestep, so every action by the NPI
+creates an output that is delivered as input.
+2. [DSL functions](https://github.com/ThousandMonkeysTypewriter/DomainSpecificLanguage)
+3. Domain itself where functions are executed ("scratchpad")
+
 ![NPI illustration](https://thousandmonkeystypewriter.github.io/npi.gif)
+
+NPI [learns by examples](https://arxiv.org/pdf/1802.02353.pdf) (supervised) or by providing instructions that fit all the constraints (SMT solver)
+
 
 ### Why do you need Thousnad Monkeys Typewriter?
 
