@@ -4,7 +4,14 @@
 
 In recent years, [deep learnig](https://en.wikipedia.org/wiki/Deep_learning) has made [considerable progress](https://arxiv.org/ftp/arxiv/papers/1801/1801.00631.pdf) in areas such as speech recognition, image recognition, and game playing.  The success of neural nets lets us to change the view on the way the software itself is being created. We can use neural nets to gradualy increase automation in the process oft programm creation, and help engineers to get more results with less efforts.
 
+There are a great deal of applications for program synthesis. Successful systems could one day
+automate a job that is currently very secure for humans: computer programming. Imagine a world
+in which debugging, refactoring, translating and synthesizing code from sketches can all be done
+without human effort. 
+
 ### What is Thousnad Monkeys Typewriter?
+
+TMT is the system for [program induction]() that generates simple scripts in a [Domain-specifil language]. The system combines [supervised] and [unsupervised] learning. The core is the Neural Programmer-Interpreter, is capable of abstraction and higher-order controls over the program. The model realizes conception of  to let functions call sub-functions in new stack frames
 
 Using the deep learning technique, called Neural Programmer-Interpreter, we create the system, that first [learns by examples](https://arxiv.org/pdf/1802.02353.pdf)
 and then is ready generate simple scripts in the [language](https://github.com/ThousandMonkeysTypewriter/DomainSpecificLanguage), that is created cpecially for that case.
