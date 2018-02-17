@@ -9,7 +9,7 @@ automate a job that is currently very secure for humans: computer programming. I
 in which debugging, refactoring, translating and synthesizing code from sketches can all be done
 without human effort. 
 
-### What is Thousnad Monkeys Typewriter?
+### What is Thousand Monkeys Typewriter?
 
 TMT is the system for [program induction](https://arxiv.org/abs/1703.07469) that generates simple scripts in a Domain-specifil language. The system combines [supervised](https://en.wikipedia.org/wiki/Supervised_learning) and [unsupervised](https://en.wikipedia.org/wiki/Unsupervised_learning) learning. The core is the [Neural Programmer-Interpreter](https://arxiv.org/abs/1511.06279), is capable of abstraction and higher-order controls over the program.
 
