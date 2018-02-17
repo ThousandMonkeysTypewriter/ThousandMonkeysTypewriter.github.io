@@ -39,8 +39,13 @@ Hopefully, with the progress of AI, in near future it will take less dull manual
 
 ### References
 
-<a name="1"></a> [1] S. Reed and N. de Freitas. “Neural Programmer-Interpreters”. In: Proceedings of ICLR (2016).
+[Deep Learning: A Critical Appraisal](https://arxiv.org/ftp/arxiv/papers/1801/1801.00631.pdf)
 
-<a name="2"></a> [2] Deep Learning: A Critical Appraisal (https://arxiv.org/ftp/arxiv/papers/1801/1801.00631.pdf)
+[Andrej Karpathy: Software 2.0](https://medium.com/@karpathy/software-2-0-a64152b37c35)
 
-<a name="3"></a> [3] Deep Learning: A Critical Appraisal ()
+[RobustFill: Neural Program Learning](https://arxiv.org/abs/1703.07469)
+
+[Neuro-Symbolic Program Synthesis](https://www.microsoft.com/en-us/research/publication/neuro-symbolic-program-synthesis-2/)
+
+[Improving the Universality and Learnability of Neural Programmer-Interpreters with Combinator Abstraction](https://arxiv.org/abs/1802.02696)
+
