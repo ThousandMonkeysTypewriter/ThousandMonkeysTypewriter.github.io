@@ -2,7 +2,7 @@
 
 ### What is neural program synthesis?
 
-In recent years, [Deep Learnig](https://en.wikipedia.org/wiki/Deep_learning) has made [considerable progress](https://arxiv.org/ftp/arxiv/papers/1801/1801.00631.pdf) in areas such as speech recognition, image recognition, and game playing.  The success of DL lets us to change the view on the way the software itself is being created. We can use neural nets to gradualy increase automation in the process oft programm creation, and help engineers to get more results with less efforts.
+In recent years, [Deep Learnig](https://en.wikipedia.org/wiki/Deep_learning) has made [considerable progress](https://arxiv.org/ftp/arxiv/papers/1801/1801.00631.pdf) in areas such as online advertising,, speech recognition and image recognition.  The success of DL lets us to change the view on the way the software itself is being created. We can use neural nets to gradualy increase automation in the process oft program creation, and help engineers to get more results with less efforts.
 
 There are a great deal of applications for program synthesis. Successful systems could one day
 automate a job that is currently very secure for humans: computer programming. Imagine a world
