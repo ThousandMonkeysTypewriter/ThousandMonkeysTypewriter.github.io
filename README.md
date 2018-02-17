@@ -28,7 +28,7 @@ creates an output that is delivered as input.
 NPI [learns by examples](https://arxiv.org/pdf/1802.02353.pdf) (supervised) or by providing instructions that fit all the constraints (SMT solver)
 
 
-### Why do you need Thousnad Monkeys Typewriter?
+### Why do you need Thousand Monkeys Typewriter?
 
 Being software engineer, sometimes you have to create simple scripts (service, testing, integrational, parsing etc.) that just slightly deviates one from another. Instead writing countles conditions for each case, it's usefull to let AI to learn all cases for you, and to create each script for each case;
 
