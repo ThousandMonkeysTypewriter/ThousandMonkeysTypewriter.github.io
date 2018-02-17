@@ -13,7 +13,7 @@ without human effort.
 
 TMT is the system for [program induction](https://arxiv.org/abs/1703.07469) that generates simple scripts in a Domain-specifil language. The system combines [supervised](https://en.wikipedia.org/wiki/Supervised_learning) and [unsupervised](https://en.wikipedia.org/wiki/Unsupervised_learning) learning. The core is the [Neural Programmer-Interpreter](https://arxiv.org/abs/1511.06279), is capable of abstraction and higher-order controls over the program.
 
-TMT also incorporates most common conceprions used today in a field of program synthesis are [satisfiability modulo theories (SMT) and [counter-example-guided inductive synthesis (CEGIS)](http://rsta.royalsocietypublishing.org/content/375/2104/20150403).
+TMT also incorporates most common conceprions used today in a field of program synthesis are [satisfiability modulo theories (SMT) and counter-example-guided inductive synthesis (CEGIS)](http://rsta.royalsocietypublishing.org/content/375/2104/20150403).
 
 NPI core consists of:
 1. [RNN](https://en.wikipedia.org/wiki/Recurrent_neural_network) controller that takes sequential state encodings built from (a) the world environment
