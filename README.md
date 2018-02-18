@@ -27,6 +27,8 @@ creates an output that is delivered as input.
 
 NPI [learns by examples](https://arxiv.org/pdf/1802.02353.pdf) (supervised) or by providing instructions that fit all the constraints (SMT solver)
 
+At the time, TMT generates simple scripts for anomaly detection in production logs.
+
 
 ### Why do you need Thousand Monkeys Typewriter?
 
