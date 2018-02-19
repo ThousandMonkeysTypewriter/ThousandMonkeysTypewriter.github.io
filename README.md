@@ -25,6 +25,10 @@ creates an output that is delivered as input.
 
 ![NPI illustration](https://thousandmonkeystypewriter.github.io/npi.gif)
 
+![LSTM](https://thousandmonkeystypewriter.github.io/lstm.png)
+
+![SMT](https://thousandmonkeystypewriter.github.io/cegis.jpg)
+
 NPI [learns by examples](https://arxiv.org/pdf/1802.02353.pdf) (supervised) or by providing instructions that fit all the constraints (SMT solver)
 
 At the time, TMT generates simple scripts for anomaly detection in production logs.
