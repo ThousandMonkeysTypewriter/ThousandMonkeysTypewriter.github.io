@@ -55,5 +55,8 @@ Hopefully, with the progress of AI, in near future it will take less dull manual
 
 [Improving the Universality and Learnability of Neural Programmer-Interpreters with Combinator Abstraction](https://arxiv.org/abs/1802.02696)
 
+[Unsupervised Anomaly Detection via Variational Auto-Encoder for Seasonal KPIs in Web Applications
+](https://arxiv.org/abs/1802.03903)
+
 
 ![Our monkey](https://thousandmonkeystypewriter.github.io/220px-Chimpanzee_seated_at_typewriter.jpg)
