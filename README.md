@@ -15,7 +15,11 @@ TMT is the system for [program induction](https://arxiv.org/abs/1703.07469) that
 
 TMT also incorporates most common conceprions used today in a field of program synthesis are [satisfiability modulo theories (SMT) and counter-example-guided inductive synthesis (CEGIS)](http://rsta.royalsocietypublishing.org/content/375/2104/20150403).
 
-NPI core consists of:
+![SMT](https://thousandmonkeystypewriter.github.io/cegis.jpg)
+
+Logs are analyzed by unsupervised mobel [Donut](https://arxiv.org/pdf/1802.03903.pdf), which provides arguments (namely, which fact is @normal@ and which is not) to the Neural Programmer.
+
+Neural Programmer (NPI) core consists of:
 1. [RNN](https://en.wikipedia.org/wiki/Recurrent_neural_network) controller that takes sequential state encodings built from (a) the world environment
 (changes with actions), (b) the program call (actions) and (c) the arguments for the called
 program. The entirety of the input is fed in the first timestep, so every action by the NPI
@@ -24,12 +28,6 @@ creates an output that is delivered as input.
 3. Domain itself where functions are executed ("scratchpad")
 
 ![NPI illustration](https://thousandmonkeystypewriter.github.io/npi.gif)
-
-![LSTM](https://thousandmonkeystypewriter.github.io/lstm.png)
-
-![SMT](https://thousandmonkeystypewriter.github.io/cegis.jpg)
-
-NPI [learns by examples](https://arxiv.org/pdf/1802.02353.pdf) (supervised) or by providing instructions that fit all the constraints (SMT solver)
 
 At the time, TMT generates simple scripts for anomaly detection in production logs.
 
