@@ -17,7 +17,7 @@ TMT also incorporates most common conceprions used today in a field of program s
 
 ![SMT](https://thousandmonkeystypewriter.github.io/cegis.jpg)
 
-Logs are analyzed by unsupervised mobel [Donut](https://arxiv.org/pdf/1802.03903.pdf), which provides arguments (namely, which fact is @normal@ and which is not) to the Neural Programmer.
+Logs are analyzed by unsupervised model [Donut](https://arxiv.org/pdf/1802.03903.pdf), which provides arguments (namely, which fact is @normal@ and which is not) to the Neural Programmer.
 
 Neural Programmer (NPI) core consists of:
 1. [RNN](https://en.wikipedia.org/wiki/Recurrent_neural_network) controller that takes sequential state encodings built from (a) the world environment
