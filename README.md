@@ -31,16 +31,6 @@ creates an output that is delivered as input.
 
 At the time, TMT generates simple scripts for anomaly detection in production logs.
 
-
-### Why do you need Thousand Monkeys Typewriter?
-
-Being software engineer, sometimes you have to create simple scripts (service, testing, integrational, parsing etc.) that just slightly deviates one from another. Instead writing countles conditions for each case, it's usefull to let AI to learn all cases for you, and to create each script for each case. [Reach us out](mailto:&#110;&#097;&#121;&#110;&#097;&#109;&#101;&#064;&#103;&#109;&#097;&#105;&#108;&#046;&#099;&#111;&#109;) and out AI monkeys will do the work for you.
-
-
-### Where do we go with all this AI?
-
-Hopefully, with the progress of AI, in near future it will take less dull manual work to create software for every day use.
-
 ### References
 
 [Deep Learning: A Critical Appraisal](https://arxiv.org/ftp/arxiv/papers/1801/1801.00631.pdf)
