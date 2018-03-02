@@ -37,14 +37,24 @@ At the time, TMT generates simple scripts for anomaly detection in production lo
 
 [Andrej Karpathy: Software 2.0](https://medium.com/@karpathy/software-2-0-a64152b37c35)
 
-[RobustFill: Neural Program Learning](https://arxiv.org/abs/1703.07469)
-
 [Neuro-Symbolic Program Synthesis](https://www.microsoft.com/en-us/research/publication/neuro-symbolic-program-synthesis-2/)
 
 [Improving the Universality and Learnability of Neural Programmer-Interpreters with Combinator Abstraction](https://arxiv.org/abs/1802.02696)
 
 [Unsupervised Anomaly Detection via Variational Auto-Encoder for Seasonal KPIs in Web Applications
 ](https://arxiv.org/abs/1802.03903)
+
+### <a name="npc"></a>Neural programmer concepts
+
+RobustFill (Microsoft, https://arxiv.org/abs/1703.07469)
+
+DeepCoder (Microsoft, https://openreview.net/pdf?id=ByldLrqlx)
+
+Program Synthesis with Reinforcement Learning (Google, https://arxiv.org/abs/1801.03526)
+
+Bayou (https://github.com/capergroup/bayou, https://arxiv.org/abs/1703.05698)
+
+Tree-to-tree parser (https://arxiv.org/abs/1802.03691, https://openreview.net/forum?id=Skp1ESxRZ)
 
 
 ![Our monkey](https://thousandmonkeystypewriter.github.io/220px-Chimpanzee_seated_at_typewriter.jpg)
