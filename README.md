@@ -46,15 +46,15 @@ At the time, TMT generates simple scripts for anomaly detection in production lo
 
 ### <a name="npc"></a>Neural programmer concepts
 
-RobustFill (Microsoft, https://arxiv.org/abs/1703.07469)
+[RobustFill](Microsoft, https://arxiv.org/abs/1703.07469)
 
-DeepCoder (Microsoft, https://openreview.net/pdf?id=ByldLrqlx)
+[DeepCoder](Microsoft, https://openreview.net/pdf?id=ByldLrqlx)
 
-Program Synthesis with Reinforcement Learning (Google, https://arxiv.org/abs/1801.03526)
+[Program Synthesis with Reinforcement Learning](Google, https://arxiv.org/abs/1801.03526)
 
-Bayou (https://github.com/capergroup/bayou, https://arxiv.org/abs/1703.05698)
+[Bayou](https://github.com/capergroup/bayou, https://arxiv.org/abs/1703.05698)
 
-Tree-to-tree parser (https://arxiv.org/abs/1802.03691, https://openreview.net/forum?id=Skp1ESxRZ)
+[Tree-to-tree parser](https://arxiv.org/abs/1802.03691, https://openreview.net/forum?id=Skp1ESxRZ)
 
 
 ![Our monkey](https://thousandmonkeystypewriter.github.io/220px-Chimpanzee_seated_at_typewriter.jpg)
