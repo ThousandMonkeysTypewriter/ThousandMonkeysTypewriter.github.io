@@ -56,5 +56,7 @@ At the time, TMT generates simple scripts for anomaly detection in production lo
 
 [Tree-to-tree parser](https://arxiv.org/abs/1802.03691, https://openreview.net/forum?id=Skp1ESxRZ)
 
+[Kayak](https://arxiv.org/abs/1712.07388)
+
 
 ![Our monkey](https://thousandmonkeystypewriter.github.io/220px-Chimpanzee_seated_at_typewriter.jpg)
