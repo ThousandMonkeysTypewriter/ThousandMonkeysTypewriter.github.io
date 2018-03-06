@@ -1,6 +1,6 @@
 # Program synthesis using neural nets in [Domain-specific language](https://en.wikipedia.org/wiki/Domain-specific_language)
 
-### What is neural program synthesis?
+## What is neural program synthesis?
 
 In recent years, [Deep Learnig](https://en.wikipedia.org/wiki/Deep_learning) has made [considerable progress](https://arxiv.org/ftp/arxiv/papers/1801/1801.00631.pdf) in areas such as online advertising,, speech recognition and image recognition.  The success of DL lets us to change the view on the way the software itself is being created. We can use neural nets to gradualy increase automation in the process oft program creation, and help engineers to get more results with less efforts.
 
@@ -9,7 +9,7 @@ automate a job that is currently very secure for humans: computer programming. I
 in which debugging, refactoring, translating and synthesizing code from sketches can all be done
 without human effort. 
 
-### What is Thousand Monkeys Typewriter?
+## What is Thousand Monkeys Typewriter?
 
 TMT is the system for [program induction](https://arxiv.org/abs/1703.07469) that generates simple scripts in a Domain-specifil language. The system combines [supervised](https://en.wikipedia.org/wiki/Supervised_learning) and [unsupervised](https://en.wikipedia.org/wiki/Unsupervised_learning) learning. The core is the [Neural Programmer-Interpreter](https://arxiv.org/abs/1511.06279), is capable of abstraction and higher-order controls over the program. The system works for error detection in both user logs and software source sode.
 
@@ -17,14 +17,14 @@ TMT also incorporates most common conceprions used today in a field of program s
 
 ![SMT](https://thousandmonkeystypewriter.github.io/cegis.jpg)
 
-## Types of data
+### Types of data
 
 Teher are to types of data (logs) that we are analyzing:
 
 - user logs
 - program traces
 
-## Supervised and unsupervised
+### Supervised and unsupervised
 
 To analyze logs, we are using both unsupervised technique ([Donut](https://arxiv.org/pdf/1802.03903.pdf) for user logs), and supervised (engineers mark anomalies in software traces using j-unit tests).
 
@@ -40,7 +40,7 @@ creates an output that is delivered as input.
 
 At the time, TMT generates simple scripts for anomaly detection in production logs.
 
-### References
+## References
 
 [Deep Learning: A Critical Appraisal](https://arxiv.org/ftp/arxiv/papers/1801/1801.00631.pdf)
 
@@ -53,7 +53,7 @@ At the time, TMT generates simple scripts for anomaly detection in production lo
 [Unsupervised Anomaly Detection via Variational Auto-Encoder for Seasonal KPIs in Web Applications
 ](https://arxiv.org/abs/1802.03903)
 
-### <a name="npc"></a>Neural programmer concepts
+## <a name="npc"></a>Neural programmer concepts
 
 [RobustFill (Microsoft)](https://arxiv.org/abs/1703.07469)
 
