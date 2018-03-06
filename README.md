@@ -1,4 +1,4 @@
-## Program synthesis using neural nets in [Domain-specific language](https://en.wikipedia.org/wiki/Domain-specific_language)
+# Program synthesis using neural nets in [Domain-specific language](https://en.wikipedia.org/wiki/Domain-specific_language)
 
 ### What is neural program synthesis?
 
