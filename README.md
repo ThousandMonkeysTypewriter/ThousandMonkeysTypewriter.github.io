@@ -28,7 +28,11 @@ Teher are to types of data (logs) that we are analyzing:
 
 To analyze logs, we are using both unsupervised technique ([Donut](https://arxiv.org/pdf/1802.03903.pdf) for user logs), and supervised (engineers mark anomalies in software traces using j-unit tests).
 
-Neural Programmer (NPI) core consists of:
+### NPI
+
+NPI is the core of the system. It takes logs and traces and learns probabilities at each timestep and environment.
+
+Neural Programmer (NPI) consists of:
 1. [RNN](https://en.wikipedia.org/wiki/Recurrent_neural_network) controller that takes sequential state encodings built from (a) the world environment
 (changes with actions), (b) the program call (actions) and (c) the arguments for the called
 program. The entirety of the input is fed in the first timestep, so every action by the NPI
