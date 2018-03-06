@@ -11,11 +11,18 @@ without human effort.
 
 ### What is Thousand Monkeys Typewriter?
 
-TMT is the system for [program induction](https://arxiv.org/abs/1703.07469) that generates simple scripts in a Domain-specifil language. The system combines [supervised](https://en.wikipedia.org/wiki/Supervised_learning) and [unsupervised](https://en.wikipedia.org/wiki/Unsupervised_learning) learning. The core is the [Neural Programmer-Interpreter](https://arxiv.org/abs/1511.06279), is capable of abstraction and higher-order controls over the program.
+TMT is the system for [program induction](https://arxiv.org/abs/1703.07469) that generates simple scripts in a Domain-specifil language. The system combines [supervised](https://en.wikipedia.org/wiki/Supervised_learning) and [unsupervised](https://en.wikipedia.org/wiki/Unsupervised_learning) learning. The core is the [Neural Programmer-Interpreter](https://arxiv.org/abs/1511.06279), is capable of abstraction and higher-order controls over the program. The system works for error detection in both user logs and software source sode.
 
 TMT also incorporates most common conceprions used today in a field of program synthesis are [satisfiability modulo theories (SMT) and counter-example-guided inductive synthesis (CEGIS)](http://rsta.royalsocietypublishing.org/content/375/2104/20150403).
 
 ![SMT](https://thousandmonkeystypewriter.github.io/cegis.jpg)
+
+## Types of data
+
+Teher are to types of data (logs) that we are analyzing:
+
+- users logs
+- program traces
 
 Logs are analyzed by unsupervised model [Donut](https://arxiv.org/pdf/1802.03903.pdf), which provides arguments (namely, which fact is @normal@ and which is not) to the Neural Programmer.
 
