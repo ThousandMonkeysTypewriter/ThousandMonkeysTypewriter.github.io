@@ -21,10 +21,12 @@ TMT also incorporates most common conceprions used today in a field of program s
 
 Teher are to types of data (logs) that we are analyzing:
 
-- users logs
+- user logs
 - program traces
 
-Logs are analyzed by unsupervised model [Donut](https://arxiv.org/pdf/1802.03903.pdf), which provides arguments (namely, which fact is @normal@ and which is not) to the Neural Programmer.
+## Supervised and unsupervised
+
+To analyze logs, we are using both unsupervised technique ([Donut](https://arxiv.org/pdf/1802.03903.pdf) for user logs), and supervised (engineers mark anomalies in software traces using j-unit tests).
 
 Neural Programmer (NPI) core consists of:
 1. [RNN](https://en.wikipedia.org/wiki/Recurrent_neural_network) controller that takes sequential state encodings built from (a) the world environment
