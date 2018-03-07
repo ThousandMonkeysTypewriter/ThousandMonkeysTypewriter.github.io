@@ -15,8 +15,6 @@ TMT is the system for [program induction](https://arxiv.org/abs/1703.07469) that
 
 TMT also incorporates most common conceprions used today in a field of program synthesis are [satisfiability modulo theories (SMT) and counter-example-guided inductive synthesis (CEGIS)](http://rsta.royalsocietypublishing.org/content/375/2104/20150403).
 
-![SMT](https://thousandmonkeystypewriter.github.io/cegis.jpg)
-
 ### Types of data
 
 Teher are to types of data (logs) that we are analyzing:
@@ -43,6 +41,10 @@ creates an output that is delivered as input.
 ![NPI illustration](https://thousandmonkeystypewriter.github.io/npi.gif)
 
 At the time, TMT generates simple scripts for anomaly detection in production logs.
+
+## How it works?
+
+First, we want to get training data.
 
 ## References
 
