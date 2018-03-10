@@ -28,7 +28,7 @@
         <header class="inner">
           <a id="forkme_banner" href="https://github.com/ThousandMonkeysTypewriter">View on GitHub</a>
 
-          <h1 id="project_title">Infinite monkey theorem</h1>
+          <h1 id="project_title">Scripts</h1>
 
           
         </header>
@@ -42,85 +42,11 @@
 <h2 id="what-is-neural-program-synthesis">What is neural program synthesis?</h2>
 
 <p>In recent years, <a href="https://en.wikipedia.org/wiki/Deep_learning">Deep Learnig</a> has made <a href="https://arxiv.org/ftp/arxiv/papers/1801/1801.00631.pdf">considerable progress</a> in areas such as online advertising,, speech recognition and image recognition.  The success of DL lets us to change the view on the way the software itself is being created. We can use neural nets to gradualy increase automation in the process oft program creation, and help engineers to get more results with less efforts.</p>
-
-<p>There are a great deal of applications for program synthesis. Successful systems could one day
-automate a job that is currently very secure for humans: computer programming. Imagine a world
-in which debugging, refactoring, translating and synthesizing code from sketches can all be done
-without human effort.</p>
-
-<h2 id="what-is-thousand-monkeys-typewriter">What is Thousand Monkeys Typewriter?</h2>
-
-<p>TMT is the system for <a href="https://arxiv.org/abs/1703.07469">program induction</a> that generates simple scripts in a Domain-specifil language. The system combines <a href="https://en.wikipedia.org/wiki/Supervised_learning">supervised</a> and <a href="https://en.wikipedia.org/wiki/Unsupervised_learning">unsupervised</a> learning. The core is the <a href="https://arxiv.org/abs/1511.06279">Neural Programmer-Interpreter</a>, is capable of abstraction and higher-order controls over the program. The system works for error detection in both user logs and software source sode.</p>
-
-<p>TMT also incorporates most common conceprions used today in a field of program synthesis are <a href="http://rsta.royalsocietypublishing.org/content/375/2104/20150403">satisfiability modulo theories (SMT) and counter-example-guided inductive synthesis (CEGIS)</a>.</p>
-
-<h3 id="types-of-data">Types of data</h3>
-
-<p>Teher are to types of data (logs) that we are analyzing:</p>
-
 <ul>
   <li>user logs</li>
   <li>program traces</li>
 </ul>
-
-<h3 id="supervised-and-unsupervised">Supervised and unsupervised</h3>
-
-<p>To analyze logs, we are using both unsupervised technique (<a href="https://arxiv.org/pdf/1802.03903.pdf">Donut</a> for user logs), and supervised (engineers mark anomalies in software traces using j-unit tests).</p>
-
-<h3 id="npi">NPI</h3>
-
-<p>NPI is the core of the system. It takes logs and traces and learns probabilities at each timestep and environment.</p>
-
-<p>Neural Programmer (NPI) consists of:</p>
-<ol>
-  <li><a href="https://en.wikipedia.org/wiki/Recurrent_neural_network">RNN</a> controller that takes sequential state encodings built from (a) the world environment
-(changes with actions), (b) the program call (actions) and (c) the arguments for the called
-program. The entirety of the input is fed in the first timestep, so every action by the NPI
-creates an output that is delivered as input.</li>
-  <li><a href="https://github.com/ThousandMonkeysTypewriter/DomainSpecificLanguage">DSL functions</a></li>
-  <li>Domain itself where functions are executed (“scratchpad”)</li>
-</ol>
-
-<p><img src="https://thousandmonkeystypewriter.github.io/npi.gif" alt="NPI illustration" /></p>
-
-<p>At the time, TMT generates simple scripts for anomaly detection in production logs.</p>
-
-<h2 id="how-it-works">How it works?</h2>
-
-<p>First, we want to get training data.</p>
-
-<h2 id="references">References</h2>
-
-<p><a href="https://arxiv.org/ftp/arxiv/papers/1801/1801.00631.pdf">Deep Learning: A Critical Appraisal</a></p>
-
-<p><a href="https://medium.com/@karpathy/software-2-0-a64152b37c35">Andrej Karpathy: Software 2.0</a></p>
-
-<p><a href="https://www.microsoft.com/en-us/research/publication/neuro-symbolic-program-synthesis-2/">Neuro-Symbolic Program Synthesis</a></p>
-
-<p><a href="https://arxiv.org/abs/1802.02696">Improving the Universality and Learnability of Neural Programmer-Interpreters with Combinator Abstraction</a></p>
-
-<p><a href="https://arxiv.org/abs/1802.03903">Unsupervised Anomaly Detection via Variational Auto-Encoder for Seasonal KPIs in Web Applications
-</a></p>
-
-<h2 id="neural-programmer-concepts"><a name="npc"></a>Neural programmer concepts</h2>
-
-<p><a href="https://arxiv.org/abs/1703.07469">RobustFill (Microsoft)</a></p>
-
-<p><a href="https://openreview.net/pdf?id=ByldLrqlx">DeepCoder (Microsoft)</a></p>
-
-<p><a href="https://arxiv.org/abs/1801.03526">Program Synthesis with Reinforcement Learning (Google)</a></p>
-
-<p><a href="https://arxiv.org/abs/1703.05698">Bayou (https://github.com/capergroup/bayou)</a></p>
-
-<p><a href="https://openreview.net/forum?id=Skp1ESxRZ">Tree-to-tree parser</a></p>
-
-<p><a href="https://arxiv.org/abs/1712.07388">Kayak (DiffBlue)</a></p>
-
-<p><img src="https://thousandmonkeystypewriter.github.io/220px-Chimpanzee_seated_at_typewriter.jpg" alt="Our monkey" /></p>
-
-      </section>
-    </div>
-
+</div>
     <!-- FOOTER  -->
     <div id="footer_wrap" class="outer">
       <footer class="inner">
