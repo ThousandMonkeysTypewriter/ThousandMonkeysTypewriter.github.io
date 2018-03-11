@@ -58,13 +58,18 @@ Normal data representation:
 ![data](https://thousandmonkeystypewriter.github.io/Picture1.png)
 
 Point anomalies, which are anomalies in a single value in the data:
-![detectum](https://thousandmonkeystypewriter.github.io/Picture2.png)
+![data](https://thousandmonkeystypewriter.github.io/Picture2.png)
+
+Query execution time anomalies:
+![detectum](https://thousandmonkeystypewriter.github.io/log.png)
 
 We are aimed to detect anomalies in situtations such as: memory leaks, bottlenecks in Java runtime, server infrastructure problems etc.
 
 As a result, we acquire training data, either labeled manually (supervised), or labeled by automatic classificator (unsupervised).
 
 ### Train Neural Programmer
+
+After we get a list with labeled normal and abnormal events, we train our core to differ what's normal and what's not in trhe future.
 
 ### Working with the scrpits in runtime
 
@@ -86,6 +91,8 @@ Examples:
 
 [Unsupervised Anomaly Detection via Variational Auto-Encoder for Seasonal KPIs in Web Applications
 ](https://arxiv.org/abs/1802.03903)
+
+[A curated list of awesome machine learning frameworks and algorithms that work on top of source code](https://github.com/src-d/awesome-machine-learning-on-source-code/)
 
 ## <a name="npc"></a>Neural programmer concepts
 
