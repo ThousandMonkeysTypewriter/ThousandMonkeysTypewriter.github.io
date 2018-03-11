@@ -50,12 +50,6 @@ At the time, TMT generates simple scripts for anomaly detection in production lo
 
 At the moment, we analyze three types of logs: user logs, database logs, software traces.
 
-Examples:
-
-- ![detectum](https://thousandmonkeystypewriter.github.io/detectum.png)[web/detectum/logs](https://github.com/ThousandMonkeysTypewriter/GeneratedScripts/tree/master/app/facebook/swift/logs)
-- ![yandex](https://thousandmonkeystypewriter.github.io/yandex.png)[db/yandex/clickhouse/logs](https://github.com/ThousandMonkeysTypewriter/GeneratedScripts/tree/master/app/facebook/swift/logs)
-- ![facebook](https://thousandmonkeystypewriter.github.io/facebook.png)[app/facebook/swift/logs](https://github.com/ThousandMonkeysTypewriter/GeneratedScripts/tree/master/app/facebook/swift/logs)
-
 ### Detect anomalies
 
 Then, we are trying to detect any problems that logs contain. What exactly are anomalies? Simply put, an anomaly is any deviation from standard behavior. 
@@ -73,6 +67,12 @@ As a result, we acquire training data, either labeled manually (supervised), or 
 ### Train Neural Programmer
 
 ### Working with the scrpits in runtime
+
+Examples:
+
+- ![detectum](https://thousandmonkeystypewriter.github.io/detectum.png)[web/detectum/logs](https://github.com/ThousandMonkeysTypewriter/GeneratedScripts/tree/master/app/facebook/swift/logs)
+- ![yandex](https://thousandmonkeystypewriter.github.io/yandex.png)[db/yandex/clickhouse/logs](https://github.com/ThousandMonkeysTypewriter/GeneratedScripts/tree/master/app/facebook/swift/logs)
+- ![facebook](https://thousandmonkeystypewriter.github.io/facebook.png)[app/facebook/swift/logs](https://github.com/ThousandMonkeysTypewriter/GeneratedScripts/tree/master/app/facebook/swift/logs)
 
 ## References
 
