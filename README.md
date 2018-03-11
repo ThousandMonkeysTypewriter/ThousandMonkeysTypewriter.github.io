@@ -44,7 +44,9 @@ creates an output that is delivered as input.
 
 At the time, TMT generates simple scripts for anomaly detection in production logs.
 
-## <a name="scripts"></a>Scripts
+## <a name="scripts"></a>How generator works
+
+### DATA
 
 At the moment, we analyze three types of logs: user logs, database logs, software traces.
 
@@ -53,6 +55,24 @@ Examples:
 - ![detectum](https://thousandmonkeystypewriter.github.io/detectum.png)[web/detectum/logs](https://github.com/ThousandMonkeysTypewriter/GeneratedScripts/tree/master/app/facebook/swift/logs)
 - ![yandex](https://thousandmonkeystypewriter.github.io/yandex.png)[db/yandex/clickhouse/logs](https://github.com/ThousandMonkeysTypewriter/GeneratedScripts/tree/master/app/facebook/swift/logs)
 - ![facebook](https://thousandmonkeystypewriter.github.io/facebook.png)[app/facebook/swift/logs](https://github.com/ThousandMonkeysTypewriter/GeneratedScripts/tree/master/app/facebook/swift/logs)
+
+### Detect anomalies
+
+Then, we are trying to detect any problems that logs contain. What exactly are anomalies? Simply put, an anomaly is any deviation from standard behavior. 
+
+Normal data representation:
+![data](https://thousandmonkeystypewriter.github.io/Picture1.png)
+
+Point anomalies, which are anomalies in a single value in the data:
+![detectum](https://thousandmonkeystypewriter.github.io/Picture2.png)
+
+We are aimed to detect anomalies in situtations such as: memory leaks, bottlenecks in Java runtime, server infrastructure problems etc.
+
+As a result, we acquire training data, either labeled manually (supervised), or labeled by automatic classificator (unsupervised).
+
+### Train Neural Programmer
+
+### Working with the scrpits in runtime
 
 ## References
 
