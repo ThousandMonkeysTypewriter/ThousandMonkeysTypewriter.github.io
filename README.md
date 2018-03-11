@@ -19,7 +19,7 @@ TMT also incorporates most common conceprions used today in a field of program s
 
 ### Types of data
 
-Teher are to types of data (logs) that we are analyzing:
+There are two types of data (logs) that we are analyzing:
 
 - user logs
 - program traces
