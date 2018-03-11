@@ -50,9 +50,9 @@ At the moment, we analyze three types of logs: user logs, database logs, softwar
 
 Examples:
 
-- [web/detectum/logs](https://github.com/ThousandMonkeysTypewriter/GeneratedScripts/tree/master/app/facebook/swift/logs)
-- [db/yandex/clickhouse/logs](https://github.com/ThousandMonkeysTypewriter/GeneratedScripts/tree/master/app/facebook/swift/logs)
-- [app/facebook/swift/logs](https://github.com/ThousandMonkeysTypewriter/GeneratedScripts/tree/master/app/facebook/swift/logs)
+- ![detectum](https://thousandmonkeystypewriter.github.io/detectum.png)[web/detectum/logs](https://github.com/ThousandMonkeysTypewriter/GeneratedScripts/tree/master/app/facebook/swift/logs)
+- ![yandex](https://thousandmonkeystypewriter.github.io/yandex.png)[db/yandex/clickhouse/logs](https://github.com/ThousandMonkeysTypewriter/GeneratedScripts/tree/master/app/facebook/swift/logs)
+- ![facebook](https://thousandmonkeystypewriter.github.io/facebook.png)[app/facebook/swift/logs](https://github.com/ThousandMonkeysTypewriter/GeneratedScripts/tree/master/app/facebook/swift/logs)
 
 ## References
 
