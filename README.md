@@ -1,5 +1,7 @@
 # Program synthesis using neural nets in [Domain-specific language](https://en.wikipedia.org/wiki/Domain-specific_language)
 
+[Generated sciipts samples](https://thousandmonkeystypewriter.github.io/index.html#scripts)
+
 ## What is neural program synthesis?
 
 In recent years, [Deep Learnig](https://en.wikipedia.org/wiki/Deep_learning) has made [considerable progress](https://arxiv.org/ftp/arxiv/papers/1801/1801.00631.pdf) in areas such as online advertising,, speech recognition and image recognition.  The success of DL lets us to change the view on the way the software itself is being created. We can use neural nets to gradualy increase automation in the process oft program creation, and help engineers to get more results with less efforts.
@@ -42,9 +44,15 @@ creates an output that is delivered as input.
 
 At the time, TMT generates simple scripts for anomaly detection in production logs.
 
-## How it works?
+## <a name="scripts"></a>Scripts
 
-First, we want to get training data.
+At the moment, we analyze three types of logs: user logs, database logs, software traces.
+
+Examples:
+
+- [web/detectum/logs](https://github.com/ThousandMonkeysTypewriter/GeneratedScripts/tree/master/app/facebook/swift/logs)
+- [db/yandex/clickhouse/logs](https://github.com/ThousandMonkeysTypewriter/GeneratedScripts/tree/master/app/facebook/swift/logs)
+- [app/facebook/swift/logs](https://github.com/ThousandMonkeysTypewriter/GeneratedScripts/tree/master/app/facebook/swift/logs)
 
 ## References
 
