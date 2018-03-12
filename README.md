@@ -85,6 +85,8 @@ db query was labeled as normal:
 db query was labeled as abnormal:
 ![detectum](https://thousandmonkeystypewriter.github.io/scheme/anomaly_db.png)
 
+In some cases, where situations by default are labeled as normal, we have only to decide what command to call next.
+![detectum](https://thousandmonkeystypewriter.github.io/scheme/npi_only.png)
 
 ### Working with the scrpits in runtime
 
