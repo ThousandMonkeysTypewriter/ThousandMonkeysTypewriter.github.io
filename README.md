@@ -95,6 +95,7 @@ Having trained NPI means that, at each step, we have a predicted operation from 
 In other words< well trained model would predict an outcome from given state: label (by default, "normal"). Each combination of this parameters could produce different outcomes.
 
 sample normal runtime script with environment:
+
 `BEGIN ({'program': {'program': 'begin', 'id': 0}, 'environment': {'terminate': False, 'date1_diff': 0, 'date1': 0, 'output': 0, 'client_id': 2, 'answer': 2, 'date2': 0, 'date2_diff': 0}, 'args': {'id': 18}})`
 
 `DIFF ({'program': {'program': 'diff', 'id': 6}, 'environment': {'terminate': False, 'date1_diff': 20, 'date1': 15, 'output': 0, 'client_id': 2, 'answer': 2, 'date2': 0, 'date2_diff': 0}, 'args': {'id': 18}})`
@@ -106,6 +107,7 @@ sample normal runtime script with environment:
 `MO_ALARM ({'program': {'program': 'no_alarm', 'id': 5}, 'environment': {'terminate': True, 'date1_diff': 20, 'date1': 15, 'output': 2, 'client_id': 2, 'answer': 2, 'date2': 15, 'date2_diff': 20}, 'args': {'id': 18}})`
 
 alert runtime script:
+
 `BEGIN ({'program': {'program': 'begin', 'id': 0}, 'environment': {'date1': 0, 'output': 0, 'answer': 2, 'terminate': False, 'client_id': 2, 'date2': 0, 'date2_diff': 0, 'date1_diff': 0}, 'args': {'id': 29}})`
 
 `DIFF ({'program': {'program': 'diff', 'id': 6}, 'environment': {'date1': 15, 'output': 0, 'answer': 2, 'terminate': False, 'client_id': 2, 'date2': 0, 'date2_diff': 0, 'date1_diff': 93}, 'args': {'id': 29}})`
