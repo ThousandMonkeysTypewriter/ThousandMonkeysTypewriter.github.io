@@ -125,7 +125,7 @@ For the sake of simplicity, we want co create on scipt that will cover many (all
 ![detectum](https://thousandmonkeystypewriter.github.io/scheme/general.png)
 
 
-Examples:
+### Examples
 
 - ![detectum](https://thousandmonkeystypewriter.github.io/detectum.png)[web/detectum/logs](https://github.com/ThousandMonkeysTypewriter/GeneratedScripts/tree/master/app/facebook/swift/logs)
 - ![yandex](https://thousandmonkeystypewriter.github.io/yandex.png)[db/yandex/clickhouse/logs](https://github.com/ThousandMonkeysTypewriter/GeneratedScripts/tree/master/app/facebook/swift/logs)
