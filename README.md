@@ -74,10 +74,10 @@ After we get a list with labeled normal and abnormal events, we train our core t
 In case of unsupervised learning, the process can be described as "one neural net teaching another":
 
 when event in log was labeled as normal:
-![detectum](https://thousandmonkeystypewriter.github.io/schemes/normal_log.png)
+![detectum](https://thousandmonkeystypewriter.github.io/scheme/normal_log.png)
 
 when event in log was labeled as abnormal:
-![detectum](https://thousandmonkeystypewriter.github.io/schemes/anomaly_log.png)
+![detectum](https://thousandmonkeystypewriter.github.io/scheme/anomaly_log.png)
 
 
 ### Working with the scrpits in runtime
