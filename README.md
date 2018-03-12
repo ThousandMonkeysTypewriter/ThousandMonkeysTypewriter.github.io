@@ -96,23 +96,26 @@ In other words< well trained model would predict an outcome from given state: la
 
 sample normal runtime script with environment:
 
-```BEGIN 
+```
+BEGIN 
 DIFF 
 DIFF
 CHECK
-MO_ALARM```
+MO_ALARM
+```
 
 alert runtime script:
+```
+BEGIN 
+DIFF 
+DIFF
+CHECK
+ALARM
+```
 
-`BEGIN ({'program': {'program': 'begin', 'id': 0}, 'environment': {'date1': 0, 'output': 0, 'answer': 2, 'terminate': False, 'client_id': 2, 'date2': 0, 'date2_diff': 0, 'date1_diff': 0}, 'args': {'id': 29}})`
-
-`DIFF ({'program': {'program': 'diff', 'id': 6}, 'environment': {'date1': 15, 'output': 0, 'answer': 2, 'terminate': False, 'client_id': 2, 'date2': 0, 'date2_diff': 0, 'date1_diff': 93}, 'args': {'id': 29}})`
+Data environment
 
 `DIFF ({'program': {'program': 'diff', 'id': 6}, 'environment': {'date1': 15, 'output': 0, 'answer': 2, 'terminate': False, 'client_id': 2, 'date2': 20, 'date2_diff': 45, 'date1_diff': 93}, 'args': {'id': 29}})`
-
-`CHECK ({'program': {'program': 'check', 'id': 3}, 'environment': {'date1': 15, 'output': 1, 'answer': 2, 'terminate': False, 'client_id': 2, 'date2': 20, 'date2_diff': 45, 'date1_diff': 93}, 'args': {'id': 29}})`
-
-`ALARM ({'program': {'program': 'alarm', 'id': 4}, 'environment': {'date1': 15, 'output': 1, 'answer': 2, 'terminate': True, 'client_id': 2, 'date2': 20, 'date2_diff': 45, 'date1_diff': 93}, 'args': {'id': 29}})`
 
 ### Challenge
 
