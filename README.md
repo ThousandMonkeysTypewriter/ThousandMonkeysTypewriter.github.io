@@ -90,6 +90,28 @@ In some cases, where situations by default are labeled as normal, we have only t
 
 ### Working with the scrpits in runtime
 
+Having trained NPI means that, at each step, we have a predicted operation from argumeents and environment. Thus we expect from a well  trained model to predict each command and each step, indicating whether this observed sutuation in logs (software traces) is normal or not. If normal, we expect one outcome, of not - another. 
+
+In other words< well trained model would predict an outcome from given state: label (by default, "normal"). Each combination of this parameters could produce different outcomes.
+
+normal runtime script:
+`{'program': {'program': 'begin', 'id': 0}, 'environment': {'date1': 0, 'output': 0, 'answer': 2, 'terminate': False, 'client_id': 2, 'date2': 0, 'date2_diff': 0, 'date1_diff': 0}, 'args': {'id': 29}}
+{'program': {'program': 'diff', 'id': 6}, 'environment': {'date1': 15, 'output': 0, 'answer': 2, 'terminate': False, 'client_id': 2, 'date2': 0, 'date2_diff': 0, 'date1_diff': 93}, 'args': {'id': 29}}
+{'program': {'program': 'diff', 'id': 6}, 'environment': {'date1': 15, 'output': 0, 'answer': 2, 'terminate': False, 'client_id': 2, 'date2': 20, 'date2_diff': 45, 'date1_diff': 93}, 'args': {'id': 29}}
+{'program': {'program': 'check', 'id': 3}, 'environment': {'date1': 15, 'output': 1, 'answer': 2, 'terminate': False, 'client_id': 2, 'date2': 20, 'date2_diff': 45, 'date1_diff': 93}, 'args': {'id': 29}}
+{'program': {'program': 'alarm', 'id': 4}, 'environment': {'date1': 15, 'output': 1, 'answer': 2, 'terminate': True, 'client_id': 2, 'date2': 20, 'date2_diff': 45, 'date1_diff': 93}, 'args': {'id': 29}}`
+
+alert runtime script:
+![detectum](https://thousandmonkeystypewriter.github.io/scheme/npi_only.png)
+
+### Challenge
+
+One of the problems with NPIs is that we can only measure the generalization by running the trained NPI on various environments and observing the results. And as we explained earlier, every change of the peremeters can produce a new script.
+
+For the sake of simplicity, we want co create on scipt that will cover many (all) situations:
+![detectum](https://thousandmonkeystypewriter.github.io/scheme/npi_only.png)
+
+
 Examples:
 
 - ![detectum](https://thousandmonkeystypewriter.github.io/detectum.png)[web/detectum/logs](https://github.com/ThousandMonkeysTypewriter/GeneratedScripts/tree/master/app/facebook/swift/logs)
