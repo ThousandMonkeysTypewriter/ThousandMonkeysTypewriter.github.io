@@ -122,7 +122,7 @@ Data environment
 One of the problems with NPIs is that we can only measure the generalization by running the trained NPI on various environments and observing the results. And as we explained earlier, every change of the peremeters can produce a new script.
 
 For the sake of simplicity, we want co create on scipt that will cover many (all) situations:
-![detectum](https://thousandmonkeystypewriter.github.io/scheme/npi_only.png)
+![detectum](https://thousandmonkeystypewriter.github.io/scheme/general.png)
 
 
 Examples:
