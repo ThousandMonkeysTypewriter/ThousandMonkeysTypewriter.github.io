@@ -95,15 +95,15 @@ Having trained NPI means that, at each step, we have a predicted operation from 
 In other words< well trained model would predict an outcome from given state: label (by default, "normal"). Each combination of this parameters could produce different outcomes.
 
 normal runtime script:
-`{'program': {'program': 'begin', 'id': 0}, 'environment': {'date1': 0, 'output': 0, 'answer': 2, 'terminate': False, 'client_id': 2, 'date2': 0, 'date2_diff': 0, 'date1_diff': 0}, 'args': {'id': 29}}
 
-{'program': {'program': 'diff', 'id': 6}, 'environment': {'date1': 15, 'output': 0, 'answer': 2, 'terminate': False, 'client_id': 2, 'date2': 0, 'date2_diff': 0, 'date1_diff': 93}, 'args': {'id': 29}}
+`{'program': {'program': 'begin', 'id': 0}, 'environment': {'date1': 0, 'output': 0, 'answer': 2, 'terminate': False, 'client_id': 2, 'date2': 0, 'date2_diff': 0, 'date1_diff': 0}, 'args': {'id': 29}}`
 
-{'program': {'program': 'diff', 'id': 6}, 'environment': {'date1': 15, 'output': 0, 'answer': 2, 'terminate': False, 'client_id': 2, 'date2': 20, 'date2_diff': 45, 'date1_diff': 93}, 'args': {'id': 29}}
+`{'program': {'program': 'diff', 'id': 6}, 'environment': {'date1': 15, 'output': 0, 'answer': 2, 'terminate': False, 'client_id': 2, 'date2': 0, 'date2_diff': 0, 'date1_diff': 93}, 'args': {'id': 29}}`
 
-{'program': {'program': 'check', 'id': 3}, 'environment': {'date1': 15, 'output': 1, 'answer': 2, 'terminate': False, 'client_id': 2, 'date2': 20, 'date2_diff': 45, 'date1_diff': 93}, 'args': {'id': 29}}
+`{'program': {'program': 'diff', 'id': 6}, 'environment': {'date1': 15, 'output': 0, 'answer': 2, 'terminate': False, 'client_id': 2, 'date2': 20, 'date2_diff': 45, 'date1_diff': 93}, 'args': {'id': 29}}`
 
-{'program': {'program': 'alarm', 'id': 4}, 'environment': {'date1': 15, 'output': 1, 'answer': 2, 'terminate': True, 'client_id': 2, 'date2': 20, 'date2_diff': 45, 'date1_diff': 93}, 'args': {'id': 29}}`
+`{'program': {'program': 'check', 'id': 3}, 'environment': {'date1': 15, 'output': 1, 'answer': 2, 'terminate': False, 'client_id': 2, 'date2': 20, 'date2_diff': 45, 'date1_diff': 93}, 'args': {'id': 29}}`
+`{'program': {'program': 'alarm', 'id': 4}, 'environment': {'date1': 15, 'output': 1, 'answer': 2, 'terminate': True, 'client_id': 2, 'date2': 20, 'date2_diff': 45, 'date1_diff': 93}, 'args': {'id': 29}}`
 
 alert runtime script:
 ![detectum](https://thousandmonkeystypewriter.github.io/scheme/npi_only.png)
