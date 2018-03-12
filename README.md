@@ -96,15 +96,11 @@ In other words< well trained model would predict an outcome from given state: la
 
 sample normal runtime script with environment:
 
-`BEGIN ({'program': {'program': 'begin', 'id': 0}, 'environment': {'terminate': False, 'date1_diff': 0, 'date1': 0, 'output': 0, 'client_id': 2, 'answer': 2, 'date2': 0, 'date2_diff': 0}, 'args': {'id': 18}})`
-
-`DIFF ({'program': {'program': 'diff', 'id': 6}, 'environment': {'terminate': False, 'date1_diff': 20, 'date1': 15, 'output': 0, 'client_id': 2, 'answer': 2, 'date2': 0, 'date2_diff': 0}, 'args': {'id': 18}})`
-
-`DIFF ({'program': {'program': 'diff', 'id': 6}, 'environment': {'terminate': False, 'date1_diff': 20, 'date1': 15, 'output': 0, 'client_id': 2, 'answer': 2, 'date2': 15, 'date2_diff': 20}, 'args': {'id': 18}})`
-
-`CHECK ({'program': {'program': 'check', 'id': 3}, 'environment': {'terminate': False, 'date1_diff': 20, 'date1': 15, 'output': 2, 'client_id': 2, 'answer': 2, 'date2': 15, 'date2_diff': 20}, 'args': {'id': 18}})`
-
-`MO_ALARM ({'program': {'program': 'no_alarm', 'id': 5}, 'environment': {'terminate': True, 'date1_diff': 20, 'date1': 15, 'output': 2, 'client_id': 2, 'answer': 2, 'date2': 15, 'date2_diff': 20}, 'args': {'id': 18}})`
+```BEGIN 
+DIFF 
+DIFF
+CHECK
+MO_ALARM```
 
 alert runtime script:
 
