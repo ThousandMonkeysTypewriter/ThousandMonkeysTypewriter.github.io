@@ -24,25 +24,93 @@
   <body>
 
     <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="forkme_banner" href="https://github.com/ThousandMonkeysTypewriter">View on GitHub</a>
-
-          <h1 id="project_title">Scripts</h1>
-
-          
-        </header>
-    </div>
-
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer"  style="background: white">
+        <div id="main_content_wrap" class="outer"  style="background: white">
       <section id="main_content" class="inner">
+<h3 id="data">DATA</h3>
+
+<p>At the moment, we analyze three types of logs: user logs, database logs, software traces.</p>
+
+<h3 id="detect-anomalies">Detect anomalies</h3>
+
+<p>Then, we are trying to detect any problems that logs contain. What exactly are anomalies? Simply put, an anomaly is any deviation from standard behavior.</p>
+
+<p>Normal data representation:
+<img src="https://thousandmonkeystypewriter.github.io/Picture1.png" alt="data" /></p>
+
+<p>Point anomalies, which are anomalies in a single value in the data:
+<img src="https://thousandmonkeystypewriter.github.io/Picture2.png" alt="data" /></p>
+
+<p>Query execution time anomalies:
+<img src="https://thousandmonkeystypewriter.github.io/log.png" alt="detectum" /></p>
+
+<p>We are aimed to detect anomalies in situtations such as: memory leaks, bottlenecks in Java runtime, server infrastructure problems etc.</p>
+
+<p>As a result, we acquire training data, either labeled manually (supervised), or labeled by automatic classificator (unsupervised).</p>
+
+<h3 id="train-neural-programmer">Train Neural Programmer</h3>
+
+<p>After we get a list with labeled normal and abnormal events, we train our core to differ what’s normal and what’s not in trhe future.</p>
+
+<p>In case of unsupervised learning, the process can be described as “one neural net teaching another”:</p>
+
+<p>event in log was labeled as normal:
+<img src="https://thousandmonkeystypewriter.github.io/scheme/normal_log.png" alt="detectum" /></p>
+
+<p>event in log was labeled as abnormal:
+<img src="https://thousandmonkeystypewriter.github.io/scheme/anomaly_log.png" alt="detectum" /></p>
+
+<p>db query was labeled as normal:
+<img src="https://thousandmonkeystypewriter.github.io/scheme/normal_db.png" alt="detectum" /></p>
+
+<p>db query was labeled as abnormal:
+<img src="https://thousandmonkeystypewriter.github.io/scheme/anomaly_db.png" alt="detectum" /></p>
+
+<p>In some cases, where situations by default are labeled as normal, we have only to decide what command to call next.
+<img src="https://thousandmonkeystypewriter.github.io/scheme/npi_only.png" alt="detectum" /></p>
+
+<h3 id="working-with-the-scrpits-in-runtime">Working with the scrpits in runtime</h3>
+
+<p>Having trained NPI means that, at each step, we have a predicted operation from argumeents and environment. Thus we expect from a well  trained model to predict each command and each step, indicating whether this observed sutuation in logs (software traces) is normal or not. If normal, we expect one outcome, of not - another.</p>
+
+<p>In other words&lt; well trained model would predict an outcome from given state: label (by default, “normal”). Each combination of this parameters could produce different outcomes.</p>
+
+<p>sample normal runtime script with environment:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>BEGIN 
+DIFF 
+DIFF
+CHECK
+MO_ALARM
+</code></pre></div></div>
+
+<p>alert runtime script:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>BEGIN 
+DIFF 
+DIFF
+CHECK
+ALARM
+</code></pre></div></div>
+
+<p>Data environment</p>
+
+<p><code class="highlighter-rouge">DIFF ({'program': {'program': 'diff', 'id': 6}, 'environment': {'date1': 15, 'output': 0, 'answer': 2, 'terminate': False, 'client_id': 2, 'date2': 20, 'date2_diff': 45, 'date1_diff': 93}, 'args': {'id': 29}})</code></p>
+
+<h3 id="challenge">Challenge</h3>
+
+<p>One of the problems with NPIs is that we can only measure the generalization by running the trained NPI on various environments and observing the results. And as we explained earlier, every change of the peremeters can produce a new script.</p>
+
+<p>For the sake of simplicity, we want co create on scipt that will cover many (all) situations:
+<img src="https://thousandmonkeystypewriter.github.io/scheme/general.png" alt="detectum" /></p>
+
+<h3 id="examples">Examples</h3>
+
 <ul>
-  <li><a href="https://github.com/ThousandMonkeysTypewriter/GeneratedScripts/tree/master/app/facebook/swift/logs">web/detectum/logs</a></li>
-  <li><a href="https://github.com/ThousandMonkeysTypewriter/GeneratedScripts/tree/master/app/facebook/swift/logs">db/yandex/clickhouse/logs</a></li>
-  <li><a href="https://github.com/ThousandMonkeysTypewriter/GeneratedScripts/tree/master/app/facebook/swift/logs">app/facebook/swift/logs</a></li>
+  <li><img src="https://thousandmonkeystypewriter.github.io/detectum.png" alt="detectum" /><a href="https://github.com/ThousandMonkeysTypewriter/GeneratedScripts/tree/master/app/facebook/swift/logs">web/detectum/logs</a></li>
+  <li><img src="https://thousandmonkeystypewriter.github.io/yandex.png" alt="yandex" /><a href="https://github.com/ThousandMonkeysTypewriter/GeneratedScripts/tree/master/app/facebook/swift/logs">db/yandex/clickhouse/logs</a></li>
+  <li><img src="https://thousandmonkeystypewriter.github.io/facebook.png" alt="facebook" /><a href="https://github.com/ThousandMonkeysTypewriter/GeneratedScripts/tree/master/app/facebook/swift/logs">app/facebook/swift/logs</a></li>
 </ul>
-</div>
+              </section>
+    </div>
     <!-- FOOTER  -->
     <div id="footer_wrap" class="outer">
       <footer class="inner">
