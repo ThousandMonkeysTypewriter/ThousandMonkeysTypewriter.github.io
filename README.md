@@ -80,10 +80,10 @@ event in log was labeled as abnormal:
 ![detectum](https://thousandmonkeystypewriter.github.io/scheme/anomaly_log.png)
 
 db query was labeled as normal:
-![detectum](https://thousandmonkeystypewriter.github.io/scheme/normal_log.png)
+![detectum](https://thousandmonkeystypewriter.github.io/scheme/normal_db.png)
 
 db query was labeled as abnormal:
-![detectum](https://thousandmonkeystypewriter.github.io/scheme/anomaly_log.png)
+![detectum](https://thousandmonkeystypewriter.github.io/scheme/anomaly_db.png)
 
 
 ### Working with the scrpits in runtime
