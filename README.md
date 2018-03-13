@@ -117,12 +117,14 @@ Data environment
 
 `DIFF ({'program': {'program': 'diff', 'id': 6}, 'environment': {'date1': 15, 'output': 0, 'answer': 2, 'terminate': False, 'client_id': 2, 'date2': 20, 'date2_diff': 45, 'date1_diff': 93}, 'args': {'id': 29}})`
 
-### Challenge
+### Challenges
 
 One of the problems with NPIs is that we can only measure the generalization by running the trained NPI on various environments and observing the results. And as we explained earlier, every change of the peremeters can produce a new script.
 
 For the sake of simplicity, we want co create on scipt that will cover many (all) situations:
 ![detectum](https://thousandmonkeystypewriter.github.io/scheme/general.png)
+
+This means that we are still have to make a module that will merge all possible cripts from this particular NPI into the smallest number of scripts possible, preferably one script.
 
 
 ### Examples
