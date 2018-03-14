@@ -92,7 +92,7 @@ In some cases, where situations by default are labeled as normal, we have only t
 
 Having trained NPI means that, at each step, we have a predicted operation from argumeents and environment. Thus we expect from a well  trained model to predict each command and each step, indicating whether this observed sutuation in logs (software traces) is normal or not. If normal, we expect one outcome, of not - another. 
 
-In other words< well trained model would predict an outcome from given state: label (by default, "normal"). Each combination of this parameters could produce different outcomes.
+In other words, the model would predict an outcome from given state: label (by default, "normal"). Each combination of this parameters could produce different outcomes.
 
 sample normal runtime script with environment:
 
