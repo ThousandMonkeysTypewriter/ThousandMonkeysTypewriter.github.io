@@ -131,7 +131,7 @@ This means that we are still have to make a module that will merge all possible 
 
 - ![detectum](https://thousandmonkeystypewriter.github.io/detectum.png)[web/detectum/logs](https://github.com/ThousandMonkeysTypewriter/GeneratedScripts/tree/master/app/facebook/swift/logs)
 - ![yandex](https://thousandmonkeystypewriter.github.io/yandex.png)[db/yandex/clickhouse/logs](https://github.com/ThousandMonkeysTypewriter/GeneratedScripts/tree/master/app/facebook/swift/logs)
-- ![facebook](https://thousandmonkeystypewriter.github.io/facebook.png)[app/facebook/swift/logs](https://github.com/ThousandMonkeysTypewriter/GeneratedScripts/tree/master/app/facebook/swift/logs)
+<!-- ![facebook](https://thousandmonkeystypewriter.github.io/facebook.png)[app/facebook/swift/logs](https://github.com/ThousandMonkeysTypewriter/GeneratedScripts/tree/master/app/facebook/swift/logs) -->
 
 ## References
 
