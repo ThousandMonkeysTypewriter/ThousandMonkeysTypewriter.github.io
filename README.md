@@ -1,6 +1,7 @@
 # Program synthesis using neural nets in [Domain-specific language](https://en.wikipedia.org/wiki/Domain-specific_language)
 
 [Generated scripts samples](https://thousandmonkeystypewriter.github.io/index.html#scripts)
+<!--[Constraints](http://thousandmonkeystypewriter.com/constraints)-->
 
 ## What is neural program synthesis?
 
