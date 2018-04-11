@@ -144,9 +144,6 @@ This means that we are still have to make a module that will merge all possible 
 
 [Improving the Universality and Learnability of Neural Programmer-Interpreters with Combinator Abstraction](https://arxiv.org/abs/1802.02696)
 
-[Unsupervised Anomaly Detection via Variational Auto-Encoder for Seasonal KPIs in Web Applications
-](https://arxiv.org/abs/1802.03903)
-
 [A curated list of awesome machine learning frameworks and algorithms that work on top of source code](https://github.com/src-d/awesome-machine-learning-on-source-code/)
 
 ## <a name="npc"></a>Neural programmer concepts
@@ -162,6 +159,17 @@ This means that we are still have to make a module that will merge all possible 
 [Tree-to-tree parser](https://openreview.net/forum?id=Skp1ESxRZ)
 
 [Kayak (DiffBlue)](https://arxiv.org/abs/1712.07388)
+
+## <a name="npc"></a>Anomaly detection
+
+[Unsupervised Anomaly Detection via Variational Auto-Encoder for Seasonal KPIs in Web Applications
+](https://arxiv.org/abs/1802.03903)
+
+[Anomaly Detection for Industrial Big Data
+](https://arxiv.org/abs/1804.02998)
+
+[Faster Anomaly Detection via Matrix Sketching
+](https://arxiv.org/abs/1804.03065)
 
 
 ![Our monkey](https://thousandmonkeystypewriter.github.io/220px-Chimpanzee_seated_at_typewriter.jpg)
