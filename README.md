@@ -1,6 +1,22 @@
-## [Articles](https://thousandmonkeystypewriter.github.io/articles)
+# How It Works
 
-## [How it works](https://thousandmonkeystypewriter.github.io/how)
+1
+
+### Request a Test
+
+2
+
+### Automation Tools Run
+
+3
+
+### Manual evaluation
+
+5
+
+### Recieve your code
+
+## [Articles](https://thousandmonkeystypewriter.github.io/articles)
 
 ## [Neural programmer](https://thousandmonkeystypewriter.github.io/techology)
 <!--[Constraints](http://thousandmonkeystypewriter.com/constraints)-->
