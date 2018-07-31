@@ -1,5 +1,6 @@
-# How It Works
+# Code faster using AI coder
 
+# How it works
 1
 
 ### Request a Test
