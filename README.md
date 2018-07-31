@@ -3,19 +3,19 @@
 # How it works
 1
 
-### Request a Test
+### Install 
 
 2
 
-### Automation Tools Run
+### Look for suggests from AI coder
 
 3
 
-### Manual evaluation
+### AI helper adapts to your coding style with time
 
 5
 
-### Recieve your code
+### Use the plugin to search and write programs in natural language
 
 ## [Articles](https://thousandmonkeystypewriter.github.io/blog.html)
 
