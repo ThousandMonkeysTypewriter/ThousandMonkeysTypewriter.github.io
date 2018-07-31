@@ -16,10 +16,7 @@
 
 ### Recieve your code
 
-## [Articles](https://thousandmonkeystypewriter.github.io/articles)
-
-## [Neural programmer](https://thousandmonkeystypewriter.github.io/techology)
-<!--[Constraints](http://thousandmonkeystypewriter.com/constraints)-->
+## [Articles](https://thousandmonkeystypewriter.github.io/blog.html)
 
 <a href="mailto:nayname@gmail.com?subject=thousandmonkeys">Email me</a>
 
