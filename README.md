@@ -9,6 +9,8 @@
 
 ### Look for suggests from AI coder
 
+Based on the context of the program the plugin can give the programmer a suggestion - for example, “open DB connection”. If the programmer clicks on that suggest, the plugin implements DB connection in the current context of the program. 
+
 3
 
 ### AI helper adapts to your coding style with time
