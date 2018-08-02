@@ -1,23 +1,19 @@
 # Code faster using AI coder
 
-# How it works
+# How it works  
 
 
-### Install 
+### Auto-complete while you writing code  
 
-
-
-### Look for suggests from AI coder
-
-Based on the context of the program the plugin can give the programmer a suggestion - for example, “open DB connection”. If the programmer clicks on that suggest, the plugin implements DB connection in the current context of the program. 
+Based on the context of the program, the plugin can give you a suggestion - for example, “open DB connection”. If the programmer clicks on that suggest, the plugin implements DB connection in the current context of the program.  
 
 
 
-### AI helper adapts to your coding style with time
+### AI helper adapts to your coding style with time  
 
 
 
-### Use the plugin to search and write programs in natural language
+### Use the plugin to search and write programs in natural language  
 
 ## [Articles](https://thousandmonkeystypewriter.github.io/blog.html)
 
