@@ -1,7 +1,4 @@
-# Code faster using AI coder
-#
-#
-#
+# Code faster using AI coder  
 # How it works  
 
 
