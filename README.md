@@ -1,9 +1,11 @@
 # Code faster using AI coder  
-# How it works  
 
 <br/>
 <br/>
 <br/>
+
+# How it works  
+
 <br/>
 
 ### Auto-complete while you writing code  
