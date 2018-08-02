@@ -1,7 +1,6 @@
 # Code faster using AI coder  
 # How it works  
-
-
+<br/>
 ### Auto-complete while you writing code  
 
 Based on the context of the program, the plugin can give you a suggestion - for example, “open DB connection”. If the programmer clicks on that suggest, the plugin implements DB connection in the current context of the program.  
