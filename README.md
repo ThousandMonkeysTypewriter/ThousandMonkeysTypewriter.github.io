@@ -16,9 +16,13 @@ Based on the context of the program, the plugin can give you a suggestion - for 
 
 ### AI helper adapts to your coding style with time  
 
+The plugin quickly trains with your code and suggests what you should write based on your programming style.
+
 <br/>
 
 ### Use the plugin to search and write programs in natural language  
+
+You can search over complete snippets of code using natural language queries 
 
 <br/>
 
