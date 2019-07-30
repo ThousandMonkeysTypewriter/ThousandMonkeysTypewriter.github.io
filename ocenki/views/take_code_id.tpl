@@ -26,17 +26,35 @@
               const top = $comment.position().top-3;
               const left = $comment.position().left + $comment.width() + 20;
               const height = $comment.height();
+
               // цвет задневого фона зависит от коммента
-              $comment.addClass('bg-success').css('color', '#FFF').css('padding', '3px 6px').css('border-radius', '5px');
-              const select = '<select style="position:absolute;z-index:10;top:'+ top +'px;left: '+ left +'px;" id="comment_'+ i +'">\
-                <option value="">Без оценки</option>\
-                <option value="useful">Useful</option>\
-                <option value="rel_plus">Rel+</option>\
-                <option value="rel_minus">Rel-</option>\
-                <option value="notrel">Notrel</option>\
-                <option value="stupid">Stupid</option>\
-              </select>';
-              $('body').append(select);
+              let bgColor = 'bg-success';
+              if(~(comment.textContent.indexOf('Отлично!:'))) {
+                // по-умолчанию
+              } else if(~(comment.textContent.indexOf('Можно улучшить:'))) {
+                bgColor = 'bg-primary';
+              } else if(~(comment.textContent.indexOf('Нужно исправить:'))) {
+                bgColor = 'bg-danger';
+              }
+
+              $comment
+                .addClass(bgColor)
+                .css('color', '#FFF')
+                .css('padding', '3px 6px')
+                .css('border-radius', '5px');
+              const select = '\
+                <div class="fieldset" style="position:absolute;z-index:10;display:flex;top:'+ top +'px;left: '+ left +'px;" id="comment_'+ i +'">\
+                  <select name="mark">\
+                    <option value="">Без оценки</option>\
+                    <option value="useful">Useful</option>\
+                    <option value="rel_plus">Rel+</option>\
+                    <option value="rel_minus">Rel-</option>\
+                    <option value="notrel">Notrel</option>\
+                    <option value="stupid">Stupid</option>\
+                  </select>\
+                  <input name="mark_comment" type="text" style="margin-left:10px;">\
+                </div>';
+              $('code.html').append(select);
               // еше коммент для оценки
             }
           });
@@ -62,11 +80,7 @@
         <form action='/reviews' method="POST">
             <h1 style="text-align:center;">Впишите код</h1>
           <div class="form-group">
-            <textarea rows="10" name="code_id" class="form-control">
-              % if 'code_id' in locals():
-                {{code_id}}
-              % end
-            </textarea>
+            <textarea rows="10" name="code_id" class="form-control">{{code_id if 'code_id' in locals() else ""}}</textarea>
           </div>
           <div class="form-group">
             <button class="form-control" type="submit">Проверить</button>
