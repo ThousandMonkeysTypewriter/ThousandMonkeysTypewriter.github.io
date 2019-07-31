@@ -13,54 +13,52 @@
   <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/highlight.min.js"></script>
   <script>hljs.initHighlightingOnLoad();</script>
   <style>
-    
+    .comment_wrapper {
+      display: flex;
+    }
+    .fieldset {
+      margin-left: 10px;
+    }
   </style>
   <script>
     jQuery(document).ready(function(){
-      addEventListener('load', (ev) => {
-        setTimeout(function(){
-          const code = $('code.html');
-          $.each(code.find('.hljs-comment'), function(i, comment){
-            if(comment.textContent.startsWith('<!--$$$')) {
-              const $comment = $(comment);
-              const top = $comment.position().top-3;
-              const left = $comment.position().left + $comment.width() + 20;
-              const height = $comment.height();
-
-              // цвет задневого фона зависит от коммента
-              let bgColor = 'bg-success';
-              if(~(comment.textContent.indexOf('Отлично!:'))) {
-                // по-умолчанию
-              } else if(~(comment.textContent.indexOf('Можно улучшить:'))) {
-                bgColor = 'bg-primary';
-              } else if(~(comment.textContent.indexOf('Нужно исправить:'))) {
-                bgColor = 'bg-danger';
-              }
-
-              $comment
-                .addClass(bgColor)
-                .css('color', '#FFF')
-                .css('padding', '3px 6px')
-                .css('border-radius', '5px');
-              const select = '\
-                <div class="fieldset" style="position:absolute;z-index:10;display:flex;top:'+ top +'px;left: '+ left +'px;" id="comment_'+ i +'">\
-                  <select name="mark">\
-                    <option value="">Без оценки</option>\
-                    <option value="useful">Useful</option>\
-                    <option value="rel_plus">Rel+</option>\
-                    <option value="rel_minus">Rel-</option>\
-                    <option value="notrel">Notrel</option>\
-                    <option value="stupid">Stupid</option>\
-                  </select>\
-                  <input name="mark_comment" type="text" style="margin-left:10px;">\
-                </div>';
-              $('code.html').append(select);
-              // еше коммент для оценки
+      setTimeout(function(){
+        const code = $('code.html');
+        $.each(code.find('.hljs-comment'), function(i, comment){
+          if(comment.textContent.startsWith('<!--$$$')) {
+            const $comment = $(comment);
+            // цвет задневого фона зависит от коммента
+            let bgColor = 'bg-success';
+            if(~(comment.textContent.indexOf('Отлично!:'))) {
+              // по-умолчанию
+            } else if(~(comment.textContent.indexOf('Можно улучшить:'))) {
+              bgColor = 'bg-primary';
+            } else if(~(comment.textContent.indexOf('Нужно исправить:'))) {
+              bgColor = 'bg-danger';
             }
-          });
-          // <!--$$$
-        }, 500);
-      });
+
+            $comment
+              .addClass(bgColor)
+              .css('color', '#FFF')
+              .css('padding', '3px 6px')
+              .css('border-radius', '5px');
+            const select = '\
+              <div class="fieldset" style="display:flex;" id="comment_'+ i +'">\
+                <select name="mark">\
+                  <option value="">Без оценки</option>\
+                  <option value="useful">Useful</option>\
+                  <option value="rel_plus">Rel+</option>\
+                  <option value="rel_minus">Rel-</option>\
+                  <option value="notrel">Notrel</option>\
+                  <option value="stupid">Stupid</option>\
+                </select>\
+                <input name="mark_comment" type="text" style="margin-left:10px;">\
+              </div>';
+            $comment.wrap('<div class="comment_wrapper" />');
+            $comment.parent().append(select);
+          }
+        });
+      }, 500);
     });
   </script>
 </head>
