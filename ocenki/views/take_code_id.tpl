@@ -45,14 +45,27 @@
                 .css('color', '#FFF')
                 .css('padding', '3px 6px')
                 .css('border-radius', '5px');
-              const select = '<select style="position:absolute;z-index:10;top:'+ top +'px;left: '+ left +'px;" id="comment_'+ i +'">\
-                <option value="">Без оценки</option>\
-                <option value="useful">Useful</option>\
-                <option value="rel_plus">Rel+</option>\
-                <option value="rel_minus">Rel-</option>\
-                <option value="notrel">Notrel</option>\
-                <option value="stupid">Stupid</option>\
-              </select>';
+              const select = '<div style="position:absolute;z-index:10;top:'+ top +'px;left: '+ left +'px;" id="u_comment_'+ i +'">\
+			  <input type="radio" id="useful" name="comment_'+ i +'" value="Useful" checked>\
+			  <label for="useful">Useful</label>\
+			  </div>\
+			  <div style="position:absolute;z-index:10;top:'+ top +'px;left: '+ (left+70) +'px;" id="rp_comment_'+ i +'">\
+			  <input type="radio" id="rel_plus" name="comment_'+ i +'" value="Rel+">\
+			  <label for="rel_plus">Rel+</label>\
+			  </div>\
+			  <div style="position:absolute;z-index:10;top:'+ top +'px;left: '+ (left+126) +'px;" id="rm_comment_'+ i +'">\
+			  <input type="radio" id="rel_minus" name="comment_'+ i +'" value="Rel-">\
+			  <label for="rel_minus">Rel-</label>\
+			  </div>\
+			  <div style="position:absolute;z-index:10;top:'+ top +'px;left: '+ (left+182) +'px;" id="nr_comment_'+ i +'">\
+			  <input type="radio" id="notrel" name="comment_'+ i +'" value="Notrel">\
+			  <label for="notrel">Notrel</label>\
+			  </div>\
+			  <div style="position:absolute;z-index:10;top:'+ top +'px;left: '+ (left+254) +'px;" id="st_comment_'+ i +'">\
+			  <input type="radio" id="stupid" name="comment_'+ i +'" value="Stupid">\
+			  <label for="stupid">Stupid</label>\
+			  </div>\
+			';
               $('body').append(select);
         //  }
         });
