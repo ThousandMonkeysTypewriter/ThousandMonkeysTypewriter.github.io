@@ -31,4 +31,4 @@ def get_reviews():
 
 
 
-run(host='localhost', port=8080)
+run(host='thousandmonkeystypewriter.com', port=80)

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Отправка оценки</title>
+  <title>Автоматическая проверка работ</title>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -25,8 +25,11 @@
       setTimeout(function(){
         const code = $('code.html');
         $.each(code.find('.hljs-comment'), function(i, comment){
-          if(comment.textContent.startsWith('<!--$$$')) {
+      //    if(comment.textContent.startsWith('<!--$$$')) {
             const $comment = $(comment);
+			              const top = $comment.position().top-3;
+              const left = $comment.position().left + $comment.width() + 20;
+              const height = $comment.height();
             // цвет задневого фона зависит от коммента
             let bgColor = 'bg-success';
             if(~(comment.textContent.indexOf('Отлично!:'))) {
@@ -37,26 +40,21 @@
               bgColor = 'bg-danger';
             }
 
-            $comment
-              .addClass(bgColor)
-              .css('color', '#FFF')
-              .css('padding', '3px 6px')
-              .css('border-radius', '5px');
-            const select = '\
-              <div class="fieldset" style="display:flex;" id="comment_'+ i +'">\
-                <select name="mark">\
-                  <option value="">Без оценки</option>\
-                  <option value="useful">Useful</option>\
-                  <option value="rel_plus">Rel+</option>\
-                  <option value="rel_minus">Rel-</option>\
-                  <option value="notrel">Notrel</option>\
-                  <option value="stupid">Stupid</option>\
-                </select>\
-                <input name="mark_comment" type="text" style="margin-left:10px;">\
-              </div>';
-            $comment.wrap('<div class="comment_wrapper" />');
-            $comment.parent().append(select);
-          }
+              $comment
+                .addClass(bgColor)
+                .css('color', '#FFF')
+                .css('padding', '3px 6px')
+                .css('border-radius', '5px');
+              const select = '<select style="position:absolute;z-index:10;top:'+ top +'px;left: '+ left +'px;" id="comment_'+ i +'">\
+                <option value="">Без оценки</option>\
+                <option value="useful">Useful</option>\
+                <option value="rel_plus">Rel+</option>\
+                <option value="rel_minus">Rel-</option>\
+                <option value="notrel">Notrel</option>\
+                <option value="stupid">Stupid</option>\
+              </select>';
+              $('body').append(select);
+        //  }
         });
       }, 500);
     });
@@ -76,9 +74,9 @@
     <div class="row">
       <div class="col-sm-12">
         <form action='/reviews' method="POST">
-            <h1 style="text-align:center;">Впишите код</h1>
+            <h1 style="text-align:center;">Введите HTML работы "Научиться учиться"</h1>
           <div class="form-group">
-            <textarea rows="10" name="code_id" class="form-control">{{code_id if 'code_id' in locals() else ""}}</textarea>
+            <textarea rows="10" name="code_id" class="form-control"></textarea>
           </div>
           <div class="form-group">
             <button class="form-control" type="submit">Проверить</button>
