@@ -19,55 +19,63 @@
     .fieldset {
       margin-left: 10px;
     }
+    .comment_mark {
+      position:absolute;
+      z-index:10;
+    }
   </style>
   <script>
     jQuery(document).ready(function(){
       setTimeout(function(){
         const code = $('code.html');
         $.each(code.find('.hljs-comment'), function(i, comment){
-      //    if(comment.textContent.startsWith('<!--$$$')) {
-            const $comment = $(comment);
-			              const top = $comment.position().top-3;
-              const left = $comment.position().left + $comment.width() + 20;
-              const height = $comment.height();
-            // цвет задневого фона зависит от коммента
-            let bgColor = 'bg-success';
-            if(~(comment.textContent.indexOf('Отлично!:'))) {
-              // по-умолчанию
-            } else if(~(comment.textContent.indexOf('Можно улучшить:'))) {
-              bgColor = 'bg-primary';
-            } else if(~(comment.textContent.indexOf('Нужно исправить:'))) {
-              bgColor = 'bg-danger';
-            }
+         // if(comment.textContent.startsWith('<!--$$$')) {
+          const $comment = $(comment);
+                  const top = $comment.position().top-7;
+            const left = $comment.position().left + $comment.width() + 30;
+            const height = $comment.height();
+          // цвет задневого фона зависит от коммента
+          let bgColor = 'bg-success';
+          if(~(comment.textContent.indexOf('Отлично!:'))) {
+            // по-умолчанию
+          } else if(~(comment.textContent.indexOf('Можно улучшить:'))) {
+            bgColor = 'bg-primary';
+          } else if(~(comment.textContent.indexOf('Нужно исправить:'))) {
+            bgColor = 'bg-danger';
+          }
 
-              $comment
-                .addClass(bgColor)
-                .css('color', '#FFF')
-                .css('padding', '3px 6px')
-                .css('border-radius', '5px');
-              const select = '<div style="position:absolute;z-index:10;top:'+ top +'px;left: '+ left +'px;" id="u_comment_'+ i +'">\
-			  <input type="radio" id="useful" name="comment_'+ i +'" value="Useful" checked>\
-			  <label for="useful">Useful</label>\
-			  </div>\
-			  <div style="position:absolute;z-index:10;top:'+ top +'px;left: '+ (left+70) +'px;" id="rp_comment_'+ i +'">\
-			  <input type="radio" id="rel_plus" name="comment_'+ i +'" value="Rel+">\
-			  <label for="rel_plus">Rel+</label>\
-			  </div>\
-			  <div style="position:absolute;z-index:10;top:'+ top +'px;left: '+ (left+126) +'px;" id="rm_comment_'+ i +'">\
-			  <input type="radio" id="rel_minus" name="comment_'+ i +'" value="Rel-">\
-			  <label for="rel_minus">Rel-</label>\
-			  </div>\
-			  <div style="position:absolute;z-index:10;top:'+ top +'px;left: '+ (left+182) +'px;" id="nr_comment_'+ i +'">\
-			  <input type="radio" id="notrel" name="comment_'+ i +'" value="Notrel">\
-			  <label for="notrel">Notrel</label>\
-			  </div>\
-			  <div style="position:absolute;z-index:10;top:'+ top +'px;left: '+ (left+254) +'px;" id="st_comment_'+ i +'">\
-			  <input type="radio" id="stupid" name="comment_'+ i +'" value="Stupid">\
-			  <label for="stupid">Stupid</label>\
-			  </div>\
-			';
-              $('body').append(select);
-        //  }
+          $comment
+            .addClass(bgColor)
+            .css('color', '#FFF')
+            .css('padding', '3px 6px')
+            .css('border-radius', '5px');
+
+          const select = '\
+            <div class="comment_mark" style="top:'+ top +'px;left: '+ left +'px;">\
+              <label>\
+                <input type="radio" name="comment_'+ i +'" value="Useful" checked />\
+                Useful\
+              </label>\
+              <label>\
+                <input type="radio" name="comment_'+ i +'" value="Rel+">\
+                Rel+\
+              </label>\
+              <label>\
+                <input type="radio" name="comment_'+ i +'" value="Rel-">\
+                Rel-\
+              </label>\
+              <label>\
+                <input type="radio" name="comment_'+ i +'" value="Notrel">\
+                Notrel\
+              </label>\
+              <label>\
+                <input type="radio" name="comment_'+ i +'" value="Stupid">\
+                Stupid\
+              </label>\
+            </div>\
+          ';
+                $('body').append(select);
+         // }
         });
       }, 500);
     });
