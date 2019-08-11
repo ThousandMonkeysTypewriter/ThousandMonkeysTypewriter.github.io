@@ -31,9 +31,9 @@
         $.each(code.find('.hljs-comment'), function(i, comment){
          // if(comment.textContent.startsWith('<!--$$$')) {
           const $comment = $(comment);
-                  const top = $comment.position().top-7;
-            const left = $comment.position().left + $comment.width() + 30;
-            const height = $comment.height();
+          const top = $comment.position().top-7;
+          const left = $comment.position().left + $comment.width() + 30;
+          const height = $comment.height();
           // цвет задневого фона зависит от коммента
           let bgColor = 'bg-success';
           if(~(comment.textContent.indexOf('Отлично!:'))) {
