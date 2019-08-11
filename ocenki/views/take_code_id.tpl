@@ -20,8 +20,14 @@
       margin-left: 10px;
     }
     .comment_mark {
-      position:absolute;
-      z-index:10;
+      display: inline-block;
+      margin-left: 10px;
+    }
+    .commentWrapper {
+      white-space: nowrap;
+    }
+    *:focus {
+      outline: none;
     }
   </style>
   <script>
@@ -30,51 +36,61 @@
         const code = $('code.html');
         $.each(code.find('.hljs-comment'), function(i, comment){
          // if(comment.textContent.startsWith('<!--$$$')) {
-          const $comment = $(comment);
-          const top = $comment.position().top-7;
-          const left = $comment.position().left + $comment.width() + 30;
-          const height = $comment.height();
+          let $comment = $(comment);
+          const width = $comment.width()+20;
+          const input = '<input style="width:'+ width +'px;" name="comment_'+ i +'" value="'+ $comment.text() +'" />';
+          $input = $(input);
+          $comment.replaceWith($input);
+          comment = $input[0];
+          $comment = $(comment);
           // цвет задневого фона зависит от коммента
-          let bgColor = 'bg-success';
-          if(~(comment.textContent.indexOf('Отлично!:'))) {
+          let bgColor = 'border-success';
+          const markMes = comment.value;
+          if(~(markMes.indexOf('Отлично!:'))) {
             // по-умолчанию
-          } else if(~(comment.textContent.indexOf('Можно улучшить:'))) {
-            bgColor = 'bg-primary';
-          } else if(~(comment.textContent.indexOf('Нужно исправить:'))) {
-            bgColor = 'bg-danger';
+          } else if(~(markMes.indexOf('Можно улучшить:'))) {
+            bgColor = 'border-primary';
+          } else if(~(markMes.indexOf('Нужно исправить:'))) {
+            bgColor = 'border-danger';
           }
 
           $comment
             .addClass(bgColor)
-            .css('color', '#FFF')
-            .css('padding', '3px 6px')
+            .css('display', 'inline-block')
+            .css('margin', '2px 0')
             .css('border-radius', '5px');
+          const top = $comment.position().top;
+          const left = $comment.position().left + $comment.width() + 30;
+          const height = $comment.height();
 
           const select = '\
             <div class="comment_mark" style="top:'+ top +'px;left: '+ left +'px;">\
               <label>\
-                <input type="radio" name="comment_'+ i +'" value="Useful" checked />\
+                <input type="radio" name="comment_mark_'+ i +'" value="Useful" checked />\
                 Useful\
               </label>\
               <label>\
-                <input type="radio" name="comment_'+ i +'" value="Rel+">\
+                <input type="radio" name="comment_mark_'+ i +'" value="Rel+">\
                 Rel+\
               </label>\
               <label>\
-                <input type="radio" name="comment_'+ i +'" value="Rel-">\
+                <input type="radio" name="comment_mark_'+ i +'" value="Rel-">\
                 Rel-\
               </label>\
               <label>\
-                <input type="radio" name="comment_'+ i +'" value="Notrel">\
+                <input type="radio" name="comment_mark_'+ i +'" value="Notrel">\
                 Notrel\
               </label>\
               <label>\
-                <input type="radio" name="comment_'+ i +'" value="Stupid">\
+                <input type="radio" name="comment_mark_'+ i +'" value="Stupid">\
                 Stupid\
               </label>\
             </div>\
           ';
-          $('body').append(select);
+          $select = $(select);
+          $wrapper = $('<span class="commentWrapper"></span>');
+          $comment.wrap($wrapper);
+          $comment.parent().append($select);
          // }
         });
       }, 500);
