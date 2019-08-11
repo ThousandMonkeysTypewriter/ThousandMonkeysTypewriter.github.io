@@ -74,7 +74,7 @@
               </label>\
             </div>\
           ';
-                $('body').append(select);
+          $('body').append(select);
          // }
         });
       }, 500);
