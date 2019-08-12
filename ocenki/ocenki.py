@@ -26,7 +26,8 @@ def get_reviews():
     logging.warning("Status: %s; code_id: %s; message: %s", res.status_code, code_id, ex)
     return "<p>Resp status: {res.status_code}</p>".format(res=res)
   else:
-    return template('take_code_id', code_id=code_id, res=res.content.decode('utf-8'))
+    res = res.content.decode('utf-8')
+    return template('take_code_id', code_id=code_id, res=res)
     # return "{res}".format(res=res.content.decode('utf-8'))
 
 

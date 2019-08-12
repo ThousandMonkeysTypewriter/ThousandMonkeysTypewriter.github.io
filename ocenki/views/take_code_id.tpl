@@ -26,6 +26,12 @@
     .commentWrapper {
       white-space: nowrap;
     }
+    .hl {
+      display: inline-block;
+      padding: 3px 5px;
+      background: #dcdcdc;
+      border-radius: 5px;
+    }
     *:focus {
       outline: none;
     }
@@ -92,6 +98,11 @@
           $comment.wrap($wrapper);
           $comment.parent().append($select);
          // }
+        });
+        $.each(code.find('.hljs-attr'), function(i, attr) {
+          if(attr.textContent != 'hl')
+            return true;
+          $(attr).parent().addClass('hl');
         });
       }, 500);
     });
