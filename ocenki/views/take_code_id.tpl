@@ -168,8 +168,17 @@
         }, 1000);
       }
       function initAutocomplete(input) {
+        // console.log(input);
         input.autoComplete({
-          source: "",
+          minChars: 1,
+          // source: "http://h57.htz10.i.detectum.com:1333/query?term=",
+          source: function (request, response) {
+            $.get("http://h57.htz10.i.detectum.com:1333/query?term="+input.val(),
+              function (data) {
+                response(data);
+              }
+            );
+          },
           select: function(event, ui) {
             var prefix = input.val();
             var selection = ui.item.label;
