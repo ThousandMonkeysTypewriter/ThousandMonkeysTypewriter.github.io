@@ -112,11 +112,18 @@
           $comment.parent().append($select);
           $select.on('change', function(ev) {
             if(ev && ev.target && ev.target.value) {
+              const data = {
+                'marks': {
+                  'comment': $(ev.currentTarget).prev().val(),
+                  'mark': ev.target.value
+                }
+              }
               $.post({
-                url: 'http://thousandmonkeystypewriter.com/save',
+                url: 'http://78.46.103.68:1958/save',
                 contentType: 'text/plain',
-                dataType: 'script',
-                data: ev.target.value
+                dataType: 'json',
+                contentType: "application/json",
+                data: data
               }).done(function(data) {
                 const $ocenka_status = $('<div class="ocenka_status" style="color:green">Ok</div>');
                 setMarkSendStatus($ocenka_status, ev);
