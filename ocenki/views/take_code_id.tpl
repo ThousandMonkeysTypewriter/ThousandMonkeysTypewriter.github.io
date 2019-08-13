@@ -11,6 +11,8 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/styles/default.min.css">
   <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/highlight.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-autocomplete/1.0.7/jquery.auto-complete.min.css" integrity="sha256-MFTTStFZmJT7CqZBPyRVaJtI2P9ovNBbwmr0/KErfEc=" crossorigin="anonymous" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-autocomplete/1.0.7/jquery.auto-complete.min.js" integrity="sha256-zs4Ql/EnwyWVY+mTbGS2WIMLdfYGtQOhkeUtOawKZVY=" crossorigin="anonymous"></script>
   <script>hljs.initHighlightingOnLoad();</script>
   <style>
     .comment_wrapper {
@@ -48,6 +50,11 @@
       display: inline-block;
       margin-right: 10px;
     }
+    .fixed_btns {
+      position: fixed;
+      top: 10px;
+      right: 25px;
+    }
   </style>
   <script>
     jQuery(document).ready(function(){
@@ -62,6 +69,7 @@
           $comment.replaceWith($input);
           comment = $input[0];
           $comment = $(comment);
+          initAutocomplete($comment);
           // цвет задневого фона зависит от коммента
           let bgColor = 'border-success';
           const markMes = comment.value;
@@ -126,15 +134,11 @@
                 data: data
               }).done(function(data) {
                 const $ocenka_status = $('<div class="ocenka_status" style="color:green">Ok</div>');
-                setMarkSendStatus($ocenka_status, ev);
-                $(ev.currentTarget).append($ocenka_status);
-                setTimeout(function() {
-                  $ocenka_status.remove();
-                }, 1000);
+                setMarkSendStatus($ocenka_status, ev, 'status_ok');
               }).fail(function(data) {
                 console.log(data);
                 const $ocenka_status = $('<div class="ocenka_status" style="color:red">Error</div>');
-                setMarkSendStatus($ocenka_status, ev);
+                setMarkSendStatus($ocenka_status, ev, 'status_fail');
               });
             } else {
               console.log('nothing happend');
@@ -155,13 +159,34 @@
           }
         });
       }, 500);
-      function setMarkSendStatus(ocenka, ev) {
+      function setMarkSendStatus(ocenka, ev, status_class) {
         $(ev.currentTarget).append(ocenka);
+        $(ev.currentTarget).parent().addClass(status_class);
         setTimeout(function() {
           ocenka.remove();
+          $(ev.currentTarget).parent().removeClass(status_class);
         }, 1000);
       }
+      function initAutocomplete(input) {
+        input.autoComplete({
+          source: "",
+          select: function(event, ui) {
+            var prefix = input.val();
+            var selection = ui.item.label;
+            input.val(selection);
+          }
+        }).keyup(function (e) {
+          if(e.which === 13) {
+            jQuery(".ui-autocomplete").hide();
+          }
+        });
+      }
     });
+    function saveMarks() {
+      $('.comment_mark input:checked').each(function(i, mark) {
+        $(mark).trigger('change');
+      });
+    }
   </script>
 </head>
 <body>
@@ -174,6 +199,13 @@
           </pre>
         </div>
       </div>
+    <div class="fixed_btns">
+      <form style="display: inline-block;" action="/raw", method="POST">
+        <input name="code_id" type="hidden" value="{{res}}" />
+        <button class="btn btn-light" type="submit">Raw</button>
+      </form>
+      <button class="btn btn-dark" onclick="saveMarks()">Сохранить</button>
+    </div>
     % end
     <div class="row">
       <div class="col-sm-12">
