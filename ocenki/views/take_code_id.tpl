@@ -32,6 +32,15 @@
       background: #dcdcdc;
       border-radius: 5px;
     }
+    .hl-warning {
+      background: #d0c882;
+    }
+    .hl-success {
+      background: #b7dab4;
+    }
+    .hl-error {
+      background: #ce9d9d;
+    }
     *:focus {
       outline: none;
     }
@@ -100,9 +109,16 @@
          // }
         });
         $.each(code.find('.hljs-attr'), function(i, attr) {
-          if(attr.textContent != 'hl')
+          const tag = $(attr).parent();
+          if(attr.textContent == 'hl-success') {
+            tag.addClass('hl hl-success');
+          } else if(attr.textContent == 'hl-warning') {
+            tag.addClass('hl hl-warning');
+          } else if(attr.textContent == 'hl-error') {
+            tag.addClass('hl hl-error');
+          } else {
             return true;
-          $(attr).parent().addClass('hl');
+          }
         });
       }, 500);
     });
