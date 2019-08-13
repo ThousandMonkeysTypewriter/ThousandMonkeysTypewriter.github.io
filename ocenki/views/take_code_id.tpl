@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -33,7 +33,7 @@
       border-radius: 5px;
     }
     .hl-warning {
-      background: #d0c882;
+      background: #8295d0;
     }
     .hl-success {
       background: #b7dab4;
@@ -43,6 +43,10 @@
     }
     *:focus {
       outline: none;
+    }
+    .ocenka_status {
+      display: inline-block;
+      margin-right: 10px;
     }
   </style>
   <script>
@@ -106,6 +110,29 @@
           $wrapper = $('<span class="commentWrapper"></span>');
           $comment.wrap($wrapper);
           $comment.parent().append($select);
+          $select.on('change', function(ev) {
+            if(ev && ev.target && ev.target.value) {
+              $.post({
+                url: 'http://thousandmonkeystypewriter.com/save',
+                contentType: 'text/plain',
+                dataType: 'script',
+                data: ev.target.value
+              }).done(function(data) {
+                const $ocenka_status = $('<div class="ocenka_status" style="color:green">Ok</div>');
+                setMarkSendStatus($ocenka_status, ev);
+                $(ev.currentTarget).append($ocenka_status);
+                setTimeout(function() {
+                  $ocenka_status.remove();
+                }, 1000);
+              }).fail(function(data) {
+                console.log(data);
+                const $ocenka_status = $('<div class="ocenka_status" style="color:red">Error</div>');
+                setMarkSendStatus($ocenka_status, ev);
+              });
+            } else {
+              console.log('nothing happend');
+            }
+          });
          // }
         });
         $.each(code.find('.hljs-attr'), function(i, attr) {
@@ -121,6 +148,12 @@
           }
         });
       }, 500);
+      function setMarkSendStatus(ocenka, ev) {
+        $(ev.currentTarget).append(ocenka);
+        setTimeout(function() {
+          ocenka.remove();
+        }, 1000);
+      }
     });
   </script>
 </head>
