@@ -63,6 +63,7 @@
         $.each(code.find('.hljs-comment'), function(i, comment){
          // if(comment.textContent.startsWith('<!--$$$')) {
           let $comment = $(comment);
+		  $comment.text($comment.text().replace("<!--", "").replace("-->", ""));
           const width = $comment.width()+20;
           const input = '<input style="width:'+ width +'px;" name="comment_'+ i +'" value="'+ $comment.text() +'" />';
           $input = $(input);
@@ -150,10 +151,13 @@
           const tag = $(attr).parent();
           if(attr.textContent == 'hl-success') {
             tag.addClass('hl hl-success');
+			attr.textContent = attr.textContent.replace('hl-success', '');
           } else if(attr.textContent == 'hl-warning') {
             tag.addClass('hl hl-warning');
+			attr.textContent = attr.textContent.replace('hl-warning', '');
           } else if(attr.textContent == 'hl-error') {
             tag.addClass('hl hl-error');
+			attr.textContent = attr.textContent.replace('hl-error', '');
           } else {
             return true;
           }
@@ -173,7 +177,7 @@
           minChars: 1,
           // source: "http://h57.htz10.i.detectum.com:1333/query?term=",
           source: function (request, response) {
-            $.get("http://h57.htz10.i.detectum.com:1333/query?term="+input.val(),
+            $.get("http://h57.htz10.i.detectum.com:1333/query?term="+input.val().toLowerCase(),
               function (data) {
                 response(data);
               }
