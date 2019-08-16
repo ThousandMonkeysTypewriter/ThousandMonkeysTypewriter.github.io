@@ -173,7 +173,7 @@
         });
         $('.hljs-tag').each(function(i, tag){
           const $tag = $(tag);
-          if(!($tag.prev().hasClass('commentWrapper') || $tag.text().startsWith('</')))
+          if(!$tag.text().startsWith('</'))
             $tag.addClass('addCommentOnClick');
 
         });
