@@ -153,7 +153,7 @@
               console.log('nothing happend');
             }
           });
-          $('<button onclick="$(this).next().remove(); $(this).remove();" class="btn btn-danger">X</i></button>').insertBefore($comment);
+          $('<button onclick="$(this).parent().remove()" class="btn btn-danger">X</i></button>').insertBefore($comment);
          // }
         });
         $.each(code.find('.hljs-attr'), function(i, attr) {
@@ -180,16 +180,17 @@
         $('.addCommentOnClick').on('click', function(ev) {
           const tag = ev.currentTarget;
           const $tag = $(tag);
-          if($tag.parent().hasClass('commentWrapper'))
+
+          if($tag.next().hasClass('commentWrapper'))
             return false;
           $wrapper = $('<span class="commentWrapper"></span>');
-          $tag.wrap($wrapper);
-          const width = $tag.width()+20;
+          $wrapper.insertAfter($tag);
+          const width = 300;
           commentsIterator += 1;
           const input = '<input style="width:'+ width +'px;" class="form-control comment_input" name="comment_'+ commentsIterator +'" value="" />';
           $input = $(input);
-          $tag.parent().append($input);
-          $('<button onclick="$(this).next().remove(); $(this).remove();" class="btn btn-danger">X</i></button>').insertBefore($input);
+          $wrapper.append($input);
+          $('<button onclick="$(this).parent().remove()" class="btn btn-danger">X</i></button>').insertBefore($input);
         });
       }, 500);
       function setMarkSendStatus(ocenka, ev, status_class) {
