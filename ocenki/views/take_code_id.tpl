@@ -55,17 +55,27 @@
       top: 10px;
       right: 25px;
     }
+    .addCommentOnClick {
+      cursor: pointer;
+    }
+    .comment_input {
+      display: inline-block;
+    }
+    .btn.btn-danger {
+      margin: 0 4px 4px 0;
+    }
   </style>
   <script>
     jQuery(document).ready(function(){
       setTimeout(function(){
         const code = $('code.html');
+        let commentsIterator = code.find('.hljs-comment').length;
         $.each(code.find('.hljs-comment'), function(i, comment){
          // if(comment.textContent.startsWith('<!--$$$')) {
           let $comment = $(comment);
-		  $comment.text($comment.text().replace("<!--", "").replace("-->", ""));
+          $comment.text($comment.text().replace("<!--", "").replace("-->", ""));
           const width = $comment.width()+20;
-          const input = '<input style="width:'+ width +'px;" name="comment_'+ i +'" value="'+ $comment.text() +'" />';
+          const input = '<input class="form-control" style="width:'+ width +'px;" name="comment_'+ i +'" value="'+ $comment.text() +'" />';
           $input = $(input);
           $comment.replaceWith($input);
           comment = $input[0];
@@ -85,8 +95,6 @@
           $comment
             .addClass(bgColor)
             .css('display', 'inline-block')
-            .css('margin', '2px 0')
-            .css('border-radius', '5px');
           const top = $comment.position().top;
           const left = $comment.position().left + $comment.width() + 30;
           const height = $comment.height();
@@ -145,22 +153,43 @@
               console.log('nothing happend');
             }
           });
+          $('<button onclick="$(this).next().remove(); $(this).remove();" class="btn btn-danger">X</i></button>').insertBefore($comment);
          // }
         });
         $.each(code.find('.hljs-attr'), function(i, attr) {
           const tag = $(attr).parent();
           if(attr.textContent == 'hl-success') {
             tag.addClass('hl hl-success');
-			attr.textContent = attr.textContent.replace('hl-success', '');
+            attr.textContent = attr.textContent.replace('hl-success', '');
           } else if(attr.textContent == 'hl-warning') {
             tag.addClass('hl hl-warning');
-			attr.textContent = attr.textContent.replace('hl-warning', '');
+            attr.textContent = attr.textContent.replace('hl-warning', '');
           } else if(attr.textContent == 'hl-error') {
             tag.addClass('hl hl-error');
-			attr.textContent = attr.textContent.replace('hl-error', '');
+            attr.textContent = attr.textContent.replace('hl-error', '');
           } else {
             return true;
           }
+        });
+        $('.hljs-tag').each(function(i, tag){
+          const $tag = $(tag);
+          if(!($tag.prev().hasClass('commentWrapper') || $tag.text().startsWith('</')))
+            $tag.addClass('addCommentOnClick');
+
+        });
+        $('.addCommentOnClick').on('click', function(ev) {
+          const tag = ev.currentTarget;
+          const $tag = $(tag);
+          if($tag.parent().hasClass('commentWrapper'))
+            return false;
+          $wrapper = $('<span class="commentWrapper"></span>');
+          $tag.wrap($wrapper);
+          const width = $tag.width()+20;
+          commentsIterator += 1;
+          const input = '<input style="width:'+ width +'px;" class="form-control comment_input" name="comment_'+ commentsIterator +'" value="" />';
+          $input = $(input);
+          $tag.parent().append($input);
+          $('<button onclick="$(this).next().remove(); $(this).remove();" class="btn btn-danger">X</i></button>').insertBefore($input);
         });
       }, 500);
       function setMarkSendStatus(ocenka, ev, status_class) {
@@ -213,7 +242,7 @@
         </div>
       </div>
     <div class="fixed_btns">
-      <form style="display: inline-block;" action="/raw", method="POST">
+      <form style="display: inline-block;" action="/raw", method="POST" target="_blank">
         <input name="code_id" type="hidden" value="{{res}}" />
         <button class="btn btn-light" type="submit">Raw</button>
       </form>
