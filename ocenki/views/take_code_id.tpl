@@ -61,8 +61,15 @@
     .comment_input {
       display: inline-block;
     }
-    .btn.btn-danger {
+    .btn.btn-remove {
       margin: 0 4px 4px 0;
+      height: 20px;
+      padding: 0;
+      width: 20px;
+      line-height: 20px;
+      background-color: #9e9e9e;
+      border-color: #9e9e9e;
+      color: #FFF;
     }
   </style>
   <script>
@@ -73,8 +80,8 @@
         $.each(code.find('.hljs-comment'), function(i, comment){
          // if(comment.textContent.startsWith('<!--$$$')) {
           let $comment = $(comment);
-          $comment.text($comment.text().replace("<!--", "").replace("-->", ""));
           const width = $comment.width()+20;
+          $comment.text($comment.text().replace("<!--", "").replace("-->", ""));
           const input = '<input class="form-control" style="width:'+ width +'px;" name="comment_'+ i +'" value="'+ $comment.text() +'" />';
           $input = $(input);
           $comment.replaceWith($input);
@@ -153,7 +160,7 @@
               console.log('nothing happend');
             }
           });
-          $('<button onclick="$(this).parent().remove()" class="btn btn-danger">X</i></button>').insertBefore($comment);
+          $('<button onclick="$(this).parent().remove()" class="btn btn-remove">X</i></button>').insertBefore($comment);
          // }
         });
         $.each(code.find('.hljs-attr'), function(i, attr) {
@@ -190,7 +197,7 @@
           const input = '<input style="width:'+ width +'px;" class="form-control comment_input" name="comment_'+ commentsIterator +'" value="" />';
           $input = $(input);
           $wrapper.append($input);
-          $('<button onclick="$(this).parent().remove()" class="btn btn-danger">X</i></button>').insertBefore($input);
+          $('<button onclick="$(this).parent().remove()" class="btn btn-remove">X</i></button>').insertBefore($input);
         });
       }, 500);
       function setMarkSendStatus(ocenka, ev, status_class) {
