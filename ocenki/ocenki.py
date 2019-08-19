@@ -45,6 +45,17 @@ def get_raw():
     res = res.content.decode('utf-8')
     return res
 
+@route('/save', method='POST')
+def get_save():
+  postdata = request.body.read()
+  data_ = request.forms.get("data")
+  try:
+    headers = {'Accept-Encoding': 'identity', 'Content-type': 'text/plain; charset=utf-8'}
+    res = requests.post('http://78.46.103.68:1958/save', data = postdata, headers = headers)
+  except Exception as ex:
+    logging.warning("Exception; data: %s; message: %s", data_, ex)
+    return "500"
+  return "{res.status_code}".format(res=res)
 
 
 # run(host='localhost', port=8080)

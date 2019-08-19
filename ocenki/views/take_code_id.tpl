@@ -80,7 +80,7 @@
         $.each(code.find('.hljs-comment'), function(i, comment){
          // if(comment.textContent.startsWith('<!--$$$')) {
           let $comment = $(comment);
-          const width = $comment.width()+20;
+          const width = ($comment.width()*1.1)+10;
           $comment.text($comment.text().replace("<!--", "").replace("-->", ""));
           const input = '<input class="form-control" style="width:'+ width +'px;" name="comment_'+ i +'" value="'+ $comment.text() +'" />';
           $input = $(input);
@@ -139,18 +139,22 @@
               const data = {
                 'marks': {
                   'comment': $(ev.currentTarget).prev().val(),
-                  'mark': ev.target.value
+                  'mark': ev.target.value,
+				  'node': $(ev.currentTarget).parent().attr("node")
                 }
               }
               $.post({
-                url: 'http://78.46.103.68:1958/save',
-                contentType: 'text/plain',
-                dataType: 'json',
-                contentType: "application/json",
+                url: '/save',
+				contentType: "application/json",
                 data: data
               }).done(function(data) {
-                const $ocenka_status = $('<div class="ocenka_status" style="color:green">Ok</div>');
-                setMarkSendStatus($ocenka_status, ev, 'status_ok');
+				if (data == "200") {
+					const $ocenka_status = $('<div class="ocenka_status" style="color:green">Ok</div>');
+					setMarkSendStatus($ocenka_status, ev, 'status_ok');
+				} else {
+					const $ocenka_status = $('<div class="ocenka_status" style="color:red">Error</div>');
+					setMarkSendStatus($ocenka_status, ev, 'status_fail');
+				}
               }).fail(function(data) {
                 console.log(data);
                 const $ocenka_status = $('<div class="ocenka_status" style="color:red">Error</div>');
@@ -178,11 +182,16 @@
             return true;
           }
         });
+		tag_counter = 0;
         $('.hljs-tag').each(function(i, tag){
           const $tag = $(tag);
-          if(!$tag.text().startsWith('</'))
+          if(!$tag.text().startsWith('</')) {
+		    tag_counter+=1;
             $tag.addClass('addCommentOnClick');
-
+			$tag.attr("node", tag_counter);
+			if ($tag.prev().attr('class').indexOf("commentWrapper") !== -1)
+				$tag.prev().attr("node", tag_counter);
+		}
         });
         $('.addCommentOnClick').on('click', function(ev) {
           const tag = ev.currentTarget;
@@ -190,9 +199,9 @@
 
           if($tag.next().hasClass('commentWrapper'))
             return false;
-          $wrapper = $('<span class="commentWrapper"></span>');
+          $wrapper = $('<span class="commentWrapper" node="'+$tag.attr("node")+'"></span>');
           $wrapper.insertAfter($tag);
-          const width = 300;
+          const width = 400;
           commentsIterator += 1;
           const input = '<input style="width:'+ width +'px;" class="form-control comment_input" name="comment_'+ commentsIterator +'" value="" />';
           $input = $(input);
