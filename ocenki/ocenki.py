@@ -9,7 +9,7 @@ import json
 
 @route('/')
 def index():
-  return template('take_code_id')
+  return [template('take_code_id').encode("utf-8")]
 
 @route('/reviews', method='POST')
 def get_reviews():
@@ -27,7 +27,7 @@ def get_reviews():
     return "<p>Resp status: {res.status_code}</p>".format(res=res)
   else:
     res = res.content.decode('utf-8')
-    return template('take_code_id', code_id=code_id, res=res)
+    return [template('take_code_id', code_id=code_id, res=res).encode("utf-8")]
 
 @route('/raw', method='POST')
 def get_raw():
@@ -43,7 +43,7 @@ def get_raw():
     return "<p>Resp status: {res.status_code}</p>".format(res=res)
   else:
     res = res.content.decode('utf-8')
-    return res
+    return [res.encode("utf-8")]
 
 @route('/save', method='POST')
 def get_save():
@@ -58,5 +58,4 @@ def get_save():
   return "{res.status_code}".format(res=res)
 
 
-# run(host='localhost', port=8080)
-run(host='thousandmonkeystypewriter.com', port=80)
+run(host='thousandmonkeystypewriter.com', port=80, server="paste")
