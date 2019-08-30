@@ -1,11 +1,15 @@
 #!bin/python3
 
-from bottle import route, run, template, request
+from bottle import route, run, template, request, static_file
 import sys
 import logging
 import requests
 import json
 
+
+@route('/assets/<filename:path>')
+def st(filename):
+    return static_file(filename, root="./assets/")
 
 @route('/')
 def index():
@@ -58,4 +62,5 @@ def get_save():
   return "{res.status_code}".format(res=res)
 
 
-run(host='thousandmonkeystypewriter.com', port=80, server="paste")
+# run(host='thousandmonkeystypewriter.com', port=80, server="paste")
+run(host='localhost', port=8000)
