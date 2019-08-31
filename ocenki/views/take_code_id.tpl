@@ -11,6 +11,7 @@
     <div class="fixed_btns">
       <form style="display: inline-block;" action="/raw", method="POST" target="_blank">
         <input name="code_id" type="hidden" value="{{res}}" />
+		<input name="[id]" id="page_id" type="hidden" value="{{uid}}" />
         <button class="btn btn-light" type="submit">Raw</button>
       </form>
       <button class="btn btn-dark" onclick="saveMarks()">Сохранить</button>
@@ -22,6 +23,7 @@
     <form action='/reviews' method="POST">
         <h1 style="text-align:center;">Введите HTML работы "Научиться учиться"</h1>
       <div class="form-group">
+	    <input id="rand_id" name="[id]" type="hidden" value="" />
         <textarea rows="10" name="code_id" class="form-control"></textarea>
       </div>
       <div class="form-group">

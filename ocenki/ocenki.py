@@ -6,7 +6,6 @@ import logging
 import requests
 import json
 
-
 @route('/assets/<filename:path>')
 def st(filename):
     return static_file(filename, root="./assets/")
@@ -17,28 +16,28 @@ def index():
 
 @route('/reviews', method='POST')
 def get_reviews():
-  code_id = request.forms.get("code_id")
+  postdata = request.body.read()
   try:
-    headers = {'Accept-Encoding': 'identity', 'Content-type': 'text/plain; charset=utf-8'}
-    res = requests.post('http://78.46.103.68:1958/highlight', data = code_id, headers = headers)
+    headers = {'Accept-Encoding': 'identity', 'Content-type': 'application/json; charset=utf-8'}
+    res = requests.post('http://78.46.103.68:1958/highlight', data = postdata, headers = headers)
     # print(res.content.decode('utf-8'))
   except Exception as ex:
-    logging.warning("Exception; code_id: %s; message: %s", code_id, ex)
+    logging.warning("Exception; code_id: %s; message: %s", request.forms.get("code_id"), ex)
     return "<p>Fail: {ex}</p>".format(ex=ex)
 
   if res.status_code != 200:
-    logging.warning("Status: %s; code_id: %s; message: %s", res.status_code, code_id, ex)
+    logging.warning("Status: %s; code_id: %s; message: %s", res.status_code, request.forms.get("code_id"), ex)
     return "<p>Resp status: {res.status_code}</p>".format(res=res)
   else:
     res = res.content.decode('utf-8')
-    return [template('take_code_id', code_id=code_id, res=res).encode("utf-8")]
+    return [template('take_code_id', code_id=request.forms.get("code_id"), res=res, uid = request.forms.get("[id]")).encode("utf-8")]
 
 @route('/raw', method='POST')
 def get_raw():
-  code_id = request.forms.get("code_id")
+  postdata = request.body.read()
   try:
     headers = {'Accept-Encoding': 'identity', 'Content-type': 'text/plain; charset=utf-8'}
-    res = requests.post('http://78.46.103.68:1958/raw', data = code_id, headers = headers)
+    res = requests.post('http://78.46.103.68:1958/raw', data = postdata, headers = headers)
   except Exception as ex:
     logging.warning("Exception; code_id: %s; message: %s", code_id, ex)
     return "<p>Fail: {ex}</p>".format(ex=ex)
@@ -62,5 +61,5 @@ def get_save():
   return "{res.status_code}".format(res=res)
 
 
-# run(host='thousandmonkeystypewriter.com', port=80, server="paste")
-run(host='localhost', port=8000)
+run(host='thousandmonkeystypewriter.com', port=80, server="paste")
+#run(host='localhost', port=8000)
