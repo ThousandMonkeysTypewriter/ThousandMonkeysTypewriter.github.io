@@ -1,6 +1,7 @@
 jQuery(document).ready(function () {
   setTimeout(function () {
     const code = get_code();
+    $('#rand_id').val('_' + Math.random().toString(36).substr(2, 9));
 
     const commentSelector = '.hljs-comment';
     const comments = code.find(commentSelector);
@@ -124,8 +125,9 @@ function save_marks(comments) {
   const data = {
     'marks': $.map(comments, function($c) {
       return {
-        'comment': $c.val(),
-        'node': $c.parents('.commentWrapper').attr("node")
+        comment: $c.val(),
+        node: $c.parents('.commentWrapper').attr("node"),
+        id: $('#page_id').val()
       }
     })
   }
