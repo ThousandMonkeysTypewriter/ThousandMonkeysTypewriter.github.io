@@ -26,7 +26,7 @@ function comments2inputs(comments) {
     let $comment = $(comment);
     $comment.text($comment.text().replace("<!--", "").replace("-->", ""));
 
-    const span = generateCommentInput(i, $comment.text());
+    const span = generateCommentInput(null, $comment.text());
     const $span = $(span);
     $input = $span.find('input');
 
@@ -50,7 +50,7 @@ function saveOnChange($comment) {
   });
 }
 
-function generateCommentInput(id, val, node) {
+function generateCommentInput(node, val) {
   // цвет задневого фона зависит от коммента
   let bgColor = '';
   val && (bgColor = 'border-success');
@@ -63,14 +63,14 @@ function generateCommentInput(id, val, node) {
   }
 
   let attr_id = [];
-  if(id !== null)
-    attr_id.push('name="comment_' + id + '"');
+  if (node !== null)
+    attr_id.push('name="comment_' + node + '"');
 
-  return '<div class="input-group input-group-sm commentWrapper" ' + (node !== undefined ? 'node="' + node + '"' : '') +'>\
+  return '<div class="input-group input-group-sm commentWrapper" ' + ((node !== null) && 'node="'+node+'"' || ':') +'>\
     <div class="input-group-prepend">\
       <button onclick="$(this).parents(\'.commentWrapper\').remove()" class="btn btn-outline-secondary" type="button">X</button>\
     </div>\
-    <input class="form-control '+ bgColor + '" ' +attr_id.join(' ') +' value="'+ val +'" >\
+    <input class="form-control '+ bgColor + '" '+attr_id.join(' ')+' value="'+ val +'" >\
   </div>';
 }
 
@@ -104,7 +104,7 @@ function initCommentOnClick($els, start_from) {
     const tag = ev.currentTarget;
     const $tag = $(tag);
 
-    if ($tag.next().hasClass('commentWrapper'))
+    if ($tag.prev().hasClass('commentWrapper'))
       return false;
 
     let value = '';
@@ -112,7 +112,7 @@ function initCommentOnClick($els, start_from) {
       value = $tag.attr("tagname")
 
     commentsIterator += 1;
-    $wrapper = $(generateCommentInput(commentsIterator, value, $tag.attr("node")));
+    $wrapper = $(generateCommentInput($tag.attr("node"), value));
     $wrapper.insertBefore($tag);
 
     $input = $wrapper.find('input');
