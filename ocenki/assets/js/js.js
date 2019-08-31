@@ -1,6 +1,8 @@
 jQuery(document).ready(function () {
   setTimeout(function () {
     const code = $('code.html');
+	id = $('#page_id').val();
+	$('#rand_id').val('_' + Math.random().toString(36).substr(2, 9));
     let commentsIterator = code.find('.hljs-comment').length;
     $.each(code.find('.hljs-comment'), function (i, comment) {
       // if(comment.textContent.startsWith('<!--$$$')) {
@@ -65,7 +67,8 @@ jQuery(document).ready(function () {
             'marks': {
               'comment': $(ev.currentTarget).prev().val(),
               'mark': ev.target.value,
-              'node': $(ev.currentTarget).parent().attr("node")
+              'node': $(ev.currentTarget).parent().attr("node"),
+			  'id': id
             }
           }
           $.post({
