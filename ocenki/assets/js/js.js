@@ -26,7 +26,8 @@ function comments2inputs(comments) {
     let $comment = $(comment);
     $comment.text($comment.text().replace("<!--", "").replace("-->", ""));
 
-    const span = generateCommentInput(null, $comment.text());
+    const $tag = $comment.next();
+    const span = generateCommentInput(null, $comment.text(), $tag);
     const $span = $(span);
     $input = $span.find('input');
 
