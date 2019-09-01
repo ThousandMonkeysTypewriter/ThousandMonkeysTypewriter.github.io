@@ -13,7 +13,17 @@
 
 .commentWrapper {
   white-space: nowrap;
-  width: 80%;
+  display: flex;
+  width: 100%;
+  position: relative;
+  height: 10px;
+}
+
+.commentWrapper>div {
+  width: 85%;
+}
+.commentWrapper>div.ocenka_status {
+  width: 10%;
 }
 
 .hl {
@@ -45,9 +55,11 @@
   padding-left: 10px;
   line-height: 30px;
 }
+
 .status_ok {
   color: green;
 }
+
 .status_fail {
   color: red;
 }

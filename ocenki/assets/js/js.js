@@ -50,7 +50,7 @@ function saveOnChange($comment) {
   });
 }
 
-function generateCommentInput(node, val) {
+function generateCommentInput(node, val, $tag) {
   // цвет задневого фона зависит от коммента
   let bgColor = '';
   val && (bgColor = 'border-success');
@@ -66,12 +66,18 @@ function generateCommentInput(node, val) {
   if (node !== null)
     attr_id.push('name="comment_' + node + '"');
 
-  return '<div class="input-group input-group-sm commentWrapper" ' + ((node !== null) && 'node="'+node+'"' || ':') +'>\
-    <div class="input-group-prepend">\
-      <button onclick="$(this).parents(\'.commentWrapper\').remove()" class="btn btn-outline-secondary" type="button">X</button>\
+  let css = '';
+  if($tag)
+    css = 'left:'+($tag.offset().left-22)+'px;'
+
+  return '<span class="commentWrapper" style="'+css+'">\
+    <div class="input-group input-group-sm" ' + ((node !== null) && 'node="'+node+'"' || ':') +'>\
+      <div class="input-group-prepend">\
+        <button onclick="$(this).parents(\'.commentWrapper\').remove()" class="btn btn-outline-secondary" type="button">X</button>\
+      </div>\
+      <input class="form-control '+ bgColor + '" '+attr_id.join(' ')+' value="'+ val +'" >\
     </div>\
-    <input class="form-control '+ bgColor + '" '+attr_id.join(' ')+' value="'+ val +'" >\
-  </div>';
+  </span>';
 }
 
 function initTagsForCommenting(code) {
@@ -112,8 +118,9 @@ function initCommentOnClick($els, start_from) {
       value = $tag.attr("tagname")
 
     commentsIterator += 1;
-    $wrapper = $(generateCommentInput($tag.attr("node"), value));
-    $wrapper.insertBefore($tag);
+    $wrapper = $(generateCommentInput($tag.attr("node"), value, $tag));
+    // $wrapper.insertBefore($tag);
+    $wrapper.insertAfter($tag.prev());
 
     $input = $wrapper.find('input');
     initAutocomplete($input);
@@ -162,10 +169,10 @@ function colorCommentedAttrs(code) {
   const attr_types = ['hl-success', 'hl-warning', 'hl-error'];
   const attrs = code.find('.hljs-attr');
   $.each(attrs, function (i, attr) {
-    const tag = $(attr).parent();
     const ind = attr_types.indexOf(attr.textContent);
-    const type = attr_types[ind];
-    if(type != -1) {
+    if (~ind) {
+      const tag = $(attr).parent();
+      const type = attr_types[ind];
       tag.addClass('hl '+ type);
       attr.textContent = attr.textContent.replace(type, '');
     }
