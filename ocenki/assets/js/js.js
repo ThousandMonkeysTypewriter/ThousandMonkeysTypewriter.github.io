@@ -12,8 +12,8 @@ jQuery(document).ready(function () {
 
     colorCommentedAttrs(code);
 
-	setRemoves();
     initCommentOnClick($('.addCommentOnClick'), numOfComments);
+	setRemoves();
   }, 500);
 });
 
@@ -74,8 +74,8 @@ function generateCommentInput(node, val, $tag) {
   if($tag)
     css = 'left:'+($tag.offset().left-22)+'px;'
 
-  return '<span class="commentWrapper" style="'+css+'">\
-    <div class="input-group input-group-sm" ' + ((node !== null) && 'node="'+node+'"' || ':') +'  order="0">\
+  return '<span class="commentWrapper" style="'+css+'" ' + ((node !== null) && 'node="'+node+'"' || ':') +'  order="0">\
+    <div class="input-group input-group-sm" >\
       <div class="input-group-prepend">\
         <button class="btn btn-outline-secondary" type="button">X</button>\
       </div>\
@@ -135,6 +135,7 @@ function initCommentOnClick($els, start_from) {
     $input.trigger('focusout')
 	
 	save_marks([$input], "create");
+	setRemoves();
   });
 }
 
