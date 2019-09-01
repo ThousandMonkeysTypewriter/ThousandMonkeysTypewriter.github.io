@@ -18,12 +18,15 @@
   position: relative;
   height: 10px;
 }
-
 .commentWrapper>div {
   width: 85%;
 }
 .commentWrapper>div.ocenka_status {
   width: 10%;
+}
+.commentWrapper > div.input-group {
+  min-width: 400px;
+  max-width: 85%;
 }
 
 .hl {

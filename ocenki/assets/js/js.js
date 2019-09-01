@@ -35,7 +35,9 @@ function comments2inputs(comments) {
     $comment = $(comment);
 
     initAutocomplete($comment);
+    initDynamicInputWidth($comment);
     saveOnChange($comment);
+    $comment.trigger('focusout')
   });
 }
 
@@ -124,7 +126,19 @@ function initCommentOnClick($els, start_from) {
 
     $input = $wrapper.find('input');
     initAutocomplete($input);
+    initDynamicInputWidth($input);
     saveOnChange($input);
+    $input.trigger('focusout')
+  });
+}
+
+function initDynamicInputWidth(input) {
+  const inputWrapper = input.parents('.input-group');
+  input.on('focusin', function (ev) {
+    inputWrapper.css('width', '');
+  });
+  input.on('focusout', function(ev) {
+    inputWrapper.css('width', input.val().length*10+'px');
   });
 }
 
