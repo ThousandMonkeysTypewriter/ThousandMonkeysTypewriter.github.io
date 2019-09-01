@@ -12,6 +12,7 @@ jQuery(document).ready(function () {
 
     colorCommentedAttrs(code);
 
+	setRemoves();
     initCommentOnClick($('.addCommentOnClick'), numOfComments);
   }, 500);
 });
@@ -48,7 +49,7 @@ function saveOnChange($comment) {
     if (timeout)
       clearTimeout(timeout);
     timeout = setTimeout(function () {
-      save_marks([$comment]);
+      save_marks([$comment], "edit");
     }, 2000);
   });
 }
@@ -59,9 +60,9 @@ function generateCommentInput(node, val, $tag) {
   val && (bgColor = 'border-success');
   if (~(val.indexOf('Отлично!:'))) {
     // по-умолчанию
-  } else if (~(val.indexOf('Можно улучшить:'))) {
+  } else if (~(val.toLowerCase().indexOf('можно улучшить:'))) {
     bgColor = 'border-primary';
-  } else if (~(val.indexOf('Нужно исправить:'))) {
+  } else if (~(val.toLowerCase().indexOf('нужно исправить:'))) {
     bgColor = 'border-danger';
   }
 
@@ -74,13 +75,20 @@ function generateCommentInput(node, val, $tag) {
     css = 'left:'+($tag.offset().left-22)+'px;'
 
   return '<span class="commentWrapper" style="'+css+'">\
-    <div class="input-group input-group-sm" ' + ((node !== null) && 'node="'+node+'"' || ':') +'>\
+    <div class="input-group input-group-sm" ' + ((node !== null) && 'node="'+node+'"' || ':') +'  order="0">\
       <div class="input-group-prepend">\
-        <button onclick="$(this).parents(\'.commentWrapper\').remove()" class="btn btn-outline-secondary" type="button">X</button>\
+        <button class="btn btn-outline-secondary" type="button">X</button>\
       </div>\
       <input class="form-control '+ bgColor + '" '+attr_id.join(' ')+' value="'+ val +'" >\
     </div>\
   </span>';
+}
+
+function setRemoves() {
+  $('.btn-outline-secondary').on('click', function (ev) {
+	save_marks([$(ev.currentTarget).parent()], 'remove'); 
+	$(ev.currentTarget).parents('.commentWrapper').remove()
+  });
 }
 
 function initTagsForCommenting(code) {
@@ -97,12 +105,7 @@ function initTagsForCommenting(code) {
         .addClass('addCommentOnClick')
         .attr("node", tag_counter)
         .attr("tagname", map[tagname]);
-      const commentWrapper = $tag.prev();
-      if (commentWrapper.hasClass("commentWrapper")) {
-        commentWrapper
-          .attr("node", tag_counter)
-          .attr("tagname", map[tagname]);
-      }
+      signComments($tag, 0);
     }
   });
 }
@@ -130,6 +133,8 @@ function initCommentOnClick($els, start_from) {
     initDynamicInputWidth($input);
     saveOnChange($input);
     $input.trigger('focusout')
+	
+	save_marks([$input], "create");
   });
 }
 
@@ -143,12 +148,14 @@ function initDynamicInputWidth(input) {
   });
 }
 
-function save_marks(comments) {
+function save_marks(comments, act_) {
   const data = {
     'marks': $.map(comments, function($c) {
       return {
         comment: $c.val(),
         node: $c.parents('.commentWrapper').attr("node"),
+        order: $c.parents('.commentWrapper').attr("order"),
+        act: act_,
         id: $('#page_id').val()
       }
     })
@@ -199,7 +206,7 @@ function saveMarks() {
   $('.commentWrapper input').each(function (i, mark) {
     comments.push($(mark));
   });
-  save_marks(comments);
+  save_marks(comments, "edit");
 }
 
 function setMarkSendStatus(ocenka, $el, status_class) {
@@ -218,7 +225,7 @@ function initAutocomplete(input) {
     minChars: 1,
     // source: "http://h57.htz10.i.detectum.com:1333/query?term=",
     source: function (request, response) {
-      $.get("http://h57.htz10.i.detectum.com:1333/query?term=" + input.val().toLowerCase(),
+      $.get("http://78.46.103.68:1959/query?term=" + input.val().toLowerCase(),
         function (data) {
           response(data);
         }
@@ -235,3 +242,14 @@ function initAutocomplete(input) {
     }
   });
 }
+
+  function signComments(tag, order) {
+    const commentWrapper = tag.prev();
+    if (commentWrapper.hasClass("commentWrapper")) {
+      commentWrapper
+        .attr("node", tag_counter)
+        .attr("tagname", map[tagname])
+        .attr("order", order);
+      signComments(tag.prev(), order+1)
+    }
+  }

@@ -13,7 +13,7 @@ if os.path.exists('my.trie'):
     trie = datrie.Trie.load('my.trie')
 else:
     print('Buidling trie structure')
-    print(f'Allowed chars are {alphs}')
+    #print(f'Allowed chars are {alphs}')
     with open('comments_classes.pickle', 'rb') as handle:
         freqs = pickle.load(handle)
     trie = datrie.Trie(alphs)
