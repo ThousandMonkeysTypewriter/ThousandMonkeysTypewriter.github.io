@@ -164,8 +164,8 @@ function colorCommentedAttrs(code) {
   $.each(attrs, function (i, attr) {
     const tag = $(attr).parent();
     const ind = attr_types.indexOf(attr.textContent);
+    const type = attr_types[ind];
     if(type != -1) {
-      const type = attr_types[ind];
       tag.addClass('hl '+ type);
       attr.textContent = attr.textContent.replace(type, '');
     }
