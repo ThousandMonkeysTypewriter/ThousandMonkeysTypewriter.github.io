@@ -19,14 +19,14 @@
   height: 10px;
 }
 .commentWrapper>div {
-  width: 85%;
+  width: 95%;
 }
 .commentWrapper>div.ocenka_status {
   width: 10%;
 }
 .commentWrapper > div.input-group {
   min-width: 400px;
-  max-width: 85%;
+  /* max-width: 100%; */
 }
 
 .hl {
