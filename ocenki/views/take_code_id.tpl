@@ -1,6 +1,7 @@
 % include('header.tpl', title='Автоматическая проверка работ')
 
 % if 'res' in locals():
+<h5>Щелкнув по тегу, вы можете добавить для него комментарий</h5>
     <div class="row">
       <div class="col-sm-12">
         <pre>
@@ -30,6 +31,7 @@
         <button class="form-control" type="submit">Проверить</button>
       </div>
     </form>
+	<span style="display: inline-block;  margin-top: 20px;">Для замечаний и предложений заполните <a href="https://docs.google.com/forms/d/e/1FAIpQLSd-VhYUq6gqRz0yynBAjOxHcXfpx0WZVBt479rdB3B9kq1bNw/viewform?usp=sf_link">эту</a> форму.</span>
   </div>
   <div class="col-sm-8"></div>
 </div>
