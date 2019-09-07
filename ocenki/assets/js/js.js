@@ -287,7 +287,7 @@ function signComments(tag, order) {
   }
 }
 
-function fallbackCopyTextToClipboard(text) {
+function fallbackCopyTextToClipboard(btn, text) {
   var textArea = document.createElement("textarea");
   textArea.value = text;
   document.body.appendChild(textArea);
@@ -298,6 +298,12 @@ function fallbackCopyTextToClipboard(text) {
     var successful = document.execCommand('copy');
     var msg = successful ? 'successful' : 'unsuccessful';
     console.log('Fallback: Copying text command was ' + msg);
+    if (msg == 'successful') {
+      $(btn).addClass('showed');
+      setTimeout(() => {
+        $(btn).removeClass('showed');
+      }, 2000);
+    }
   } catch (err) {
     console.error('Fallback: Oops, unable to copy', err);
   }
@@ -306,7 +312,7 @@ function fallbackCopyTextToClipboard(text) {
 }
 function copyTextToClipboard(btn, text) {
   if (!navigator.clipboard) {
-    fallbackCopyTextToClipboard(text);
+    fallbackCopyTextToClipboard(btn, text);
     return;
   }
   navigator.clipboard.writeText(text).then(function () {
