@@ -10,7 +10,7 @@
       </div>
     </div>
     <div class="fixed_btns">
-	  <button class="btn btn-light copyRaw" onclick="return copyRaw(this, '{{uid}}');">Скопировать код в буфер</button>
+	  <button class="btn btn-light copyRaw" onclick="event.preventDefault(); copyRaw(this, '{{uid}}')">Скопировать код в буфер</button>
       <button class="btn btn-dark" onclick="saveMarks()">Сохранить</button>
     </div>
 % end
