@@ -179,6 +179,8 @@ function copyRaw(btn, uid) {
       alert('Error');
     }
   });
+
+  return false;
 }
 
 function save_marks(comments, act_) {
