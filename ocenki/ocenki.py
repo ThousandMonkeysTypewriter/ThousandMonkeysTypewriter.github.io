@@ -61,5 +61,5 @@ def get_save():
   return "{res.status_code}".format(res=res)
 
 
-run(host='thousandmonkeystypewriter.com', port=80, server="paste")
-#run(host='localhost', port=8000)
+# run(host='thousandmonkeystypewriter.com', port=80, server="paste")
+run(host='localhost', port=8000)
