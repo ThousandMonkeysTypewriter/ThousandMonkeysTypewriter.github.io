@@ -149,6 +149,34 @@ function initDynamicInputWidth(input) {
   });
 }
 
+function copyRaw(uid) {
+  const data = {
+        id: id_
+  }
+  
+  let status = {
+      class: 'status_fail',
+      mes: 'Error'
+  };
+  $.post({
+    url: '/raw',
+    contentType: "application/json",
+    dataType: "json",
+    data: data
+  }).done(function (data) {
+    if (data == "200") {
+      status = {
+        class: 'status_ok',
+        mes: 'Ok'
+      };
+    }
+  }).fail(function (data) {
+    console.log(data);
+  }).always(function(data) {
+      alert(data.responseText)
+  });
+}
+
 function save_marks(comments, act_) {
   const data = {
     'marks': $.map(comments, function($c) {
