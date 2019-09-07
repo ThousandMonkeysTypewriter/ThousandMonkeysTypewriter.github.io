@@ -18,12 +18,15 @@
   position: relative;
   height: 10px;
 }
+
 .commentWrapper>div {
   width: 95%;
 }
+
 .commentWrapper>div.ocenka_status {
   width: 10%;
 }
+
 .commentWrapper > div.input-group {
   min-width: 400px;
   /* max-width: 100%; */
@@ -93,5 +96,20 @@
 }
 
 input[name^="comment_"] {
+  display: inline-block;
+}
+
+.copyRaw:before {
+  width: 50px;
+  height: 36px;
+  position: absolute;
+  top: 0;
+  left: -50px;
+  content: 'Ok';
+  line-height: 36px;
+  color: green;
+  display: none;
+}
+.copyRaw.showed:before {
   display: inline-block;
 }

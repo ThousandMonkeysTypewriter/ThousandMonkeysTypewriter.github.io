@@ -149,9 +149,9 @@ function initDynamicInputWidth(input) {
   });
 }
 
-function copyRaw(uid) {
+function copyRaw(btn, uid) {
   const data = {
-        id: id_
+    id: uid
   }
   
   let status = {
@@ -161,19 +161,23 @@ function copyRaw(uid) {
   $.post({
     url: '/raw',
     contentType: "application/json",
-    dataType: "json",
+    // dataType: "json",
     data: data
   }).done(function (data) {
-    if (data == "200") {
-      status = {
-        class: 'status_ok',
-        mes: 'Ok'
-      };
-    }
+    status = {
+      class: 'status_ok',
+      mes: 'Ok'
+    };
   }).fail(function (data) {
     console.log(data);
+    alert('Error');
   }).always(function(data) {
-      alert(data.responseText)
+    if(status.mes == 'Ok') {
+      copyTextToClipboard(btn, data);
+    } else {
+      console.log('Error');
+      alert('Error');
+    }
   });
 }
 
@@ -272,13 +276,47 @@ function initAutocomplete(input) {
   });
 }
 
-  function signComments(tag, order) {
-    const commentWrapper = tag.prev();
-    if (commentWrapper.hasClass("commentWrapper")) {
-      commentWrapper
-        .attr("node", tag_counter)
-        .attr("tagname", map[tagname])
-        .attr("order", order);
-      signComments(tag.prev(), order+1)
-    }
+function signComments(tag, order) {
+  const commentWrapper = tag.prev();
+  if (commentWrapper.hasClass("commentWrapper")) {
+    commentWrapper
+      .attr("node", tag_counter)
+      .attr("tagname", map[tagname])
+      .attr("order", order);
+    signComments(tag.prev(), order+1)
   }
+}
+
+function fallbackCopyTextToClipboard(text) {
+  var textArea = document.createElement("textarea");
+  textArea.value = text;
+  document.body.appendChild(textArea);
+  textArea.focus();
+  textArea.select();
+
+  try {
+    var successful = document.execCommand('copy');
+    var msg = successful ? 'successful' : 'unsuccessful';
+    console.log('Fallback: Copying text command was ' + msg);
+  } catch (err) {
+    console.error('Fallback: Oops, unable to copy', err);
+  }
+
+  document.body.removeChild(textArea);
+}
+function copyTextToClipboard(btn, text) {
+  if (!navigator.clipboard) {
+    fallbackCopyTextToClipboard(text);
+    return;
+  }
+  navigator.clipboard.writeText(text).then(function () {
+    console.log('Async: Copying to clipboard was successful!');
+
+    $(btn).addClass('showed');
+    setTimeout(() => {
+      $(btn).removeClass('showed');
+    }, 2000);
+  }, function (err) {
+    console.error('Async: Could not copy text: ', err);
+  });
+}
