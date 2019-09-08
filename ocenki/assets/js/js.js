@@ -150,36 +150,40 @@ function initDynamicInputWidth(input) {
 }
 
 function copyRaw(btn, uid) {
-  const data = {
-       'marks[0]': {id: uid}
-  }
-  
-  let status = {
-      class: 'status_fail',
-      mes: 'Error'
-  };
-  $.post({
-    url: '/raw',
-    contentType: "application/json",
-    // dataType: "json",
-    data: data
-  }).done(function (data) {
-    status = {
-      class: 'status_ok',
-      mes: 'Ok'
-    };
-  }).fail(function (data) {
-    console.log(data);
-    alert('Error');
-  }).always(function(data) {
-    if(status.mes == 'Ok') {
-      copyTextToClipboard(btn, data);
-    } else {
-      console.log('Error');
-      alert('Error');
-    }
-  });
 
+	if(navigator.userAgent.toLowerCase().indexOf('firefox') > -1){
+	  alert("Not yet implemented for Firefox");
+	} else {
+	  const data = {
+		   'marks[0]': {id: uid}
+	  }
+	  
+	  let status = {
+		  class: 'status_fail',
+		  mes: 'Error'
+	  };
+	  $.post({
+		url: '/raw',
+		contentType: "application/json",
+		// dataType: "json",
+		data: data
+	  }).done(function (data) {
+		status = {
+		  class: 'status_ok',
+		  mes: 'Ok'
+		};
+	  }).fail(function (data) {
+		console.log(data);
+		alert('Error');
+	  }).always(function(data) {
+		if(status.mes == 'Ok') {
+		  copyTextToClipboard(btn, data);
+		} else {
+		  console.log('Error');
+		  alert('Error');
+		}
+	  });
+	}
   return false;
 }
 
