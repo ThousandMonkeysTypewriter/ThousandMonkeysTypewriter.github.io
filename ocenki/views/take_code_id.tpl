@@ -10,6 +10,10 @@
       </div>
     </div>
     <div class="fixed_btns">
+	  <form style="display: inline-block;" action="/raw", method="POST" target="_blank">
+        <input name="code_id" type="hidden" value="{{res}}" />
+		<input name="[id]" id="page_id" type="hidden" value="{{uid}}" />
+      </form>
 	  <button class="btn btn-light copyRaw" onclick="event.preventDefault(); copyRaw(this, '{{uid}}')">Скопировать код в буфер</button>
       <button class="btn btn-dark" onclick="saveMarks()">Сохранить</button>
     </div>

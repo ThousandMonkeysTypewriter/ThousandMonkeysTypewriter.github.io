@@ -151,7 +151,7 @@ function initDynamicInputWidth(input) {
 
 function copyRaw(btn, uid) {
   const data = {
-    id: uid
+       'marks[0]': {id: uid}
   }
   
   let status = {
@@ -293,7 +293,7 @@ function fallbackCopyTextToClipboard(btn, text) {
   var textArea = document.createElement("textarea");
   textArea.value = text;
   document.body.appendChild(textArea);
-  textArea.focus();
+ // textArea.focus();
   textArea.select();
 
   try {
