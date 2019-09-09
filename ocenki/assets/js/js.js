@@ -14,8 +14,45 @@ jQuery(document).ready(function () {
 
     initCommentOnClick($('.addCommentOnClick'), numOfComments);
 	setRemoves();
+	setRaw();
   }, 500);
 });
+
+function setRaw() {
+	if(navigator.userAgent.toLowerCase().indexOf('firefox') > -1) {
+	  const data = {
+		'marks[0]': {id: $('#page_id').val()}
+	  }
+	  
+	  let status = {
+		  class: 'status_fail',
+		  mes: 'Error'
+	  };
+	  $.post({
+		url: '/raw',
+		contentType: "application/json",
+		// dataType: "json",
+		data: data
+	  }).done(function (data) {
+		status = {
+		  class: 'status_ok',
+		  mes: 'Ok'
+		};
+	  }).fail(function (data) {
+		console.log(data);
+		alert('Error');
+	  }).always(function(data) {
+		if(status.mes == 'Ok') {
+		  	clipboard = document.getElementById("clipboard");
+	        clipboard.value = data;
+		} else {
+		  console.log('Error');
+		  alert('Error');
+		}
+	  });
+	}
+  return false;
+}
 
 
 function get_code() {
@@ -152,7 +189,7 @@ function initDynamicInputWidth(input) {
 function copyRaw(btn, uid) {
 
 	if(navigator.userAgent.toLowerCase().indexOf('firefox') > -1){
-	  alert("Not yet implemented for Firefox");
+	   copyTextToClipboard(btn,  document.getElementById("clipboard").value);
 	} else {
 	  const data = {
 		   'marks[0]': {id: uid}
@@ -223,6 +260,7 @@ function save_marks(comments, act_) {
       const $ocenka_status = $('<div class="ocenka_status '+ status.class +'">'+ status.mes +'</div>');
       setMarkSendStatus($ocenka_status, $(c), status.class);
     });
+	setRaw();
   });
 }
 
