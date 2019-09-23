@@ -30,6 +30,7 @@
 .commentWrapper > div.input-group {
   min-width: 400px;
   /* max-width: 100%; */
+  min-height: 31px;
 }
 
 .hl {
