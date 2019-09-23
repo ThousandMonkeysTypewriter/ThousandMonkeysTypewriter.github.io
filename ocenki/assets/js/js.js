@@ -3,8 +3,7 @@ jQuery(document).ready(function () {
     const code = get_code();
     $('#rand_id').val('_' + Math.random().toString(36).substr(2, 9));
 
-    const commentSelector = '.hljs-comment';
-    const comments = code.find(commentSelector);
+    const comments = getEditableComment(code, '.hljs-comment');
     let numOfComments = comments.length;
 
     comments2inputs(comments);
@@ -17,6 +16,17 @@ jQuery(document).ready(function () {
 	setRaw();
   }, 500);
 });
+
+function getEditableComment(code, commentSelector) {
+  comments = [];
+  $.each(code.find(commentSelector), function (i, comment) {
+    let $comment = $(comment);
+	if($comment.text().indexOf('$$$') > -1) 
+      comments.push($comment);
+  
+  });
+  return comments;
+}
 
 function setRaw() {
 	if(navigator.userAgent.toLowerCase().indexOf('firefox') > -1) {
@@ -62,7 +72,7 @@ function get_code() {
 function comments2inputs(comments) {
   $.each(comments, function (i, comment) {
     let $comment = $(comment);
-    $comment.text($comment.text().replace("<!--", "").replace("-->", ""));
+    $comment.text($comment.text().replace("<!--$$$", "").replace("-->", ""));
 
     const $tag = $comment.next();
     const span = generateCommentInput(null, $comment.text(), $tag);
@@ -133,8 +143,7 @@ function initTagsForCommenting(code) {
   tag_counter = 0;
   $.each(tags, function (i, tag) {
     const $tag = $(tag);
-    if (!$tag.text().startsWith('</')) {
-      tag_counter += 1;
+    if (!$tag.text().startsWith('</') && $tag.text().toLowerCase().indexOf('<body') == -1) {
       tagname = $tag.text().substr(0, $tag.text().indexOf(" ")).replace("<", "");
       if (!tagname)
         tagname = $tag.text().substr(0, $tag.text().indexOf(">")).replace("<", "");
@@ -143,6 +152,7 @@ function initTagsForCommenting(code) {
         .attr("node", tag_counter)
         .attr("tagname", map[tagname]);
       signComments($tag, 0);
+	  tag_counter += 1;
     }
   });
 }
