@@ -134,7 +134,11 @@ function generateCommentInput(node, val, $tag) {
 function setRemoves() {
   $('.btn-outline-secondary').on('click', function (ev) {
 	save_marks([$(ev.currentTarget).parent()], 'remove'); 
+	
 	$(ev.currentTarget).parents('.commentWrapper').remove()
+    
+	const code = get_code();
+    changeCommentsAll(code);
   });
 }
 
@@ -153,6 +157,16 @@ function initTagsForCommenting(code) {
         .attr("tagname", map[tagname]);
       signComments($tag, 0);
 	  tag_counter += 1;
+    }
+  });
+}
+
+function changeCommentsAll(code) {
+  const tags = code.find('.hljs-tag');
+  $.each(tags, function (i, tag) {
+    const $tag = $(tag);
+    if (!$tag.text().startsWith('</') && $tag.text().toLowerCase().indexOf('<body') == -1) {
+      changeOrder($tag, 0);
     }
   });
 }
@@ -338,6 +352,16 @@ function signComments(tag, order) {
       .attr("tagname", map[tagname])
       .attr("order", order);
     signComments(tag.prev(), order+1)
+  }
+}
+
+function changeOrder(tag, order) {
+  const commentWrapper = tag.prev();
+  if (commentWrapper.hasClass("commentWrapper")) {
+    commentWrapper
+      .attr("order", order);
+	  
+    changeOrder(tag.prev(), order+1)
   }
 }
 
