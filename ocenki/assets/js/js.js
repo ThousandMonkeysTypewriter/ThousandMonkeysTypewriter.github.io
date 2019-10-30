@@ -297,6 +297,19 @@ function colorCommentedAttrs(code) {
       const tag = $(attr).parent();
       const type = attr_types[ind];
       tag.addClass('hl '+ type);
+
+      // попробуем раскрасить закрывающий тег если внутри нет новых открывающихся тегов
+      // или же этот элемент без закрывающего тега
+      const tagName = tag.find('.hljs-name').text();
+      let tagClosingCand = tag.next();
+      // даю 2 попытки найти тег. после тега может быть коммент
+      if(tagClosingCand && !tagClosingCand.hasClass('hljs-tag')) {
+        tagClosingCand = tagClosingCand.next();
+      }
+      if( tagClosingCand.text() == "</"+ tagName +">" ) {
+        tagClosingCand.addClass('hl '+ type);
+      }
+
       attr.textContent = attr.textContent.replace(type, '');
     }
   });
