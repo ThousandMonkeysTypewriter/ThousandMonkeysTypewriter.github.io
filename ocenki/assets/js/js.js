@@ -153,8 +153,8 @@ function initTagsForCommenting(code) {
         tagname = $tag.text().substr(0, $tag.text().indexOf(">")).replace("<", "");
       $tag
         .addClass('addCommentOnClick')
-        .attr("node", tag_counter)
-        .attr("tagname", map[tagname]);
+        .attr("node", tag_counter);
+        // .attr("tagname", map[tagname]);
       signComments($tag, 0);
 	  tag_counter += 1;
     }
