@@ -4,9 +4,7 @@
 <h5>Щелкнув по тегу, вы можете добавить для него комментарий</h5>
     <div class="row">
       <div class="col-sm-12">
-        <pre>
-          <code class="html">{{res}}</code>
-        </pre>
+        <pre id="code" class="prettyprint lang-html linenums:1">{{res}}</pre>
       </div>
     </div>
     <div class="fixed_btns">

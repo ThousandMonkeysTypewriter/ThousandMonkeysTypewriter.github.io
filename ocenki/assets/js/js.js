@@ -1,9 +1,14 @@
+const commentSelector = '.com';
+const tagSelector = '.tag';
+const attrSelector = 'atn';
+const autoCommentClass = 'autoComment'
+
 jQuery(document).ready(function () {
   setTimeout(function () {
     const code = get_code();
     $('#rand_id').val('_' + Math.random().toString(36).substr(2, 9));
 
-    const comments = getEditableComment(code, '.hljs-comment');
+    const comments = getEditableComment(code, commentSelector);
     let numOfComments = comments.length;
 
     comments2inputs(comments);
@@ -14,15 +19,15 @@ jQuery(document).ready(function () {
     initCommentOnClick($('.addCommentOnClick'), numOfComments);
 	setRemoves();
 	setRaw();
-  }, 500);
+  }, 1000);
 });
 
 function getEditableComment(code, commentSelector) {
   comments = [];
   $.each(code.find(commentSelector), function (i, comment) {
     let $comment = $(comment);
-	if($comment.text().indexOf('$$$') > -1) 
-      comments.push($comment);
+  	if($comment.text().indexOf('$$$') > -1)
+        comments.push($comment);
   
   });
   return comments;
@@ -66,7 +71,7 @@ function setRaw() {
 
 
 function get_code() {
-  return $('code.html');
+  return $('#code');
 }
 
 function comments2inputs(comments) {
@@ -74,8 +79,7 @@ function comments2inputs(comments) {
     let $comment = $(comment);
     $comment.text($comment.text().replace("<!--$$$", "").replace("-->", ""));
 
-    const $tag = $comment.next();
-    const span = generateCommentInput(null, $comment.text(), $tag);
+    const span = generateCommentInput(null, $comment.text(), autoCommentClass);
     const $span = $(span);
     $input = $span.find('input');
 
@@ -101,7 +105,7 @@ function saveOnChange($comment) {
   });
 }
 
-function generateCommentInput(node, val, $tag) {
+function generateCommentInput(node, val, wrapperClass) {
   // цвет задневого фона зависит от коммента
   let bgColor = '';
   val && (bgColor = 'border-success');
@@ -117,11 +121,8 @@ function generateCommentInput(node, val, $tag) {
   if (node !== null)
     attr_id.push('name="comment_' + node + '"');
 
-  let css = '';
-  if($tag)
-    css = 'left:'+($tag.offset().left-22)+'px;'
 
-  return '<span class="commentWrapper" style="'+css+'" ' + ((node !== null) && 'node="'+node+'"' || ':') +'  order="0">\
+  return '<span class="commentWrapper '+ (wrapperClass || '') +'"' + ((node !== null) && 'node="'+node+'"' || ':') +' order="0">\
     <div class="input-group input-group-sm" >\
       <div class="input-group-prepend">\
         <button class="btn btn-outline-secondary" type="button">X</button>\
@@ -133,17 +134,16 @@ function generateCommentInput(node, val, $tag) {
 
 function setRemoves() {
   $('.btn-outline-secondary').on('click', function (ev) {
-	save_marks([$(ev.currentTarget).parent()], 'remove'); 
-	
-	$(ev.currentTarget).parents('.commentWrapper').remove()
-    
-	const code = get_code();
+  	save_marks([$(ev.currentTarget).parent()], 'remove');
+  	$(ev.currentTarget).parents('li').remove();
+      
+  	const code = get_code();
     changeCommentsAll(code);
   });
 }
 
 function initTagsForCommenting(code) {
-  const tags = code.find('.hljs-tag');
+  const tags = code.find(tagSelector);
   tag_counter = 0;
   $.each(tags, function (i, tag) {
     const $tag = $(tag);
@@ -162,7 +162,7 @@ function initTagsForCommenting(code) {
 }
 
 function changeCommentsAll(code) {
-  const tags = code.find('.hljs-tag');
+  const tags = code.find(tagSelector);
   $.each(tags, function (i, tag) {
     const $tag = $(tag);
     if (!$tag.text().startsWith('</') && $tag.text().toLowerCase().indexOf('<body') == -1) {
@@ -177,7 +177,7 @@ function initCommentOnClick($els, start_from) {
     const tag = ev.currentTarget;
     const $tag = $(tag);
 
-    if ($tag.prev().hasClass('commentWrapper'))
+    if($tag.parents('li').next().find('.commentWrapper').length && !$tag.parents('li').next().find('.commentWrapper').hasClass('autoComment'))
       return false;
 
     let value = '';
@@ -185,9 +185,16 @@ function initCommentOnClick($els, start_from) {
       value = $tag.attr("tagname")
 
     commentsIterator += 1;
-    $wrapper = $(generateCommentInput($tag.attr("node"), value, $tag));
-    // $wrapper.insertBefore($tag);
-    $wrapper.insertAfter($tag.prev());
+    $wrapper = $(generateCommentInput($tag.attr("node"), value));
+
+    const $li = $tag.parent(); // копируем строку, меняем содержимое и вставляем после
+
+    let $liComment = $li.clone()
+    const $pln = $li.find('.pln');
+    $liComment.empty();
+    $pln && $liComment.append($($pln[0]).clone());
+    $liComment.append($wrapper);
+    $liComment.insertAfter($li);
 
     $input = $wrapper.find('input');
     initAutocomplete($input);
@@ -201,13 +208,14 @@ function initCommentOnClick($els, start_from) {
 }
 
 function initDynamicInputWidth(input) {
-  const inputWrapper = input.parents('.input-group');
-  input.on('focusin', function (ev) {
+  const commentWrapper = input.parents('.commentWrapper');
+  commentWrapper.css('width', input.val().length*10+'px');
+  /*input.on('focusin', function (ev) {
     inputWrapper.css('width', '');
   });
   input.on('focusout', function(ev) {
     inputWrapper.css('width', input.val().length*10+'px');
-  });
+  });*/
 }
 
 function copyRaw(btn, uid) {
@@ -290,7 +298,7 @@ function save_marks(comments, act_) {
 
 function colorCommentedAttrs(code) {
   const attr_types = ['hl-success', 'hl-warning', 'hl-error'];
-  const attrs = code.find('.hljs-attr');
+  const attrs = code.find(attrSelector);
   $.each(attrs, function (i, attr) {
     const ind = attr_types.indexOf(attr.textContent);
     if (~ind) {

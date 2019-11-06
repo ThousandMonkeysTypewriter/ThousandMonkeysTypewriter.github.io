@@ -13,10 +13,12 @@
 
 .commentWrapper {
   white-space: nowrap;
-  display: flex;
-  width: 100%;
-  position: relative;
-  height: 10px;
+  display: inline-block;
+  vertical-align: bottom;
+  /*display: flex;*/
+  /*width: 100%;*/
+  /*position: relative;*/
+  /*height: 10px;*/
 }
 
 .commentWrapper>div {
@@ -24,10 +26,12 @@
 }
 
 .commentWrapper>div.ocenka_status {
-  width: 10%;
+  width: 2%;
 }
 
 .commentWrapper > div.input-group {
+  width: 95%;
+  float: left;
   min-width: 400px;
   /* max-width: 100%; */
   min-height: 31px;
@@ -58,8 +62,8 @@
 
 .ocenka_status {
   display: inline-block;
-  margin-right: 10px;
-  padding-left: 10px;
+  margin-right: 2%;
+  padding-left: 1%;
   line-height: 30px;
 }
 
@@ -113,4 +117,15 @@ input[name^="comment_"] {
 }
 .copyRaw.showed:before {
   display: inline-block;
+}
+li.L0, li.L1, li.L2, li.L3,
+li.L5, li.L6, li.L7, li.L8 {
+  list-style-type: decimal !important;
+}
+li.L0, li.L1, li.L2, li.L3, li.L4,
+li.L5, li.L6, li.L7, li.L8, li.L9 {
+  background: #FFF;
+}
+li.L1, li.L3, li.L5, li.L7, li.L9 {
+  background: #EEE;
 }
