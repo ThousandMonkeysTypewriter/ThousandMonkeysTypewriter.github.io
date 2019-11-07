@@ -118,16 +118,35 @@ input[name^="comment_"] {
 .copyRaw.showed:before {
   display: inline-block;
 }
+ol.linenums {
+  counter-reset: item;
+  list-style: none;
+  padding-left: 0;
+}
+ol.linenums li:before {
+  content: counter(item) " ";
+  counter-increment: item;
+  color: #AAA;
+  display:inline-block;
+  width:2em;
+  display: inline-block;
+  width: 2em;
+  text-align: right;
+}
 li.L0, li.L1, li.L2, li.L3,
 li.L5, li.L6, li.L7, li.L8 {
-  list-style-type: decimal !important;
+  /*list-style-type: decimal !important;*/
+  list-style: none;
 }
 li.L0, li.L1, li.L2, li.L3, li.L4,
 li.L5, li.L6, li.L7, li.L8, li.L9 {
   background: #FFF;
 }
-li.L1, li.L3, li.L5, li.L7, li.L9 {
+li[class^="L"]:hover {
   background: #EEE;
+}
+li.L1, li.L3, li.L5, li.L7, li.L9 {
+  /*background: #EEE;*/
 }
 pre.prettyprint {
   border: 0;
