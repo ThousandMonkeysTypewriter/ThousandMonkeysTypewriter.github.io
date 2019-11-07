@@ -11,9 +11,9 @@ jQuery(document).ready(function () {
     const comments = getEditableComment(code, commentSelector);
     let numOfComments = comments.length;
 
-    comments2inputs(comments);
     initTagsForCommenting(code);
-    signComments();
+    comments2inputs(comments);
+    // signComments();
 
     colorCommentedAttrs(code);
 
@@ -117,7 +117,18 @@ function comments2inputs(comments) {
     let $comment = $(comment);
     $comment.text($comment.text().replace("<!--$$$", "").replace("-->", ""));
 
-    const span = generateCommentInput(null, 0, $comment.text(), autoCommentClass);
+    let node = null,
+        order = 0;
+    let prev = $comment.parents('li').prev();
+    if(prev.find('.commentWrapper').length) {
+      order = +prev.find('.commentWrapper').attr('order')+1;
+      node = prev.find('.commentWrapper').attr('node');
+    } else {
+      console.log(prev, prev.find('.addCommentOnClick').length, prev.find('.addCommentOnClick').attr('node'));
+      node = prev.find('.addCommentOnClick').length && prev.find('.addCommentOnClick').attr('node');
+    }
+
+    const span = generateCommentInput(node, order, $comment.text(), autoCommentClass);
     const $span = $(span);
     $input = $span.find('input');
 
@@ -414,7 +425,7 @@ function initAutocomplete(input) {
   });
 }
 
-function signComments() {
+/*function signComments() {
   $(attrSelector).each(function(i, attr) { // найти все dist
     if(attr.textContent != 'dist')
       return true;
@@ -438,7 +449,7 @@ function signComments() {
       // $(attr).remove();
     }
   });
-}
+}*/
 
 /*function signComments(tag, order) {
   const commentWrapper = tag.prev();
