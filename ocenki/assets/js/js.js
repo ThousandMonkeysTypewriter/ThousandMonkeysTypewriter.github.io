@@ -209,7 +209,8 @@ function initCommentOnClick($els, start_from) {
 
 function initDynamicInputWidth(input) {
   const commentWrapper = input.parents('.commentWrapper');
-  commentWrapper.css('width', input.val().length*10+'px');
+  const width = $(window).width() - commentWrapper.offset().left;
+  commentWrapper.css('width', width);
   /*input.on('focusin', function (ev) {
     inputWrapper.css('width', '');
   });
