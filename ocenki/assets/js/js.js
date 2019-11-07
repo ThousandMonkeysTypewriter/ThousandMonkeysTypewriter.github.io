@@ -372,14 +372,25 @@ function signComments() {
   $(attrSelector).each(function(i, attr) { // найти все dist
     if(attr.textContent != 'dist')
       return true;
+
     const atv = $(attr).next().next();
-    const dist = atv && atv.text() && +JSON.parse(atv.text());
+    let dist = atv && atv.text() && +JSON.parse(atv.text());
     if(dist) {
       const $li = $(attr).parent();
-      const autoComment = $li.nextAll().slice(dist-1, dist);
-      const commentWrapper = autoComment.find('.commentWrapper');
-      console.log(dist, commentWrapper);
+      let $autoComment = $li;
+      while(dist) {
+        $autoComment = $autoComment.next(); 
+        if(!$autoComment.find('.commentWrapper').length || dist==1)
+          dist -= 1;
+      }
+      // const $autoComment = $li.nextAll().slice(dist-1, dist);
+      console.log($autoComment);
+      const commentWrapper = $autoComment.find('.commentWrapper');
       commentWrapper && commentWrapper.attr('node', $li.find('.addCommentOnClick').attr('node'));
+
+      $(attr).nextAll().slice(0,3).remove();
+      $(attr).prev().remove();
+      $(attr).remove();
     }
   });
 }
