@@ -146,6 +146,8 @@ function initTagsForCommenting(code) {
   const tags = code.find(tagSelector);
   tag_counter = 0;
   $.each(tags, function (i, tag) {
+    if(!tag.textContent.match("<[a-zA-Z]"))
+      return true;
     const $tag = $(tag);
     if (!$tag.text().startsWith('</') && $tag.text().toLowerCase().indexOf('<body') == -1) {
       tagname = $tag.text().substr(0, $tag.text().indexOf(" ")).replace("<", "");
