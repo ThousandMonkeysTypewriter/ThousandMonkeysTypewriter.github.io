@@ -133,8 +133,8 @@ ol.linenums li:before {
   display:inline-block;
   width:2em;
   display: inline-block;
-  width: 2em;
   text-align: right;
+  font-size: .9em;
 }
 li.L0, li.L1, li.L2, li.L3,
 li.L5, li.L6, li.L7, li.L8 {
