@@ -167,3 +167,6 @@ pre.prettyprint {
 .com {
   color: #AAA;
 }
+.commonComment {
+  width: 95%;
+}

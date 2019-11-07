@@ -18,10 +18,47 @@ jQuery(document).ready(function () {
     colorCommentedAttrs(code);
 
     initCommentOnClick($('.addCommentOnClick'), numOfComments);
-	setRemoves();
-	setRaw();
+
+    initCommonComment(code);
+
+  	setRemoves();
+  	setRaw();
   }, 1000);
 });
+
+function initCommonComment(code) {
+  $.each(code.find('.com'), function(i, com){
+    if(!~com.textContent.indexOf('$%$'))
+      return true;
+
+    let comText = '';
+    let isCollectCom = true;
+    let $c = $(com).parent();
+    let toRemove = [];
+    const finishText = '-->';
+    let rows = 3;
+    while(isCollectCom) {
+      $c = $c.next();
+      let t = $c.text();
+      if(t.match(finishText)) {
+        isCollectCom = false;
+        t = t.replace(finishText, '');
+      }
+      comText += t;
+      comText += "\n";
+      toRemove.push($c);
+      rows += 1;
+    }
+    $.each(toRemove, function(i, $li){
+      $li.remove();
+    });
+    $(com).html('<span class="commentWrapper commonComment"><textarea rows="'+ rows +'" class="form-control">'+comText+'</textarea></span>');
+    saveOnChange($(com).find('.commonComment textarea'), 'save_final');
+
+    return false;
+  });
+  // $('.com')
+}
 
 function getEditableComment(code, commentSelector) {
   comments = [];
@@ -95,13 +132,15 @@ function comments2inputs(comments) {
   });
 }
 
-function saveOnChange($comment) {
+function saveOnChange($comment, act_) {
+  if(!act_)
+    act_ = 'edit';
   var timeout = null;
   $comment.on('keyup', function (ev) {
     if (timeout)
       clearTimeout(timeout);
     timeout = setTimeout(function () {
-      save_marks([$comment], "edit");
+      save_marks([$comment], act_);
     }, 2000);
   });
 }
@@ -384,13 +423,12 @@ function signComments() {
           dist -= 1;
       }
       // const $autoComment = $li.nextAll().slice(dist-1, dist);
-      console.log($autoComment);
       const commentWrapper = $autoComment.find('.commentWrapper');
-      commentWrapper && commentWrapper.attr('node', $li.find('.addCommentOnClick').attr('node'));
+      commentWrapper && commentWrapper.attr('node', $li.find('.addCommentOnClick').attr('node')) && commentWrapper.find('input').val(commentWrapper.find('input').val()+' node="'+ $li.find('.addCommentOnClick').attr('node') +'"');;
 
-      $(attr).nextAll().slice(0,3).remove();
-      $(attr).prev().remove();
-      $(attr).remove();
+      // $(attr).nextAll().slice(0,3).remove();
+      // $(attr).prev().remove();
+      // $(attr).remove();
     }
   });
 }
