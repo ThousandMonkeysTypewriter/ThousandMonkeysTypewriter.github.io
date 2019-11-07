@@ -308,7 +308,7 @@ function colorCommentedAttrs(code) {
       $(li).children().each(function(i,e){
         $e = $(e);
         if(tagIsOpened || $e.hasClass('tag')) {
-          $e.addClass('hl hl-error');
+          $e.addClass('hl '+ type);
           if(tagIsOpened && $e.hasClass('tag')) {
             $e.addClass('hl-last');
             return false;
@@ -316,7 +316,6 @@ function colorCommentedAttrs(code) {
             tagIsOpened = true;
           }
         }
-        !$(e).hasClass('hl '+ type)
       });
       attr.textContent = attr.textContent.replace(type, ' ');
     }
