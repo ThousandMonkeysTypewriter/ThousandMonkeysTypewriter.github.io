@@ -117,7 +117,7 @@ function comments2inputs(comments) {
     let $comment = $(comment);
     $comment.text($comment.text().replace("<!--$$$", "").replace("-->", ""));
 
-    const span = generateCommentInput(null, $comment.text(), autoCommentClass);
+    const span = generateCommentInput(null, 0, $comment.text(), autoCommentClass);
     const $span = $(span);
     $input = $span.find('input');
 
@@ -145,7 +145,7 @@ function saveOnChange($comment, act_) {
   });
 }
 
-function generateCommentInput(node, val, wrapperClass) {
+function generateCommentInput(node, order, val, wrapperClass) {
   // цвет задневого фона зависит от коммента
   let bgColor = '';
   val && (bgColor = 'border-success');
@@ -162,7 +162,7 @@ function generateCommentInput(node, val, wrapperClass) {
     attr_id.push('name="comment_' + node + '"');
 
 
-  return '<span class="commentWrapper '+ (wrapperClass || '') +'"' + ((node !== null) && 'node="'+node+'"' || ':') +' order="0">\
+  return '<span class="commentWrapper '+ (wrapperClass || '') +'"' + ((node !== null) && 'node="'+node+'"' || ':') +' order="'+order+'">\
     <div class="input-group input-group-sm" >\
       <div class="input-group-prepend">\
         <button class="btn btn-outline-secondary" type="button">X</button>\
@@ -227,7 +227,14 @@ function initCommentOnClick($els, start_from) {
       value = $tag.attr("tagname")
 
     commentsIterator += 1;
-    $wrapper = $(generateCommentInput($tag.attr("node"), value));
+    let order = 0;
+    $nextCommentCand = $tag.parents('li').next();
+    while($nextCommentCand.find('.commentWrapper').length && $nextCommentCand.find('.commentWrapper').attr('node') == $tag.attr('node')) {
+      order += 1;
+      $nextCommentCand = $nextCommentCand.next();
+    }
+
+    $wrapper = $(generateCommentInput($tag.attr("node"), order, value));
 
     const $li = $tag.parent(); // копируем строку, меняем содержимое и вставляем после
 
@@ -424,7 +431,7 @@ function signComments() {
       }
       // const $autoComment = $li.nextAll().slice(dist-1, dist);
       const commentWrapper = $autoComment.find('.commentWrapper');
-      commentWrapper && commentWrapper.attr('node', $li.find('.addCommentOnClick').attr('node')) && commentWrapper.find('input').val(commentWrapper.find('input').val()+' node="'+ $li.find('.addCommentOnClick').attr('node') +'"');;
+      commentWrapper && commentWrapper.attr('node', $li.find('.addCommentOnClick').attr('node')) // && commentWrapper.find('input').val(commentWrapper.find('input').val()+' node="'+ $li.find('.addCommentOnClick').attr('node') +'"');;
 
       // $(attr).nextAll().slice(0,3).remove();
       // $(attr).prev().remove();
