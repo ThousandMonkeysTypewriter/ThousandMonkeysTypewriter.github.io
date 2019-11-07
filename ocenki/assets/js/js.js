@@ -13,6 +13,7 @@ jQuery(document).ready(function () {
 
     comments2inputs(comments);
     initTagsForCommenting(code);
+    signComments();
 
     colorCommentedAttrs(code);
 
@@ -157,7 +158,7 @@ function initTagsForCommenting(code) {
         .addClass('addCommentOnClick')
         .attr("node", tag_counter);
         // .attr("tagname", map[tagname]);
-      signComments($tag, 0);
+      // signComments($tag, 0);
 	  tag_counter += 1;
     }
   });
@@ -367,7 +368,23 @@ function initAutocomplete(input) {
   });
 }
 
-function signComments(tag, order) {
+function signComments() {
+  $(attrSelector).each(function(i, attr) { // найти все dist
+    if(attr.textContent != 'dist')
+      return true;
+    const atv = $(attr).next().next();
+    const dist = atv && atv.text() && +JSON.parse(atv.text());
+    if(dist) {
+      const $li = $(attr).parent();
+      const autoComment = $li.nextAll().slice(dist-1, dist);
+      const commentWrapper = autoComment.find('.commentWrapper');
+      console.log(dist, commentWrapper);
+      commentWrapper && commentWrapper.attr('node', $li.find('.addCommentOnClick').attr('node'));
+    }
+  });
+}
+
+/*function signComments(tag, order) {
   const commentWrapper = tag.prev();
   if (commentWrapper.hasClass("commentWrapper")) {
     commentWrapper
@@ -376,7 +393,7 @@ function signComments(tag, order) {
       .attr("order", order);
     signComments(tag.prev(), order+1)
   }
-}
+}*/
 
 function changeOrder(tag, order) {
   const commentWrapper = tag.prev();
