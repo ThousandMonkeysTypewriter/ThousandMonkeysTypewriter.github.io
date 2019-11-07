@@ -41,7 +41,7 @@
   display: inline-block;
   padding: 3px 5px;
   background: #dcdcdc;
-  border-radius: 5px;
+  /*border-radius: 5px;*/
 }
 
 .hl-warning {
@@ -128,4 +128,16 @@ li.L5, li.L6, li.L7, li.L8, li.L9 {
 }
 li.L1, li.L3, li.L5, li.L7, li.L9 {
   background: #EEE;
+}
+pre.prettyprint {
+  border: 0;
+}
+.hl {
+  border-radius: 5px 0 0 5px;
+}
+.hl ~ .hl {
+  border-radius: 0;
+}
+.hl.hl-last {
+  border-radius: 0 5px 5px 0 !important;
 }

@@ -1,6 +1,6 @@
 const commentSelector = '.com';
 const tagSelector = '.tag';
-const attrSelector = 'atn';
+const attrSelector = '.atn';
 const autoCommentClass = 'autoComment'
 
 jQuery(document).ready(function () {
@@ -302,10 +302,23 @@ function colorCommentedAttrs(code) {
   $.each(attrs, function (i, attr) {
     const ind = attr_types.indexOf(attr.textContent);
     if (~ind) {
-      const tag = $(attr).parent();
+      const li = $(attr).parent();
+      let tagIsOpened = false;
       const type = attr_types[ind];
-      tag.addClass('hl '+ type);
-      attr.textContent = attr.textContent.replace(type, '');
+      $(li).children().each(function(i,e){
+        $e = $(e);
+        if(tagIsOpened || $e.hasClass('tag')) {
+          $e.addClass('hl hl-error');
+          if(tagIsOpened && $e.hasClass('tag')) {
+            $e.addClass('hl-last');
+            return false;
+          } else {
+            tagIsOpened = true;
+          }
+        }
+        !$(e).hasClass('hl '+ type)
+      });
+      attr.textContent = attr.textContent.replace(type, ' ');
     }
   });
 }
