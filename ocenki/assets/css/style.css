@@ -141,3 +141,6 @@ pre.prettyprint {
 .hl.hl-last {
   border-radius: 0 5px 5px 0 !important;
 }
+.com {
+  color: #AAA;
+}
