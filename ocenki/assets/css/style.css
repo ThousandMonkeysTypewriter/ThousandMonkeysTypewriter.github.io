@@ -39,9 +39,19 @@
 
 .hl {
   display: inline-block;
-  padding: 3px 5px;
+  padding-left: 5px;
+  padding-top: 3px;
+  padding-bottom: 3px;
   background: #dcdcdc;
-  /*border-radius: 5px;*/
+  border-radius: 5px 0 0 5px;
+}
+.hl ~ .hl {
+  border-radius: 0;
+  padding: 3px 0;
+}
+.hl.hl-last {
+  border-radius: 0 5px 5px 0 !important;
+  padding-right: 5px;
 }
 
 .hl-warning {
@@ -154,15 +164,6 @@ li.L1, li.L3, li.L5, li.L7, li.L9 {
 }
 pre.prettyprint {
   border: 0;
-}
-.hl {
-  border-radius: 5px 0 0 5px;
-}
-.hl ~ .hl {
-  border-radius: 0;
-}
-.hl.hl-last {
-  border-radius: 0 5px 5px 0 !important;
 }
 .com {
   color: #AAA;

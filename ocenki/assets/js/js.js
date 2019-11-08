@@ -380,7 +380,10 @@ function colorCommentedAttrs(code) {
           }
         }
       });
-      attr.textContent = attr.textContent.replace(type, ' ');
+      $(attr).prev().hasClass('pln') && $(attr).prev().remove();
+      $(attr).prev().hasClass('pln') && $(attr).prev().remove();
+      // attr.textContent = attr.textContent.replace(type, ' ');
+
     }
   });
 }
