@@ -381,7 +381,7 @@ function colorCommentedAttrs(code) {
         }
       });
       $(attr).prev().hasClass('pln') && $(attr).prev().remove();
-      $(attr).prev().hasClass('pln') && $(attr).prev().remove();
+      $(attr).remove();
       // attr.textContent = attr.textContent.replace(type, ' ');
 
     }
