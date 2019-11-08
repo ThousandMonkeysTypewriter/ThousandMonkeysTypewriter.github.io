@@ -124,7 +124,6 @@ function comments2inputs(comments) {
       order = +prev.find('.commentWrapper').attr('order')+1;
       node = prev.find('.commentWrapper').attr('node');
     } else {
-      console.log(prev, prev.find('.addCommentOnClick').length, prev.find('.addCommentOnClick').attr('node'));
       node = prev.find('.addCommentOnClick').length && prev.find('.addCommentOnClick').attr('node');
     }
 
@@ -268,15 +267,18 @@ function initCommentOnClick($els, start_from) {
 }
 
 function initDynamicInputWidth(input) {
-  const commentWrapper = input.parents('.commentWrapper');
-  const width = $(window).width() - commentWrapper.offset().left;
-  commentWrapper.css('width', width);
-  /*input.on('focusin', function (ev) {
-    inputWrapper.css('width', '');
+  input.on('focusin', function (ev) {
+    const commentWrapper = input.parents('.commentWrapper');
+    const width = $(window).width() - commentWrapper.offset().left;
+    commentWrapper.css('width', width);
+    // inputWrapper.css('width', '');
   });
   input.on('focusout', function(ev) {
-    inputWrapper.css('width', input.val().length*10+'px');
-  });*/
+    const commentWrapper = input.parents('.commentWrapper');
+    const width1 = $(window).width() - commentWrapper.offset().left;
+    const width2 = input.val().length*10;
+    commentWrapper.css('width', width2 < width1 ? width2 : width1);
+  });
 }
 
 function copyRaw(btn, uid) {
