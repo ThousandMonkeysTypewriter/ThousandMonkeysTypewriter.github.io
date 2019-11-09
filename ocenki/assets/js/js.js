@@ -184,11 +184,16 @@ function generateCommentInput(node, order, val, wrapperClass) {
 
 function setRemoves() {
   $('.btn-outline-secondary').on('click', function (ev) {
+    const node = $(ev.currentTarget).parents('.commentWrapper').attr('node');
+
   	save_marks([$(ev.currentTarget).parent()], 'remove');
   	$(ev.currentTarget).parents('li').remove();
+
+    // поменять order у других комментов с тем же нодом
+    resetOrder($('.commentWrapper[node="'+node+'"]'));
       
-  	const code = get_code();
-    changeCommentsAll(code);
+  	// const code = get_code();
+    // changeCommentsAll(code);
   });
 }
 
@@ -213,7 +218,7 @@ function initTagsForCommenting(code) {
   });
 }
 
-function changeCommentsAll(code) {
+/*function changeCommentsAll(code) {
   const tags = code.find(tagSelector);
   $.each(tags, function (i, tag) {
     const $tag = $(tag);
@@ -221,7 +226,7 @@ function changeCommentsAll(code) {
       changeOrder($tag, 0);
     }
   });
-}
+}*/
 
 function initCommentOnClick($els, start_from) {
   let commentsIterator = start_from;
@@ -467,14 +472,11 @@ function initAutocomplete(input) {
   }
 }*/
 
-function changeOrder(tag, order) {
-  const commentWrapper = tag.prev();
-  if (commentWrapper.hasClass("commentWrapper")) {
-    commentWrapper
-      .attr("order", order);
-	  
-    changeOrder(tag.prev(), order+1)
-  }
+function resetOrder(commentsWrapper) {
+  // const commentWrapper = tag.prev();
+  commentsWrapper.each(function(order, cw) {
+    $(cw).attr("order", order);
+  });
 }
 
 function fallbackCopyTextToClipboard(btn, text) {
