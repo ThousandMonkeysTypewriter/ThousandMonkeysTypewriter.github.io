@@ -120,14 +120,17 @@ function comments2inputs(comments) {
     let node = null,
         order = 0;
     let prev = $comment.parents('li').prev();
+    let tagName = '';
     if(prev.find('.commentWrapper').length) {
       order = +prev.find('.commentWrapper').attr('order')+1;
       node = prev.find('.commentWrapper').attr('node');
+      tagName = prev.find('.commentWrapper').find('input').attr('tag');
     } else {
       node = prev.find('.addCommentOnClick').length && prev.find('.addCommentOnClick').attr('node');
+      tagName = node && prev.find('.addCommentOnClick').attr('tag');
     }
 
-    const span = generateCommentInput(node, order, $comment.text(), autoCommentClass);
+    const span = generateCommentInput(node, order, $comment.text(), tagName, autoCommentClass);
     const $span = $(span);
     $input = $span.find('input');
 
@@ -155,7 +158,7 @@ function saveOnChange($comment, act_) {
   });
 }
 
-function generateCommentInput(node, order, val, wrapperClass) {
+function generateCommentInput(node, order, val, tagName, wrapperClass) {
   // цвет задневого фона зависит от коммента
   let bgColor = '';
   val && (bgColor = 'border-success');
@@ -177,7 +180,7 @@ function generateCommentInput(node, order, val, wrapperClass) {
       <div class="input-group-prepend">\
         <button class="btn btn-outline-secondary" type="button">X</button>\
       </div>\
-      <input class="form-control '+ bgColor + '" '+attr_id.join(' ')+' value="'+ val +'" >\
+      <input class="form-control '+ bgColor + '" '+attr_id.join(' ')+' value="'+ val +'" tag="'+ tagName +'" >\
     </div>\
   </span>';
 }
@@ -204,16 +207,18 @@ function initTagsForCommenting(code) {
     if(!tag.textContent.match("<[a-zA-Z]"))
       return true;
     const $tag = $(tag);
+    const tagname = tag.textContent.slice(1);
     if (!$tag.text().startsWith('</') && $tag.text().toLowerCase().indexOf('<body') == -1) {
-      tagname = $tag.text().substr(0, $tag.text().indexOf(" ")).replace("<", "");
-      if (!tagname)
-        tagname = $tag.text().substr(0, $tag.text().indexOf(">")).replace("<", "");
+      // tagname = $tag.text().substr(0, $tag.text().indexOf(" ")).replace("<", "");
+      // if (!tagname)
+      //   tagname = $tag.text().substr(0, $tag.text().indexOf(">")).replace("<", "");
       $tag
         .addClass('addCommentOnClick')
-        .attr("node", tag_counter);
+        .attr("node", tag_counter)
+        .attr("tag", tagname);
         // .attr("tagname", map[tagname]);
       // signComments($tag, 0);
-	  tag_counter += 1;
+	   tag_counter += 1;
     }
   });
 }
@@ -249,7 +254,8 @@ function initCommentOnClick($els, start_from) {
       $nextCommentCand = $nextCommentCand.next();
     }
 
-    $wrapper = $(generateCommentInput($tag.attr("node"), order, value));
+    const tagName = $tag.attr('tag');
+    $wrapper = $(generateCommentInput($tag.attr("node"), order, value, tagName));
 
     const $li = $tag.parent(); // копируем строку, меняем содержимое и вставляем после
 
@@ -417,7 +423,7 @@ function initAutocomplete(input) {
     minChars: 1,
     // source: "http://h57.htz10.i.detectum.com:1333/query?term=",
     source: function (request, response) {
-      $.get("http://78.46.103.68:1959/query?term=" + input.val().toLowerCase(),
+      $.get("http://78.46.103.68:1959/query?tag="+ $(input).attr('tag') +"&term=" + input.val().toLowerCase(),
         function (data) {
           response(data);
         }
