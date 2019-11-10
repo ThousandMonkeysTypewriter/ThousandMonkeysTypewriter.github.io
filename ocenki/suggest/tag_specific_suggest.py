@@ -10,8 +10,8 @@ alphs = string.ascii_lowercase + rus_alph + string.punctuation + string.digits +
 
 
 def get_trie(tag):
-    if os.path.exists(f'{tag}.trie'):
-        trie = datrie.Trie.load(f'{tag}.trie')
+    if os.path.exists(tag + '.trie'):
+        trie = datrie.Trie.load(tag + '.trie')
         return trie
     else:
         trie = datrie.Trie(alphs)
@@ -20,7 +20,7 @@ def get_trie(tag):
                 continue
             for comment in tag_comments[t]:
                 trie[comment.lower()] = tag_comments[t][comment]
-        trie.save(f'{tag}.trie')
+        trie.save(tag + '.trie')
         return trie
 
 
