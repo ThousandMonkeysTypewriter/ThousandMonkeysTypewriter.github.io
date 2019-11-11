@@ -407,7 +407,7 @@ function parseSpecialAttrs(code) {
         tagCond = tagCond.prev();
         if(tagCond.hasClass('tag')) {
           tagCond.attr(elIdAttrName, elId);
-          // еще нудно сделать remove
+          $(attr).next().next().remove() && $(attr).next().remove() && ($(attr).prev().hasClass('pln') && $(attr).prev().remove()) && $(attr).remove();
           break;
         }
       }
