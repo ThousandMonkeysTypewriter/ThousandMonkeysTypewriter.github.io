@@ -39,7 +39,9 @@ def get_closest(word, tag, n):
         relevant = check_surroundings(word, trie)
     most_freq = []
     for query in relevant:
-        most_freq.append((query, trie[query]))
+        clear_query = query.replace('бэм', 'БЭМ')
+        clear_query = clear_query[0].upper() + clear_query[1:]
+        most_freq.append((clear_query, trie[query]))
     sorted_queries = sorted(most_freq, key=lambda x: x[1], reverse=True)
     top_n = [i[0] for i in sorted_queries[:n]]
     return top_n
