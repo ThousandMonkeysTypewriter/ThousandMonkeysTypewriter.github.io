@@ -16,7 +16,7 @@ def get_trie(element):
     else:
         trie = datrie.Trie(alphs)
         for e in element_comments:
-            if e != element:
+            if e != int(element):
                 continue
             for comment in element_comments[e]:
                 trie[comment.lower()] = element_comments[e][comment]
@@ -61,6 +61,5 @@ if __name__ == '__main__':
     with open('element_comments.pickle', 'rb') as handle:
         element_comments = pickle.load(handle)
     run(host='78.46.103.68', port=1959)
-
 
 
