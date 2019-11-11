@@ -6,6 +6,9 @@ import logging
 import requests
 import json
 
+# URL = "http://138.201.200.88:1958"
+URL = "http://78.46.103.68:1958"
+
 @route('/assets/<filename:path>')
 def st(filename):
     return static_file(filename, root="./assets/")
@@ -19,14 +22,15 @@ def get_reviews():
   postdata = request.body.read()
   try:
     headers = {'Accept-Encoding': 'identity', 'Content-type': 'application/json; charset=utf-8'}
-    res = requests.post('http://78.46.103.68:1958/highlight', data = postdata, headers = headers)
+    print('/'.join([URL, 'highlight']))
+    res = requests.post('/'.join([URL, 'highlight']), data = postdata, headers = headers)
     # print(res.content.decode('utf-8'))
   except Exception as ex:
     logging.warning("Exception; code_id: %s; message: %s", request.forms.get("code_id"), ex)
     return "<p>Fail: {ex}</p>".format(ex=ex)
 
   if res.status_code != 200:
-    logging.warning("Status: %s; code_id: %s; message: %s", res.status_code, request.forms.get("code_id"), ex)
+    logging.warning("Status: %s; code_id: %s;", res.status_code, request.forms.get("code_id"))
     return "<p>Resp status: {res.status_code}</p>".format(res=res)
   else:
     res = res.content.decode('utf-8')
@@ -37,12 +41,12 @@ def get_raw():
   postdata = request.body.read()
   try:
     headers = {'Accept-Encoding': 'identity', 'Content-type': 'text/plain; charset=utf-8'}
-    res = requests.post('http://78.46.103.68:1958/raw', data = postdata, headers = headers)
+    res = requests.post('/'.join([URL, 'raw']), data = postdata, headers = headers)
   except Exception as ex:
     logging.warning("Exception; code_id: %s; message: %s", code_id, ex)
     return "<p>Fail: {ex}</p>".format(ex=ex)
   if res.status_code != 200:
-    logging.warning("Status: %s; code_id: %s; message: %s", res.status_code, code_id, ex)
+    logging.warning("Status: %s; code_id: %s;", res.status_code, code_id)
     return "<p>Resp status: {res.status_code}</p>".format(res=res)
   else:
     res = res.content.decode('utf-8')
@@ -54,12 +58,12 @@ def get_save():
   data_ = request.forms.get("data")
   try:
     headers = {'Accept-Encoding': 'identity', 'Content-type': 'text/plain; charset=utf-8'}
-    res = requests.post('http://78.46.103.68:1958/save', data = postdata, headers = headers)
+    res = requests.post('/'.join([URL, 'save']), data = postdata, headers = headers)
   except Exception as ex:
     logging.warning("Exception; data: %s; message: %s", data_, ex)
     return "500"
   return "{res.status_code}".format(res=res)
 
 
-run(host='thousandmonkeystypewriter.com', port=80, server="paste")
-# run(host='localhost', port=8000, debug=True)
+# run(host='thousandmon stypewriter.com', port=80, server="paste")
+run(host='localhost', port=8000, debug=True)
