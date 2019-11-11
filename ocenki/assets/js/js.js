@@ -1,7 +1,8 @@
 const commentSelector = '.com';
 const tagSelector = '.tag';
 const attrSelector = '.atn';
-const autoCommentClass = 'autoComment'
+const autoCommentClass = 'autoComment';
+const elIdAttrName = 'element_id';
 
 jQuery(document).ready(function () {
   setTimeout(function () {
@@ -11,11 +12,11 @@ jQuery(document).ready(function () {
     const comments = getEditableComment(code, commentSelector);
     let numOfComments = comments.length;
 
+    parseSpecialAttrs(code);
     initTagsForCommenting(code);
     comments2inputs(comments);
     // signComments();
 
-    colorCommentedAttrs(code);
 
     initCommentOnClick($('.addCommentOnClick'), numOfComments);
 
@@ -121,16 +122,19 @@ function comments2inputs(comments) {
         order = 0;
     let prev = $comment.parents('li').prev();
     let tagName = '';
+    let elId = '';
     if(prev.find('.commentWrapper').length) {
       order = +prev.find('.commentWrapper').attr('order')+1;
       node = prev.find('.commentWrapper').attr('node');
       tagName = prev.find('.commentWrapper').find('input').attr('tag');
+      elId = prev.find('.commentWrapper').find('input').attr(elIdAttrName);
     } else {
       node = prev.find('.addCommentOnClick').length && prev.find('.addCommentOnClick').attr('node');
       tagName = node && prev.find('.addCommentOnClick').attr('tag');
+      elId = node && prev.find('.addCommentOnClick').attr(elIdAttrName);
     }
 
-    const span = generateCommentInput(node, order, $comment.text(), tagName, autoCommentClass);
+    const span = generateCommentInput(node, order, $comment.text(), tagName, elId, autoCommentClass);
     const $span = $(span);
     $input = $span.find('input');
 
@@ -158,7 +162,7 @@ function saveOnChange($comment, act_) {
   });
 }
 
-function generateCommentInput(node, order, val, tagName, wrapperClass) {
+function generateCommentInput(node, order, val, tagName, elId, wrapperClass) {
   // цвет задневого фона зависит от коммента
   let bgColor = '';
   val && (bgColor = 'border-success');
@@ -180,7 +184,7 @@ function generateCommentInput(node, order, val, tagName, wrapperClass) {
       <div class="input-group-prepend">\
         <button class="btn btn-outline-secondary" type="button">X</button>\
       </div>\
-      <input class="form-control '+ bgColor + '" '+attr_id.join(' ')+' value="'+ val +'" tag="'+ tagName +'" >\
+      <input class="form-control '+ bgColor + '" '+attr_id.join(' ')+' value="'+ val +'" tag="'+ tagName +'" '+ elIdAttrName +'="'+ elId +'" >\
     </div>\
   </span>';
 }
@@ -255,7 +259,8 @@ function initCommentOnClick($els, start_from) {
     }
 
     const tagName = $tag.attr('tag');
-    $wrapper = $(generateCommentInput($tag.attr("node"), order, value, tagName));
+    const elId = $tag.attr(elIdAttrName);
+    $wrapper = $(generateCommentInput($tag.attr("node"), order, value, tagName, elId));
 
     const $li = $tag.parent(); // копируем строку, меняем содержимое и вставляем после
 
@@ -370,7 +375,7 @@ function save_marks(comments, act_) {
   });
 }
 
-function colorCommentedAttrs(code) {
+function parseSpecialAttrs(code) {
   const attr_types = ['hl-success', 'hl-warning', 'hl-error'];
   const attrs = code.find(attrSelector);
   $.each(attrs, function (i, attr) {
@@ -395,6 +400,17 @@ function colorCommentedAttrs(code) {
       $(attr).remove();
       // attr.textContent = attr.textContent.replace(type, ' ');
 
+    } else if(elIdAttrName == attr.textContent) {
+      const elId = $(attr).next().next() && JSON.parse($(attr).next().next().text());
+      let tagCond = $(attr);
+      while(tagCond.length) {
+        tagCond = tagCond.prev();
+        if(tagCond.hasClass('tag')) {
+          tagCond.attr(elIdAttrName, elId);
+          // еще нудно сделать remove
+          break;
+        }
+      }
     }
   });
 }
@@ -423,7 +439,7 @@ function initAutocomplete(input) {
     minChars: 1,
     // source: "http://h57.htz10.i.detectum.com:1333/query?term=",
     source: function (request, response) {
-      $.get("http://78.46.103.68:1959/query?tag="+ $(input).attr('tag') +"&term=" + input.val().toLowerCase(),
+      $.get("http://78.46.103.68:1959/query?tag="+ $(input).attr('tag') +"&"+ elIdAttrName +"="+ $(input).attr(elIdAttrName) +"&term=" + input.val().toLowerCase(),
         function (data) {
           response(data);
         }
