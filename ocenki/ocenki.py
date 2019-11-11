@@ -22,7 +22,6 @@ def get_reviews():
   postdata = request.body.read()
   try:
     headers = {'Accept-Encoding': 'identity', 'Content-type': 'application/json; charset=utf-8'}
-    print('/'.join([URL, 'highlight']))
     res = requests.post('/'.join([URL, 'highlight']), data = postdata, headers = headers)
     # print(res.content.decode('utf-8'))
   except Exception as ex:
