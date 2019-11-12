@@ -3,6 +3,7 @@ const tagSelector = '.tag';
 const attrSelector = '.atn';
 const autoCommentClass = 'autoComment';
 const elIdAttrName = 'element_id';
+const $PLN = $('<span class="pln">    </span>'); // минимальный отступ
 
 jQuery(document).ready(function () {
   setTimeout(function () {
@@ -290,10 +291,22 @@ function initCommentOnClick($els, start_from) {
     const elId = $tag.attr(elIdAttrName);
     $wrapper = $(generateCommentInput($tag.attr("node"), order, value, tagName, elId));
 
-    const $li = $tag.parent(); // копируем строку, меняем содержимое и вставляем после
+    const $li = $tag.parents('li'); // копируем строку, меняем содержимое и вставляем после
+
+    const $pln = $li.find('.pln');
+    // если в строке несколько тегов и комментируемый тег не последний - перенести оставшуюся строку, начиная со след тега, на новую строку
+    if($li.find('.tag.addCommentOnClick').length > 1 ) {
+      const nextTag = $($tag.nextAll('.tag.addCommentOnClick')[0]);
+      let pln = $($pln[0]).clone()
+      pln.text(pln.text()+$PLN.text());
+      let newLi = $li.clone().empty().html( pln );
+      const nextEls = nextTag.nextAll();
+      newLi.append(nextTag);
+      newLi.append(nextEls);
+      newLi.insertAfter($li);
+    }
 
     let $liComment = $li.clone()
-    const $pln = $li.find('.pln');
     $liComment.empty();
     $pln && $liComment.append($($pln[0]).clone());
     $liComment.append($wrapper);
