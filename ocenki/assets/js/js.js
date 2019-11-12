@@ -5,30 +5,36 @@ const autoCommentClass = 'autoComment';
 const elIdAttrName = 'element_id';
 const $PLN = $('<span class="pln">    </span>'); // минимальный отступ
 
-jQuery(document).ready(function () {
-  setTimeout(function () {
-    const code = get_code();
-    $('#rand_id').val('_' + Math.random().toString(36).substr(2, 9));
+window['exports'] = {
+  init:
+    function() {
 
-    splitTags(code);
+      jQuery(document).ready(function () {
+        const code = get_code();
+        $('#rand_id').val('_' + Math.random().toString(36).substr(2, 9));
 
-    const comments = getEditableComment(code, commentSelector);
-    let numOfComments = comments.length;
+        splitTags(code);
 
-    parseSpecialAttrs(code);
-    initTagsForCommenting(code);
-    comments2inputs(comments);
-    // signComments();
+        const comments = getEditableComment(code, commentSelector);
+        let numOfComments = comments.length;
+
+        parseSpecialAttrs(code);
+        initTagsForCommenting(code);
+        comments2inputs(comments);
+        // signComments();
 
 
-    initCommentOnClick($('.addCommentOnClick'), numOfComments);
+        initCommentOnClick($('.addCommentOnClick'), numOfComments);
 
-    initCommonComment(code);
+        initCommonComment(code);
 
-  	setRemoves();
-  	setRaw();
-  }, 1000);
-});
+      	setRemoves();
+      	setRaw();
+      });
+
+    }
+}
+
 
 function splitTags(code) {
   code.find(tagSelector).each(function(i, tag) {
