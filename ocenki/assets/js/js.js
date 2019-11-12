@@ -257,8 +257,22 @@ function initCommentOnClick($els, start_from) {
     const tag = ev.currentTarget;
     const $tag = $(tag);
 
-    if($tag.parents('li').next().find('.commentWrapper').length && !$tag.parents('li').next().find('.commentWrapper').hasClass('autoComment'))
+    // если коммент для тега уже есть и это не автокоммент, то ничего не делаем
+    let itHasManualComment = false;
+    let nextTag = $tag.parents('li').next();
+    let commentWrapper = nextTag.find('.commentWrapper');
+    while(commentWrapper.length) {
+      if(commentWrapper.attr('node') == $tag.attr('node') && !commentWrapper.hasClass('autoComment')) {// ручной коммент для этого нода уже есть
+        itHasManualComment = true;
+        break;
+      }
+      nextTag = nextTag.next();
+      commentWrapper = nextTag.find('.commentWrapper');
+    }
+
+    if(itHasManualComment)
       return false;
+
 
     let value = '';
     if ($tag.attr("tagname"))
