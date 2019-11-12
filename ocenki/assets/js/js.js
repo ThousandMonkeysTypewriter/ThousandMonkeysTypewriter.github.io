@@ -212,7 +212,7 @@ function initTagsForCommenting(code) {
       return true;
     const $tag = $(tag);
     const tagname = tag.textContent.slice(1);
-    // if (!$tag.text().startsWith('</') && $tag.text().toLowerCase().indexOf('<body') == -1) {
+    if (!$tag.text().startsWith('</') && $tag.text().toLowerCase().indexOf('<body') == -1) {
       // tagname = $tag.text().substr(0, $tag.text().indexOf(" ")).replace("<", "");
       // if (!tagname)
       //   tagname = $tag.text().substr(0, $tag.text().indexOf(">")).replace("<", "");
@@ -223,7 +223,7 @@ function initTagsForCommenting(code) {
         // .attr("tagname", map[tagname]);
       // signComments($tag, 0);
 	   tag_counter += 1;
-    // }
+    }
   });
 }
 
