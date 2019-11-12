@@ -9,6 +9,8 @@ jQuery(document).ready(function () {
     const code = get_code();
     $('#rand_id').val('_' + Math.random().toString(36).substr(2, 9));
 
+    splitTags(code);
+
     const comments = getEditableComment(code, commentSelector);
     let numOfComments = comments.length;
 
@@ -26,6 +28,18 @@ jQuery(document).ready(function () {
   	setRaw();
   }, 1000);
 });
+
+function splitTags(code) {
+  code.find(tagSelector).each(function(i, tag) {
+    $tag = $(tag);
+    if($tag.text().startsWith('><')) {
+      let $newTag = $tag.clone();
+      $newTag.text($newTag.text().slice(1));
+      $tag.text($tag.text().slice(0,1));
+      $newTag.insertAfter($tag);
+    }
+  });
+}
 
 function initCommonComment(code) {
   $.each(code.find('.com'), function(i, com){
@@ -381,26 +395,30 @@ function parseSpecialAttrs(code) {
   $.each(attrs, function (i, attr) {
     const ind = attr_types.indexOf(attr.textContent);
     if (~ind) {
-      const li = $(attr).parent();
-      let tagIsOpened = false;
+      // const li = $(attr).parent();
+      let $startTag = $(attr).prev();
+      while(!$startTag.hasClass('tag')) { // находим открывающий тег
+        $startTag = $startTag.prev();
+      }
+
       const type = attr_types[ind];
-      $(li).children().each(function(i,e){
-        $e = $(e);
-        if(tagIsOpened || $e.hasClass('tag')) {
-          $e.addClass('hl '+ type);
-          if(tagIsOpened && $e.hasClass('tag')) {
-            $e.addClass('hl-last');
-            return false;
-          } else {
-            tagIsOpened = true;
-          }
+      let tagIsOpened = true;
+      while(true) {
+        $startTag.addClass('hl '+ type); // обводим элемент 
+        if(tagIsOpened && $startTag.hasClass('tag')) { // если открывающий тег поставить флаг, что он прошел
+          $startTag.addClass('hl-start');
+          tagIsOpened = false;
+        } else if(!$startTag.length || $startTag.hasClass('tag')) { // если тег закрывающий или конец строки выходим из цикла
+          $startTag.addClass('hl-last');
+          break;
         }
-      });
+        $startTag = $startTag.next();
+      }
+
       $(attr).prev().hasClass('pln') && $(attr).prev().remove();
       $(attr).remove();
-      // attr.textContent = attr.textContent.replace(type, ' ');
 
-    } else if(elIdAttrName == attr.textContent) {
+    } else if(elIdAttrName == attr.textContent) { // вставляем в открывающий тег element_id для саджеста
       const elId = $(attr).next().next() && JSON.parse($(attr).next().next().text());
       let tagCond = $(attr);
       while(tagCond.length) {
