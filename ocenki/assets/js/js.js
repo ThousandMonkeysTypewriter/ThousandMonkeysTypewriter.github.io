@@ -434,21 +434,16 @@ function setMarkSendStatus(ocenka, $el, status_class) {
 }
 
 function initAutocomplete(input) {
-  // console.log(input);
   input.autoComplete({
     minChars: 1,
-    // source: "http://h57.htz10.i.detectum.com:1333/query?term=",
     source: function (request, response) {
       $.get("http://78.46.103.68:1959/query?tag="+ $(input).attr('tag') +"&"+ elIdAttrName +"="+ $(input).attr(elIdAttrName) +"&term=" + input.val().toLowerCase(),
         function (data) {
-          response(data);
+          response( $.map( data, function(item) {
+            return htmlspecialchars(item);
+          }));
         }
       );
-    },
-    select: function (event, ui) {
-      var prefix = input.val();
-      var selection = ui.item.label;
-      input.val(selection);
     }
   }).keyup(function (e) {
     if (e.which === 13) {
@@ -456,6 +451,17 @@ function initAutocomplete(input) {
     }
   });
 }
+
+function htmlspecialchars(str) {
+ if (typeof(str) == "string") {
+  str = str.replace(/&/g, "&amp;"); /* must do &amp; first */
+  str = str.replace(/"/g, "&quot;");
+  str = str.replace(/'/g, "&#039;");
+  str = str.replace(/</g, "<");
+  str = str.replace(/>/g, ">");
+  }
+ return str;
+ }
 
 /*function signComments() {
   $(attrSelector).each(function(i, attr) { // найти все dist
