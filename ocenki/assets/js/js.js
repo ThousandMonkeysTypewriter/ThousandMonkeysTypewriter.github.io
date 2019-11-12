@@ -485,7 +485,7 @@ function initAutocomplete(input) {
       $.get("http://78.46.103.68:1959/query?tag="+ $(input).attr('tag') +"&"+ elIdAttrName +"="+ $(input).attr(elIdAttrName) +"&term=" + input.val().toLowerCase(),
         function (data) {
           response( $.map( data, function(item) {
-            return htmlspecialchars(item);
+            return htmlEntities(item);
           }));
         }
       );
@@ -496,17 +496,9 @@ function initAutocomplete(input) {
     }
   });
 }
-
-function htmlspecialchars(str) {
- if (typeof(str) == "string") {
-  str = str.replace(/&/g, "&amp;"); /* must do &amp; first */
-  str = str.replace(/"/g, "&quot;");
-  str = str.replace(/'/g, "&#039;");
-  str = str.replace(/</g, "<");
-  str = str.replace(/>/g, ">");
-  }
- return str;
- }
+function htmlEntities(str) {
+  return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
 
 /*function signComments() {
   $(attrSelector).each(function(i, attr) { // найти все dist
