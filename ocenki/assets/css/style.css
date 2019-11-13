@@ -178,3 +178,7 @@ pre.prettyprint {
 .copyRaw {
   box-shadow: 0px 0px 3px 0px #000;
 }
+.autocomplete-suggestion {
+  padding-top: 3px;
+  padding-bottom: 3px;
+}
