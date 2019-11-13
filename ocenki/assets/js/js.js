@@ -436,8 +436,10 @@ function parseSpecialAttrs(code) {
     if (~ind) {
       // const li = $(attr).parent();
       let $startTag = $(attr).prev();
-      while(!$startTag.hasClass('tag')) { // находим открывающий тег
+      while($startTag.length && !$startTag.hasClass('tag')) { // находим открывающий тег
         $startTag = $startTag.prev();
+        if(!$startTag.length)
+          console.log(attr, $(attr).parents('li'), $startTag.length);
       }
 
       const type = attr_types[ind];
