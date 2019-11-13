@@ -274,7 +274,7 @@ function initCommentOnClick($els, start_from) {
     let itHasManualComment = false;
     let nextTag = $tag.parents('li').next();
     let commentWrapper = nextTag.find('.commentWrapper');
-    while(commentWrapper.length) {
+    /*while(commentWrapper.length) {
       if(commentWrapper.attr('node') == $tag.attr('node') && !commentWrapper.hasClass('autoComment')) {// ручной коммент для этого нода уже есть
         itHasManualComment = true;
         break;
@@ -284,7 +284,7 @@ function initCommentOnClick($els, start_from) {
     }
 
     if(itHasManualComment)
-      return false;
+      return false;*/
 
 
     let value = '';
