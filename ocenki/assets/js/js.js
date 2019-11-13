@@ -44,6 +44,12 @@ function splitTags(code) {
       $newTag.text($newTag.text().slice(1));
       $tag.text($tag.text().slice(0,1));
       $newTag.insertAfter($tag);
+    } else if( $tag.text().match('</.*><.*') ) {
+      const splitIndex = $tag.text().indexOf('><')+1;
+      let $newTag = $tag.clone();
+      $newTag.text($newTag.text().slice(splitIndex));
+      $tag.text($tag.text().slice(0,splitIndex));
+      $newTag.insertAfter($tag);
     }
   });
 }
