@@ -143,7 +143,7 @@ function get_code() {
 function comments2inputs(comments) {
   $.each(comments, function (i, comment) {
     let $comment = $(comment);
-    $comment.text($comment.text().replace("<!--$$$", "").replace("-->", "").trim());
+    $comment.text( htmlEntities( $comment.text().replace("<!--$$$", "").replace("-->", "").trim() ) );
 
     let node = null,
         order = 0;
