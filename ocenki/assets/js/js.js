@@ -338,7 +338,7 @@ function initCommentOnClick($els, start_from) {
 function initDynamicInputWidth(input) {
   input.on('focusin', function (ev) {
     const commentWrapper = input.parents('.commentWrapper');
-    const width = $(window).width() - commentWrapper.offset().left;
+    const width = $(window).width() - commentWrapper.offset().left - 30; // 30 отсутпы padding у container-fluid
     commentWrapper.css('width', width);
     // inputWrapper.css('width', '');
   });
