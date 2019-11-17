@@ -9,7 +9,7 @@
   <script src="assets/js/popper.min.js"></script>
   <script src="assets/js/bootstrap.min.js"></script>
   <script src="assets/js/map.js"></script> <!-- для сохранения в связке коммента и тега -->
-  <script src="assets/js/js.js?1"></script>
+  <script src="assets/js/js.js?2"></script>
   <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js?callback=init"></script>
   <script src="assets/js/jquery.auto-complete.min.js"></script>
   <link rel="stylesheet" href="assets/css/bootstrap.min.css" />

@@ -344,7 +344,7 @@ function initDynamicInputWidth(input) {
   });
   input.on('focusout', function(ev) {
     const commentWrapper = input.parents('.commentWrapper');
-    const width1 = $(window).width() - commentWrapper.offset().left;
+    const width1 = $(window).width() - commentWrapper.offset().left - 30;
     const width2 = input.val().length*10;
     commentWrapper.css('width', width2 < width1 ? width2 : width1);
   });
