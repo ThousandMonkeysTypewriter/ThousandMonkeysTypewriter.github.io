@@ -597,3 +597,12 @@ function copyTextToClipboard(btn, text) {
     console.error('Async: Could not copy text: ', err);
   });
 }
+
+function attach(input){
+  var attach_size = 1*1024*1024; //1мб
+  var attach_file = input.files[0];
+  if(attach_file.size > attach_size){
+    $('#err_attach').html('Не больше 1 мб');
+    $('.attach-more').val(''); //удалить аттач, если превышен размер файла
+  }
+};
