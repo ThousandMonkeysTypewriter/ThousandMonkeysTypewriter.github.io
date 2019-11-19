@@ -184,3 +184,6 @@ pre.prettyprint {
   padding-top: 3px;
   padding-bottom: 3px;
 }
+.autocomplete-suggestions {
+  max-height: 300px;
+}
