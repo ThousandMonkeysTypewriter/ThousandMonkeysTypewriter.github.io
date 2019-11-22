@@ -134,7 +134,7 @@ input[name^="comment_"] {
 }
 #code {
   background: #EEE;
-  padding-bottom: 10%;
+  padding-bottom: 5%;
   margin-bottom: 3%;
 }
 ol.linenums {
