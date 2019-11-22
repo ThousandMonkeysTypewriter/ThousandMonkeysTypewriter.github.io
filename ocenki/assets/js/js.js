@@ -319,9 +319,17 @@ function initCommentOnClick($els, start_from) {
       newLi.insertAfter($li);
     }
 
-    let $liComment = $li.clone()
+    let $liComment = $li.clone();
     $liComment.empty();
-    $pln && $liComment.append($($pln[0]).clone());
+    if($pln.length) {
+      let $plnClone = $($pln[0]).clone();
+      let plnText = $plnClone.text();
+      if(plnText.replace(/\s/g, '').length) {
+        const to = plnText.search(/\S/g);
+        $plnClone.text($plnClone.text().slice(0, to));
+      }
+      $liComment.append($plnClone);
+    }
     $liComment.append($wrapper);
     $liComment.insertAfter($li);
 
