@@ -307,7 +307,8 @@ function initCommentOnClick($els, start_from) {
 
     const $pln = $li.find('.pln');
     // если в строке несколько тегов и комментируемый тег не последний - перенести оставшуюся строку, начиная со след тега, на новую строку
-    if($li.find('.tag.addCommentOnClick').length > 1 ) {
+    // if($li.find('.tag.addCommentOnClick').length > 1 ) {
+    if($tag.nextAll('.tag.addCommentOnClick').length) {
       const nextTag = $($tag.nextAll('.tag.addCommentOnClick')[0]);
       let pln = $($pln[0]).clone()
       pln.text(pln.text()+$PLN.text());
