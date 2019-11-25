@@ -661,3 +661,7 @@ function attach(input){
     $('.attach-more').val(''); //удалить аттач, если превышен размер файла
   }
 };
+
+function toggleErrors() {
+  $('body').toggleClass('hide_errors');
+}

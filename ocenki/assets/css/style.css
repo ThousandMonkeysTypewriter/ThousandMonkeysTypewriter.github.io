@@ -187,3 +187,18 @@ pre.prettyprint {
 .autocomplete-suggestions {
   max-height: 300px;
 }
+
+.errorsSwitcher {
+  display: inline-block;
+  padding-top: .5rem;
+  padding-bottom: .5rem;
+  border-radius: .25rem;
+  background: #f8f9fa;
+  padding: .44rem .75rem .44rem 2.5rem;
+  line-height: 1.5;
+  position: relative;
+  top: .1rem;
+}
+.hide_errors .hl {
+  background: none !important;
+}
