@@ -53,8 +53,6 @@ function splitTags(code) {
         $tag.text($tag.text().slice(0,splitIndex));
         $newTag.insertAfter($tag);
         $tag = $newTag;
-      } else {
-        $tag = null;
       }
     }
   });
