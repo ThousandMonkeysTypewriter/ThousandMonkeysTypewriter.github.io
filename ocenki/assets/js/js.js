@@ -195,6 +195,8 @@ function generateCommentInput(node, order, val, tagName, elId, wrapperClass) {
   val && (bgColor = 'border-success');
   if (~(val.indexOf('Отлично!:'))) {
     // по-умолчанию
+  } else if ((val.toLowerCase().indexOf('validator:')) == 0) {
+    bgColor = 'border-warning';
   } else if (~(val.toLowerCase().indexOf('можно улучшить:'))) {
     bgColor = 'border-primary';
   } else if (~(val.toLowerCase().indexOf('нужно исправить:'))) {
