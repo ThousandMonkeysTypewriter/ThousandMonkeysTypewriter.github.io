@@ -455,7 +455,7 @@ function save_marks(comments, act_) {
 }
 
 function parseSpecialAttrs(code) {
-  const attr_types = ['hl-success', 'hl-warning', 'hl-error'];
+  const attr_types = ['hl-success', 'hl-warning', 'hl-error', 'hl-validator'];
   const attrs = code.find(attrSelector);
   $.each(attrs, function (i, attr) {
     const ind = attr_types.indexOf(attr.textContent);
