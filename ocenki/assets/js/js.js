@@ -303,17 +303,32 @@ function initCommentOnClick($els, start_from) {
     const elId = $tag.attr(elIdAttrName);
     $wrapper = $(generateCommentInput($tag.attr("node"), order, value, tagName, elId));
 
-    const $li = $tag.parents('li'); // копируем строку, меняем содержимое и вставляем после
+    let $li = $tag.parents('li'); // копируем строку, меняем содержимое и вставляем после
 
-    const $pln = $li.find('.pln');
+    let $pln = $li.find('.pln');
     // если в строке несколько тегов и комментируемый тег не последний - перенести оставшуюся строку, начиная со след тега, на новую строку
-    // if($li.find('.tag.addCommentOnClick').length > 1 ) {
+    if($tag.prevAll('.addCommentOnClick').length) {
+      const numOfPrevTags = $tag.prevAll('.addCommentOnClick').length;
+      let pln = $($pln[0]).clone()
+      pln.text(pln.text());
+      for(i=0;i<numOfPrevTags;i++) {
+        pln.text(pln.text()+$PLN.text())
+      }
+      let newLi = $li.clone().empty().html( pln );
+      let nextEls = $tag.nextAll();
+      newLi.append($tag);
+      newLi.append(nextEls);
+      newLi.insertAfter($li);
+      $li = $li.next();
+      $pln = $li.find('.pln');
+    }
+
     if($tag.nextAll('.tag.addCommentOnClick').length) {
       const nextTag = $($tag.nextAll('.tag.addCommentOnClick')[0]);
       let pln = $($pln[0]).clone()
       pln.text(pln.text()+$PLN.text());
       let newLi = $li.clone().empty().html( pln );
-      const nextEls = nextTag.nextAll();
+      let nextEls = nextTag.nextAll();
       newLi.append(nextTag);
       newLi.append(nextEls);
       newLi.insertAfter($li);
@@ -339,8 +354,8 @@ function initCommentOnClick($els, start_from) {
     saveOnChange($input);
     $input.trigger('focusout')
 	
-	save_marks([$input], "create");
-	setRemoves();
+	 save_marks([$input], "create");
+   setRemoves();
   });
 }
 
