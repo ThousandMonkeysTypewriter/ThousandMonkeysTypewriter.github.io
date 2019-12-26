@@ -15,25 +15,28 @@ def st(filename):
 
 @route('/')
 def index():
-  return [template('take_code_id').encode("utf-8")]
+  return [template('take_code_id', lang='html').encode("utf-8")]
 
 @route('/reviews', method='POST')
 def get_reviews():
   postdata = request.body.read()
-  try:
-    headers = {'Accept-Encoding': 'identity', 'Content-type': 'application/json; charset=utf-8'}
-    res = requests.post('/'.join([URL, 'highlight']), data = postdata, headers = headers)
-    # print(res.content.decode('utf-8'))
-  except Exception as ex:
-    logging.warning("Exception; code_id: %s; message: %s", request.forms.get("code_id"), ex)
-    return "<p>Fail: {ex}</p>".format(ex=ex)
+  if request.forms.get('lang') == 'html':
+    try:
+      headers = {'Accept-Encoding': 'identity', 'Content-type': 'application/json; charset=utf-8'}
+      res = requests.post('/'.join([URL, 'highlight']), data = postdata, headers = headers)
+      # print(res.content.decode('utf-8'))
+    except Exception as ex:
+      logging.warning("Exception; code_id: %s; message: %s", request.forms.get("code_id"), ex)
+      return "<p>Fail: {ex}</p>".format(ex=ex)
 
-  if res.status_code != 200:
-    logging.warning("Status: %s; code_id: %s;", res.status_code, request.forms.get("code_id"))
-    return "<p>Resp status: {res.status_code}</p>".format(res=res)
+    if res.status_code != 200:
+      logging.warning("Status: %s; code_id: %s;", res.status_code, request.forms.get("code_id"))
+      return "<p>Resp status: {res.status_code}</p>".format(res=res)
+    else:
+      res = res.content.decode('utf-8')
+      return [template('take_code_id', code_id=request.forms.get("code_id"), lang=request.forms.get('lang'), res=res, uid = request.forms.get("[id]")).encode("utf-8")]
   else:
-    res = res.content.decode('utf-8')
-    return [template('take_code_id', code_id=request.forms.get("code_id"), res=res, uid = request.forms.get("[id]")).encode("utf-8")]
+    return [template('take_code_id', code_id=request.forms.get("code_id"), lang=request.forms.get('lang'), res=request.forms.get("code_id").encode("utf-8"), uid = None).encode("utf-8")]
 
 @route('/raw', method='POST')
 def get_raw():
