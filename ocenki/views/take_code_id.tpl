@@ -22,16 +22,22 @@
 % end
 <div class="row">
 <div class="col-sm-12">
-  <form action='/reviews' method="POST">
+  <form action='/reviews' method="POST" enctype="multipart/form-data">
     <h1 style="text-align:center;">Введите HTML работы "Научиться учиться"</h1>
     <div class="form-group">
       <input id="rand_id" name="[id]" type="hidden" value="" />
-      <textarea rows="10" name="code_id" class="form-control"></textarea>
+      <div class="input-group mt-1 mb-1">
+        <div class="input-group-prepend">
+          <span id="file_name" class="input-group-text" onclick="$('#file').trigger('click')">Выберите файл</span>
+        </div>
+        <textarea placeholder="Или вставьте текстом" rows="10" name="code_id" class="form-control"></textarea>
+      </div>
+      <input style="display:none" type="file" name="code_file" id="file" onchange="$('#file_name').text(this.files.length && this.files[0].name || 'Выберите файл')" />
       <div class="input-group mt-1 mb-1">
         <div class="input-group-prepend">
           <label class="input-group-text" for="inputGroupSelect01">Язык</label>
         </div>
-        <select class="custom-select" id="inputGroupSelect01" value="lang">
+        <select class="custom-select" id="inputGroupSelect01" name="lang">
           <option value="html" {{'selected' if lang == 'html' else ''}}>HTML</option>
           <option value="js" {{'selected' if lang == 'js' else ''}}>JS</option>
           <option value="python" {{'selected' if lang == 'python' else ''}}>Python</option>

@@ -19,24 +19,30 @@ def index():
 
 @route('/reviews', method='POST')
 def get_reviews():
-  postdata = request.body.read()
-  if request.forms.get('lang') == 'html':
+  # postdata = request.body.read() // было до файла в форме
+  postdata = request.forms.get('code_id')
+  if not postdata:
+    upload = request.files.get('code_file')
+    if upload:
+      postdata = upload.file.read().decode("utf-8")
+  lang = request.forms.get('lang')
+  if lang == 'html':
     try:
       headers = {'Accept-Encoding': 'identity', 'Content-type': 'application/json; charset=utf-8'}
       res = requests.post('/'.join([URL, 'highlight']), data = postdata, headers = headers)
       # print(res.content.decode('utf-8'))
     except Exception as ex:
-      logging.warning("Exception; code_id: %s; message: %s", request.forms.get("code_id"), ex)
+      logging.warning("Exception; code_id: %s; message: %s", postdata, ex)
       return "<p>Fail: {ex}</p>".format(ex=ex)
 
     if res.status_code != 200:
-      logging.warning("Status: %s; code_id: %s;", res.status_code, request.forms.get("code_id"))
+      logging.warning("Status: %s; code_id: %s;", res.status_code, postdata)
       return "<p>Resp status: {res.status_code}</p>".format(res=res)
     else:
       res = res.content.decode('utf-8')
-      return [template('take_code_id', code_id=request.forms.get("code_id"), lang=request.forms.get('lang'), res=res, uid = request.forms.get("[id]")).encode("utf-8")]
+      return [template('take_code_id', code_id=postdata, lang=lang, res=res, uid = request.forms.get("[id]")).encode("utf-8")]
   else:
-    return [template('take_code_id', code_id=request.forms.get("code_id"), lang=request.forms.get('lang'), res=request.forms.get("code_id").encode("utf-8"), uid = None).encode("utf-8")]
+    return [template('take_code_id', code_id=postdata, lang=lang, res=postdata.encode("utf-8"), uid = None).encode("utf-8")]
 
 @route('/raw', method='POST')
 def get_raw():
