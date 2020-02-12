@@ -59,15 +59,20 @@
 }
 
 .hl-warning {
-  background: #8295d0;
+  /*background: #8295d0;*/
+  /*background: #a9ccf9;*/
+  background: #82ABD0D4;
 }
 
 .hl-success {
   background: #b7dab4;
+  /*background: #119011;*/
 }
 
 .hl-error {
-  background: #ce9d9d;
+  /*background: #ce9d9d;*/
+  /*background: #f99a9a;*/
+  background: #9630307d;
 }
 
 *:focus {
