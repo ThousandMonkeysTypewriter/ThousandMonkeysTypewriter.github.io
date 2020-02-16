@@ -167,7 +167,7 @@ function comments2inputs(comments) {
 
     const span = generateCommentInput(node, order, $comment.text(), tagName, elId, autoCommentClass);
     const $span = $(span);
-    $input = $span.find('input');
+    $input = $span.find('p');
 
     $comment.replaceWith($span);
     comment = $input[0];
@@ -176,7 +176,7 @@ function comments2inputs(comments) {
    // initAutocomplete($comment);
    initDynamicInputWidth($comment);
    // saveOnChange($comment);
-    $comment.trigger('focusout')
+    $comment.trigger('initWidth')
   });
 }
 
@@ -214,10 +214,8 @@ function generateCommentInput(node, order, val, tagName, elId, wrapperClass) {
 
   return '<span class="commentWrapper '+ (wrapperClass || '') +'"' + ((node !== null) && 'node="'+node+'"' || ':') +' order="'+order+'">\
     <div class="input-group input-group-sm" >\
-      <div class="input-group-prepend">\
-        <button class="btn btn-outline-secondary" type="button">X</button>\
-      </div>\
-      <input class="form-control '+ bgColor + '" '+attr_id.join(' ')+' value="'+ val +'" tag="'+ tagName +'" '+ elIdAttrName +'="'+ elId +'" readonly="readonly">\
+      <p class="form-control '+ bgColor + '" '+attr_id.join(' ')+' tag="'+ tagName +'" '+ elIdAttrName +'="'+ elId +'">'+ val +'</p>\
+      <span class="btn btn-sm btn-outline-secondary toggleP" onclick="$(this).prev().removeClass(\'focused\');"><i class="fas fa-chevron-up"></i></span>\
     </div>\
   </span>';
 }
@@ -358,7 +356,7 @@ function initCommentOnClick($els, start_from) {
  //   initAutocomplete($input);
  //   initDynamicInputWidth($input);
  //   saveOnChange($input);
-    $input.trigger('focusout')
+    $input.trigger('initWidth')
 	
 //	 save_marks([$input], "create");
 //   setRemoves();
@@ -366,16 +364,17 @@ function initCommentOnClick($els, start_from) {
 }
 
 function initDynamicInputWidth(input) {
-  input.on('focusin', function (ev) {
+  input.on('click', function (ev) {
     const commentWrapper = input.parents('.commentWrapper');
-    const width = $(window).width() - commentWrapper.offset().left - 30; // 30 отсутпы padding у container-fluid
-    commentWrapper.css('width', width);
-    // inputWrapper.css('width', '');
+    input.hasClass('toggleOnClick') && input.addClass('focused');
   });
-  input.on('focusout', function(ev) {
+  input.on('initWidth', function(ev) {
     const commentWrapper = input.parents('.commentWrapper');
     const width1 = $(window).width() - commentWrapper.offset().left - 30;
-    const width2 = input.val().length*10;
+    const width2 = input.text().length*10;
+    if(width2 > width1+30) {
+      input.addClass('toggleOnClick');
+    }
     commentWrapper.css('width', width2 < width1 ? width2 : width1);
   });
 }

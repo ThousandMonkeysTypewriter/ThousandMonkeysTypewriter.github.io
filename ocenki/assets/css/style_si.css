@@ -36,6 +36,27 @@
   /* max-width: 100%; */
   min-height: 31px;
 }
+.commentWrapper p {
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.commentWrapper p.focused {
+  white-space: normal;
+  height: auto;
+}
+.commentWrapper .toggleP {
+  position: absolute;
+  left: -1.9rem;
+  top: 0;
+  display: none;
+  cursor: pointer;
+  /*background-color: #9e9e9e;*/
+  border: 0;
+  border-radius: .2rem !important;
+}
+.commentWrapper p.focused + .toggleP {
+  display: inline-block;
+}
 
 .hl {
   display: inline-block;
