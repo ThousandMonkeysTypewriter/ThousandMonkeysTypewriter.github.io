@@ -363,6 +363,10 @@ function initCommentOnClick($els, start_from) {
   });
 }
 
+function toggleAllComments() {
+  $('.toggleOnClick').trigger('click');
+}
+
 function initDynamicInputWidth(input) {
   input.on('click', function (ev) {
     const commentWrapper = input.parents('.commentWrapper');

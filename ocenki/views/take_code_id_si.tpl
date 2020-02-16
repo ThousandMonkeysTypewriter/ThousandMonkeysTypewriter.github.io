@@ -13,6 +13,7 @@
   		  <input name="[id]" id="page_id" type="hidden" value="{{uid}}" />
   		  <textarea id="clipboard" style="display:none;"></textarea>
       </form>
+      <button class="btn btn-light copyRaw" onclick="event.preventDefault(); toggleAllComments()">Развернуть все комментарии</button>
   	  <button class="btn btn-light copyRaw" onclick="event.preventDefault(); copyRaw(this, '{{uid}}')">Скопировать код в буфер</button>
       <div class="custom-control custom-switch errorsSwitcher copyRaw">
         <input type="checkbox" checked onchange="toggleErrors()" class="custom-control-input" id="customSwitch1">
