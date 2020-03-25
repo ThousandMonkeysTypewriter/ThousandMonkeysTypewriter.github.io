@@ -15,8 +15,8 @@
   <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
   <link rel="stylesheet" href="assets/css/default.min.css" />
   <link rel="stylesheet" href="assets/css/jquery.auto-complete.min.css" />
-  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="assets/css/style.css?1" />
 
 </head>
 <body>
-  <div class="container-fluid">
+  <div class="container-fluid pt-3">

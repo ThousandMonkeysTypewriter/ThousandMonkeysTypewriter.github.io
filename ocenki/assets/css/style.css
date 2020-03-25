@@ -210,3 +210,20 @@ pre.prettyprint {
 #file_name {
   cursor: pointer;
 }
+
+.border-error {
+  border-color: #dc3545 !important;
+}
+.text-error {
+  color: #dc3545 !important;
+}
+.mt--3 {
+  margin-top: -1rem !important
+}
+.points {
+  counter-reset: point;
+}
+.point:before {
+  counter-increment: point;
+  content: counter(point) ". "
+}

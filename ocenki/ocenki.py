@@ -26,24 +26,54 @@ def get_reviews():
     upload = request.files.get('code_file')
     if upload:
       postdata = upload.file.read().decode("utf-8")
-  lang = request.forms.get('lang')
-  if lang == 'html':
-    try:
-      headers = {'Accept-Encoding': 'identity', 'Content-type': 'application/json; charset=utf-8'}
-      res = requests.post('/'.join([URL, 'highlight']), data = {'code_id':postdata, '[id]':req_id}, headers = headers)
-      # print(res.content.decode('utf-8'))
-    except Exception as ex:
-      logging.warning("Exception; code_id: %s; message: %s", postdata, ex)
-      return "<p>Fail: {ex}</p>".format(ex=ex)
 
-    if res.status_code != 200:
-      logging.warning("Status: %s; code_id: %s;", res.status_code, postdata)
-      return "<p>Resp status: {res.status_code}</p>".format(res=res)
-    else:
-      res = res.content.decode('utf-8')
-      return [template('take_code_id', code_id=postdata, lang=lang, res=res, uid = req_id)]
+  """ try:
+    headers = {
+      'Accept-Encoding': 'identity',
+      'Content-type': 'application/json; charset=utf-8'
+    }
+    res = requests.post(
+      '/'.join([URL, 'highlight']),
+      data = {
+        'code_id':postdata,
+        '[id]':req_id
+      },
+      headers = headers
+    )
+  except Exception as ex:
+    logging.warning(
+      "Exception; code_id: %s; message: %s", postdata, ex
+    )
+    return "<p>Fail: {ex}</p>".format(ex=ex)
+
+  if res.status_code != 200:
+    logging.warning("Status: %s; code_id: %s;", res.status_code, postdata)
+    return "<p>Resp status: {res.status_code}</p>".format(res=res)
   else:
-    return [template('take_code_id', code_id=postdata, lang=lang, res=postdata.encode("utf-8"), uid = None).encode("utf-8")]
+    res = res.content.decode('utf-8')
+    return [template('take_code_id', code_id=postdata, lang=lang, res=res, uid = req_id)] """
+    
+  f = open('hh_test.json', 'r')
+  res = json.loads(f.read())
+  f.close()
+  res['responseBody']['counters'] = {
+    'success': 0,
+    'warning': 0,
+    'error': 0
+  }
+  for ll in res['responseBody']['result']:
+    for l in ll['rows']:
+      for cc in l.get('comments',[]):
+        res['responseBody']['counters'][cc] += 1
+
+  return [
+    template(
+      'take_code_id',
+      code_id=postdata,
+      res=res,
+      uid=req_id
+    )
+  ]
 
 @route('/raw', method='POST')
 def get_raw():
