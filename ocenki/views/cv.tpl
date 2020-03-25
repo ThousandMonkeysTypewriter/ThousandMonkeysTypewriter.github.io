@@ -3,7 +3,7 @@
     <div class="col">
       <div class="pt-2 border border-{{type}}">
         <h2 class="mb-0">{{number}}</h2>
-        <p class="mb-2">{{type}}</p>
+        <p class="mb-2">{{res['responseBody']['marks'][type]}}</p>
       </div>
     </div>
   % end
