@@ -14,8 +14,15 @@ def st(filename):
     return static_file(filename, root="./assets/")
 
 @route('/')
+# show start form
 def index():
   return [template('take_code_id', lang='html').encode("utf-8")]
+
+def fileData(upload):
+  separate = ''.join(['#' for i in range(10)])
+  name = upload.filename
+  content = upload.file.read().decode("utf-8")
+  return "{0} {1} {0}\n {2}\n\n".format(separate, name, content)
 
 @route('/reviews', method='POST')
 def get_reviews():
@@ -23,9 +30,13 @@ def get_reviews():
   req_id = request.forms.get("[id]").encode("utf-8")
   postdata = request.forms.get('code_id').encode('utf-8')
   if not postdata:
-    upload = request.files.get('code_file')
-    if upload:
-      postdata = upload.file.read().decode("utf-8")
+    uploads = request.files.getall('code_file');
+    if len(uploads):
+      if len(uploads) == 1:
+        postdata = uploads[0].file.read().decode("utf-8")
+      else:
+        postdata = "".join(map(fileData, uploads))
+    print(postdata)
   lang = request.forms.get('lang')
   if lang == 'html':
     try:

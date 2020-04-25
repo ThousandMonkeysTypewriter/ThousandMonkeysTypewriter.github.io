@@ -32,7 +32,15 @@
         </div>
         <textarea placeholder="Или вставьте текстом" rows="10" name="code_id" class="form-control"></textarea>
       </div>
-      <input style="display:none" type="file" name="code_file" id="file" onchange="$('#file_name').text(this.files.length && this.files[0].name || 'Выберите файл')" />
+      <input
+        style="display:none"
+        type="file"
+        id="file"
+        name="code_file"
+        onchange="setUploadinFilesName(this)"
+        multiple=""
+        directory="" webkitdirectory="" mozdirectory=""
+      />
       <div class="input-group mt-1 mb-1">
         <div class="input-group-prepend">
           <label class="input-group-text" for="inputGroupSelect01">Язык</label>
@@ -52,4 +60,13 @@
 </div>
 <div class="col-sm-8"></div>
 </div>
+<script>
+  function setUploadinFilesName(input) {
+    let fileName = 'Выберите файл';
+    if(input.files.length) {
+      fileName = Array.prototype.map.call(input.files, (f) => f.name).join(', \n');
+    }
+    $('#file_name').text(fileName);
+  }
+</script>
 % include('footer.tpl', title='Footer')

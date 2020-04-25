@@ -209,4 +209,5 @@ pre.prettyprint {
 }
 #file_name {
   cursor: pointer;
+  white-space: pre-wrap;
 }
