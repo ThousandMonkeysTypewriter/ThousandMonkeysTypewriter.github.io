@@ -36,6 +36,32 @@
   /* max-width: 100%; */
   min-height: 31px;
 }
+.commentWrapper p {
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.commentWrapper p.focused {
+  white-space: normal;
+  height: auto;
+}
+.commentWrapper .toggleP {
+  position: absolute;
+  left: -1.5rem;
+  top: 0;
+  display: none;
+  cursor: pointer;
+  /*background-color: #9e9e9e;*/
+  border: 0;
+  border-radius: .2rem !important;
+  line-height: 1.45rem;
+  font-size: .5rem;
+}
+.commentWrapper .toggleP:hover {
+  background: #EEE;
+}
+.commentWrapper p.focused + .toggleP {
+  display: inline-block;
+}
 
 .hl {
   display: inline-block;
@@ -58,15 +84,16 @@
   margin-left: 3px;
 }
 
-	
 .hl-warning {
   /*background: #8295d0;*/
   /*background: #a9ccf9;*/
   background: #82ABD0D4;
 }
+
 .hl-success {
   background: #b7dab4;
 }
+
 .hl-error {
     /*background: #ce9d9d;*/
   /*background: #f99a9a;*/
@@ -119,6 +146,7 @@
 
 input[name^="comment_"] {
   display: inline-block;
+  background:#fff !important;
 }
 
 .copyRaw:before {

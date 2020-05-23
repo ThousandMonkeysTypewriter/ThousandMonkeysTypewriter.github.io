@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width,maximum-scale=2">
+    <meta name="description" content="ThousandMonkeysTypewriter.github.io : ">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="https://thousandmonkeystypewriter.github.io/style.css?v=1a4ff4e20d94f254d1ba1a1add0b77cf8298ef1c">
+    <link rel="icon" href="http://thousandmonkeystypewriter.github.io/favicon.ico">
+
+    <title> ThousandMonkeysTypewriter </title>
+    <meta property="og:title" content="Welcome to GitHub" />
+    <meta property="og:locale" content="en_US" />
+    <link rel="canonical" href="https://thousandmonkeystypewriter.github.io/scripts" />
+    <meta property="og:url" content="https://thousandmonkeystypewriter.github.io/scripts" />
+    <meta property="og:site_name" content="ThousandMonkeysTypewriter.github.io" />
+    <script type="application/ld+json">
+    {"name":"ThousandMonkeysTypewriter.github.io","description":null,"author":null,"@type":"WebSite","url":"https://thousandmonkeystypewriter.github.io/scripts","image":null,"publisher":null,"headline":"Welcome to GitHub","dateModified":null,"datePublished":null,"sameAs":null,"mainEntityOfPage":null,"@context":"http://schema.org"}</script>
+
+  </head>
+
+  <body>
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/ThousandMonkeysTypewriter">View on GitHub</a>
+
+          <h1 id="project_title">Code reviewing process</h1>
+
+          
+        </header>
+    </div>
+    <!-- MAIN CONTENT -->
+        </div>
+    <!-- MAIN CONTENT -->
+        <div id="main_content_wrap" class="outer"  style="background: white">
+      <section id="main_content" class="inner">
+        <div class="content">
+                              <div class="columns is-centered">
+                      <h2 id="Screencast">Demo</h2>
+                         <iframe width="560" height="315" src="https://www.youtube.com/embed/BTLg0y-UTq0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                    </div>
+		
+					
+					<!--<p>Based on the context of the program, the plugin can give you a suggestion - for example, “open DB connection”. If the programmer clicks on that suggest, the plugin implements DB connection in the current context of the program.<br />
+<br />
+<img src="https://user-images.githubusercontent.com/33597677/73614903-a46b3100-4614-11ea-9f72-e386fc9c9067.png" alt="enter image description here" />
+<br /></p>-->
+          
+                 <!--   <div class="columns is-centered">
+                      <h2 id="Screencast">Screencasts of real users</h2>
+                      <iframe width="560" height="315" src="https://www.youtube.com/embed/lCiYBMB9cvM" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                    </div>-->
+                      </section>
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+    </div>
+
+    
+  </body>
+</html>
