@@ -1,6 +1,6 @@
 #!bin/python3
 
-from bottle import route, run, template, request, static_file
+from bottle import auth_basic, route, run, template, request, static_file
 import sys
 import logging
 import json
@@ -8,12 +8,15 @@ import requests
 from pathlib import Path
 import re
 
+def is_authenticated_user(user, password):
+  return (user == 'hh' and password == 'otkrito')
 
 @route('/assets/<filename:path>')
 def st(filename):
     return static_file(filename, root="./assets/")
 
 @route('/')
+@auth_basic(is_authenticated_user)
 def index():
   return ''
 
@@ -22,6 +25,7 @@ def index():
   return ''
 
 @route('/<vacancy_id>')
+@auth_basic(is_authenticated_user)
 # show start form
 def vacancy(vacancy_id):
   if not vacancy_id:
@@ -39,7 +43,7 @@ def vacancy(vacancy_id):
   else:
     json_data = res.json()
     json_data['vac']['vacancyView']['description'] = unescape(json_data['vac']['vacancyView']['description'])
-    return [template('index', vacancy=json_data).encode("utf-8")]
+    return [template('index', vacancy=json_data, json_tabs=json.dumps(json_data['tabs'])).encode("utf-8")]
   
   # p = Path('./example.json')
   # with p.open() as json_file:

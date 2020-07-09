@@ -123,7 +123,7 @@
     }
     p.tab-title:before {
       content: '';
-      background: #007bff;
+      background: #848484;
       width: 5px;
       position: absolute;
       border-radius: 50px;
@@ -131,6 +131,9 @@
       left: 0;
       top: calc(50% - 3px);
       margin: 0;
+    }
+    .tab-type-recommend p.tab-title:before {
+      background: #007bff;
     }
     .tab-type-fix p.tab-title:before {
       background: #de3d53;
@@ -151,6 +154,10 @@
       $('.tab .tab-title').on('click', function() {
         $(this).parent('.tab').toggleClass('showen');
       });
+      const tabs = {{!json_tabs}};
+      for (let i = 0, len = tabs.length; i < len; i++) {
+        console.log(tabs[i]);
+      }
     });
   </script>
 </head>
