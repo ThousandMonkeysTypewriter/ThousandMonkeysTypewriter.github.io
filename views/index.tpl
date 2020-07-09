@@ -1,4 +1,24 @@
 % v = vacancy['vac']['vacancyView']
+<% work_schedule = {
+  "flexible": 'Гибкий график',
+  "fullDay": 'Полный день',
+  "flyInFlyOut": 'Вахтовый метод',
+  "remote": 'Удаленная работа',
+  "shift": 'Сменный график'
+}
+experience = {
+  "noExperience": 'Нет опыта',
+  "between1And3": '1–3 года',
+  "between3And6": '3–6 лет',
+  "moreThan6": 'Более 6 лет'
+}
+employment = {
+  "PART": 'Частичная занятость',
+  "PROBATION": 'Стажировка',
+  "PROJECT": 'Проектная/Временная работа',
+  "VOLUNTEER": 'Волонтерство',
+  "FULL": 'Полная занятость'
+} %>
 
 <!DOCTYPE html>
 <html>
@@ -206,14 +226,11 @@
         <div class="info">
           <div class="work-wrapper">
             <div class="work-experience">
-              % if v['workExperience'] == 'between1And3':
-                Требуемый опыт работы: 1–3 года
-              % end
+              Требуемый опыт работы: {{experience[v['workExperience']] if v['workExperience'] in experience else 'Не имеет значения '}}
             </div>
             <div class="work-shedule">
-              % if v['@workSchedule'] == 'fullDay':
-                Полная занятость, полный день
-              % end
+              Требуемый опыт работы: {{employment[v['employment']['@type']] if v['employment']['@type'] in employment else 'Не указано'}}, 
+              {{work_schedule[v['@workSchedule']] if v['@workSchedule'] in work_schedule else 'Не указано'}}
             </div>
           </div>
           <div class="description">

@@ -30,6 +30,14 @@ def index():
 def vacancy(vacancy_id):
   if not vacancy_id:
     return ''
+
+  if(vacancy_id == 'test'):
+    p = Path('./example.json')
+    with p.open() as f:
+      json_data = json.load(f)
+    json_data['vac']['vacancyView']['description'] = unescape(json_data['vac']['vacancyView']['description'])
+    return [template('index', vacancy=json_data, json_tabs=json.dumps(json_data['tabs'])).encode("utf-8")]
+
   try:
     headers = {'Accept-Encoding': 'identity', 'Content-type': 'application/json; charset=utf-8'}
     res = requests.get('/'.join(['http://prog.ai:1078', 'highlight']), params = {'id':vacancy_id}, headers = headers)
