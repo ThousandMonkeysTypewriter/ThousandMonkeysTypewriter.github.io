@@ -135,6 +135,9 @@
     .tab-type-fix p.tab-title:before {
       background: #de3d53;
     }
+    .tab-type-analysis p.tab-title:before {
+      background: #3ddec8;
+    }
     .tab-descr {
       display: none;
       margin-top: 20px;
@@ -232,6 +235,11 @@
             <span class="badge badge-pill badge-dark">
               {{len([t for t in vacancy['tabs'] if t['message_type'] == 'recommend'])}}
             </span> Recommendations
+          </span>
+          <span class="tabs-num">
+            <span class="badge badge-pill badge-dark">
+              {{len([t for t in vacancy['tabs'] if t['message_type'] == 'analysis'])}}
+            </span> Analysis
           </span>
         </div>
         <div class="tabs-wrapper">
