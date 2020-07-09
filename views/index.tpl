@@ -223,7 +223,7 @@ employment = {
         const {section} = tabs[i];
         const remarkType = tabMark[''+section];
         if(!remarkType.searchText) {
-          $('span[class="@workSchedule"]').addClass('remark-for');
+          $('span[class="'+ remarkType.key +'"]').addClass('remark-for');
         } else {
           $(".description:contains('"+ remarkType.searchText +"')").html(function(_, html) {
             const regex = new RegExp(remarkType.searchText, 'g');
@@ -242,7 +242,7 @@ employment = {
           <div class="title">
             <h1>{{v['name']}}</h1>
           </div>
-          <div class="salary">
+          <div class="salary compensation">
             % if v['compensation']['noCompensation']:
               з/п не указана
             % else: 
@@ -255,7 +255,7 @@ employment = {
           </div>
         </div>
         <div class="company-wrapper">
-          <div class="company-name">
+          <div class="company-name name">
             {{v['company']['visibleName']}}
             % if v['company']['@trusted']:
               <span class="company-trusted">&#10004;</span>
@@ -278,11 +278,11 @@ employment = {
         </div>
         <div class="info">
           <div class="work-wrapper">
-            <div class="work-experience">
+            <div class="work-experience workExperience">
               Требуемый опыт работы: {{experience[v['workExperience']] if v['workExperience'] in experience else 'Не имеет значения '}}
             </div>
             <div class="work-shedule">
-              <span class="@workSchedule">Требуемый опыт работы</span>: {{employment[v['employment']['@type']] if v['employment']['@type'] in employment else 'Не указано'}}, 
+              <span class="@workSchedule employment">Требуемый опыт работы</span>: {{employment[v['employment']['@type']] if v['employment']['@type'] in employment else 'Не указано'}}, 
               {{work_schedule[v['@workSchedule']] if v['@workSchedule'] in work_schedule else 'Не указано'}}
             </div>
           </div>
@@ -290,7 +290,7 @@ employment = {
             {{!v['description']}}
           </div>
           <div class="tags-wrapper">
-            <h2 class="tags-header">Ключевые навыки</h2>
+            <h2 class="tags-header keySkills">Ключевые навыки</h2>
             % if 'keySkills' in v:
               <div class="tags-list">
                 % for skill in v['keySkills']['keySkill']:
