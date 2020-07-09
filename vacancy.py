@@ -17,6 +17,10 @@ def st(filename):
 def index():
   return ''
 
+@route('/favicon.ico')
+def index():
+  return ''
+
 @route('/<vacancy_id>')
 # show start form
 def vacancy(vacancy_id):
