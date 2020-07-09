@@ -42,6 +42,9 @@ employment = {
       font-weight: 400;
       margin: 0 0 15px;
     }
+    h1, h2 {
+      display: inline;
+    }
     .salary {
       font-size: 22px;
       font-weight: 400;
@@ -169,7 +172,20 @@ employment = {
       display: block;
     }
     .remark-for {
-      box-shadow: 0px 15px 5px -5px #de3d53;
+      /* box-shadow: 0px 15px 5px -5px #de3d53; */
+      position: relative;
+    }
+    .remark-for:before {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -5px;
+      width: 100%;
+      height: 1px;
+      background: #de3d53;
+      box-shadow: 0 0 3px 2px #de3d53;
+      border-radius: 10px;
+      opacity: .5;
     }
   </style>
   <script>
@@ -223,7 +239,8 @@ employment = {
         const {section} = tabs[i];
         const remarkType = tabMark[''+section];
         if(!remarkType.searchText) {
-          $('span[class="'+ remarkType.key +'"]').addClass('remark-for');
+          const cands = document.getElementsByClassName(remarkType.key);
+          cands.length && $(cands[0]).addClass('remark-for');
         } else {
           $(".description:contains('"+ remarkType.searchText +"')").html(function(_, html) {
             const regex = new RegExp(remarkType.searchText, 'g');
