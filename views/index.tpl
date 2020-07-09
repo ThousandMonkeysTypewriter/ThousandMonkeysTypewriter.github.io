@@ -179,25 +179,25 @@ employment = {
       content: '';
       position: absolute;
       left: 0;
-      bottom: -5px;
+      bottom: -4px;
       width: 100%;
       height: 1px;
-      background: #de3d53;
-      box-shadow: 0 0 3px 2px #de3d53;
+      background: #848484;
+      box-shadow: 0 0 0px 1px #848484;
       border-radius: 10px;
       opacity: .5;
     }
     .mark-type-analysis:before {
       background-color: #3ddec8;
-      box-shadow: 0 0 3px 2px #3ddec8;
-    }
-    .mark-type-fix:before {
-      background-color: #de3d53;
-      box-shadow: 0 0 3px 2px #de3d53;
+      box-shadow: 0 0 0px 1px #3ddec8;
     }
     .mark-type-recommend:before {
       background-color: #007bff;
-      box-shadow: 0 0 3px 2px #007bff;
+      box-shadow: 0 0 0px 1px #007bff;
+    }
+    .mark-type-fix:before {
+      background-color: #de3d53;
+      box-shadow: 0 0 0px 1px #de3d53;
     }
   </style>
   <script>
@@ -271,16 +271,18 @@ employment = {
           <div class="title">
             <h1>{{v['name']}}</h1>
           </div>
-          <div class="salary compensation">
-            % if v['compensation']['noCompensation']:
-              з/п не указана
-            % else: 
-              % if v['compensation']['to']:
-                от {{v['compensation']['from']}} до {{v['compensation']['to']}} руб.
-              % else:
-                {{v['compensation']['from']}} руб.
+          <div class="salary">
+            <span class="compensation">
+              % if v['compensation']['noCompensation']:
+                з/п не указана
+              % else: 
+                % if v['compensation']['to']:
+                  от {{v['compensation']['from']}} до {{v['compensation']['to']}} руб.
+                % else:
+                  {{v['compensation']['from']}} руб.
+                % end
               % end
-            % end
+            </span>
           </div>
         </div>
         <div class="company-wrapper">
