@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>{{'Title'}}</title>
+  <title>Анализ вакансии HH.RU</title>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -231,7 +231,7 @@
           <span class="tabs-num">
             <span class="badge badge-pill badge-dark">
               {{len([t for t in vacancy['tabs'] if t['message_type'] == 'recommend'])}}
-            </span> Recomendations
+            </span> Recommendations
           </span>
         </div>
         <div class="tabs-wrapper">
