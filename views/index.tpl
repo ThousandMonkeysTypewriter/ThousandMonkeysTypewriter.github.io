@@ -187,6 +187,18 @@ employment = {
       border-radius: 10px;
       opacity: .5;
     }
+    .mark-type-analysis:before {
+      background-color: #3ddec8;
+      box-shadow: 0 0 3px 2px #3ddec8;
+    }
+    .mark-type-fix:before {
+      background-color: #de3d53;
+      box-shadow: 0 0 3px 2px #de3d53;
+    }
+    .mark-type-recommend:before {
+      background-color: #007bff;
+      box-shadow: 0 0 3px 2px #007bff;
+    }
   </style>
   <script>
     $(document).ready(function() {
@@ -236,15 +248,15 @@ employment = {
       };
       const tabs = {{!json_tabs}};
       for (let i = 0, len = tabs.length; i < len; i++) {
-        const {section} = tabs[i];
+        const {section, message_type} = tabs[i];
         const remarkType = tabMark[''+section];
         if(!remarkType.searchText) {
           const cands = document.getElementsByClassName(remarkType.key);
-          cands.length && $(cands[0]).addClass('remark-for');
+          cands.length && $(cands[0]).addClass('remark-for').addClass('mark-type-'+message_type);
         } else {
           $(".description:contains('"+ remarkType.searchText +"')").html(function(_, html) {
             const regex = new RegExp(remarkType.searchText, 'g');
-            return html.replace(regex, '<span class="remark-for">'+ remarkType.searchText +'</span>');
+            return html.replace(regex, '<span class="remark-for mark-type-'+ message_type +'">'+ remarkType.searchText +'</span>');
           });
         }
       }
