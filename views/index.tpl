@@ -168,15 +168,68 @@ employment = {
     .showen .tab-descr {
       display: block;
     }
+    .remark-for {
+      box-shadow: 0px 15px 5px -5px #de3d53;
+    }
   </style>
   <script>
     $(document).ready(function() {
       $('.tab .tab-title').on('click', function() {
         $(this).parent('.tab').toggleClass('showen');
       });
+      const tabMark = {
+        '1': {
+          'key': 'description',
+          searchText: 'Требования:'
+        },
+        '2': {
+          'key': 'description',
+          searchText: 'Условия:'
+        },
+        '3': {
+          'key': 'description',
+          searchText: 'Обязанности:'
+        },
+        '4': {
+          'key': 'name'
+        },
+        '5': {
+          'key': 'compensation',
+        },
+        '6': {
+          'key': 'SHORT_DESCR'
+        },
+        '7': {
+          'key': 'REGION',
+        },
+        '8': {
+          'key': 'PROF'
+        },
+        '9': {
+          'key': '@workSchedule'
+        },
+        '10': {
+          'key': 'workExperience'
+        },
+        '11': {
+          'key': 'employment'
+        },
+        '12': {
+          'key': 'keySkills'
+        }
+      };
       const tabs = {{!json_tabs}};
       for (let i = 0, len = tabs.length; i < len; i++) {
-        console.log(tabs[i]);
+        const {section} = tabs[i];
+        const remarkType = tabMark[''+section];
+        if(!remarkType.searchText) {
+          $('span[class="@workSchedule"]').addClass('remark-for');
+        } else {
+          $(".description:contains('"+ remarkType.searchText +"')").html(function(_, html) {
+            const regex = new RegExp(remarkType.searchText, 'g');
+            return html.replace(regex, '<span class="remark-for">'+ remarkType.searchText +'</span>');
+          });
+        }
       }
     });
   </script>
@@ -229,7 +282,7 @@ employment = {
               Требуемый опыт работы: {{experience[v['workExperience']] if v['workExperience'] in experience else 'Не имеет значения '}}
             </div>
             <div class="work-shedule">
-              Требуемый опыт работы: {{employment[v['employment']['@type']] if v['employment']['@type'] in employment else 'Не указано'}}, 
+              <span class="@workSchedule">Требуемый опыт работы</span>: {{employment[v['employment']['@type']] if v['employment']['@type'] in employment else 'Не указано'}}, 
               {{work_schedule[v['@workSchedule']] if v['@workSchedule'] in work_schedule else 'Не указано'}}
             </div>
           </div>
