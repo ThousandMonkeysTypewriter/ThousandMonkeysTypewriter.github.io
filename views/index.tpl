@@ -199,9 +199,25 @@ employment = {
       background-color: #de3d53;
       box-shadow: 0 0 0px 1px #de3d53;
     }
+    .fixes_num {
+      background: #de3d53;
+    }
+    .recommends_num {
+      background: #007bff;
+    }
+    .analysis_num {
+      background: #3ddec8;
+    }
+    span[class$='_num-wrapper'] {
+      cursor: pointer;
+    }
   </style>
   <script>
     $(document).ready(function() {
+      $("span[class$='_num-wrapper']").on('click', function(el) {
+        const selector = $(el.currentTarget).data('selector');
+        $(selector).prependTo($('.tabs-wrapper'));
+      });
       $('.tab .tab-title').on('click', function() {
         $(this).parent('.tab').toggleClass('showen');
       });
@@ -313,8 +329,12 @@ employment = {
               Требуемый опыт работы: {{experience[v['workExperience']] if v['workExperience'] in experience else 'Не имеет значения '}}
             </div>
             <div class="work-shedule">
-              <span class="@workSchedule employment">Требуемый опыт работы</span>: {{employment[v['employment']['@type']] if v['employment']['@type'] in employment else 'Не указано'}}, 
-              {{work_schedule[v['@workSchedule']] if v['@workSchedule'] in work_schedule else 'Не указано'}}
+              <span class="employment">
+                {{employment[v['employment']['@type']] if v['employment']['@type'] in employment else 'Не указано'}}
+              </span>,&nbsp;
+              <span class="@workSchedule">
+                {{work_schedule[v['@workSchedule']] if v['@workSchedule'] in work_schedule else 'Не указано'}}
+              </span>
             </div>
           </div>
           <div class="description">
@@ -334,21 +354,30 @@ employment = {
       </div>
       <div class="col-4 tabs">
         <div class="tabs-info">
-          <span class="tabs-num">
-            <span class="badge badge-pill badge-dark">
-              {{len([t for t in vacancy['tabs'] if t['message_type'] == 'fix'])}}
-            </span> Fixes
-          </span>
-          <span class="tabs-num">
-            <span class="badge badge-pill badge-dark">
-              {{len([t for t in vacancy['tabs'] if t['message_type'] == 'recommend'])}}
-            </span> Recommendations
-          </span>
-          <span class="tabs-num">
-            <span class="badge badge-pill badge-dark">
-              {{len([t for t in vacancy['tabs'] if t['message_type'] == 'analysis'])}}
-            </span> Analysis
-          </span>
+          % fixes_num = len([t for t in vacancy['tabs'] if t['message_type'] == 'fix'])
+          % if fixes_num:
+            <span class="tabs-num fixes_num-wrapper" data-selector=".tab-type-fix">
+              <span class="badge badge-pill badge-dark fixes_num">
+                {{fixes_num}}
+              </span> Fixes
+            </span>
+          % end
+          % recommends_num = len([t for t in vacancy['tabs'] if t['message_type'] == 'recommend'])
+          % if recommends_num:
+            <span class="tabs-num recommends_num-wrapper" data-selector=".tab-type-recommend">
+              <span class="badge badge-pill badge-dark recommends_num">
+                {{recommends_num}}
+              </span> Recommendations
+            </span>
+          % end
+          % analysis_num = len([t for t in vacancy['tabs'] if t['message_type'] == 'analysis'])
+          % if analysis_num:
+            <span class="tabs-num analysis_num-wrapper" data-selector=".tab-type-analysis">
+              <span class="badge badge-pill badge-dark analysis_num">
+                {{analysis_num}}
+              </span> Analysis
+            </span>
+          % end
         </div>
         <div class="tabs-wrapper">
           % for t in vacancy['tabs']:
