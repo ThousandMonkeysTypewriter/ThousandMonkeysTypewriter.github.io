@@ -18,10 +18,34 @@ def st(filename):
 @route('/')
 @auth_basic(is_authenticated_user)
 def index():
-  return ''
+  try:
+    headers = {'Accept-Encoding': 'identity', 'Content-type': 'application/json; charset=utf-8'}
+    res = requests.get('/'.join(['http://prog.ai:1078', 'highlight']), params = {'all':''}, headers = headers)
+  except Exception as ex:
+    logging.warning("Exception; vacancies list. Message: %s", ex)
+    return "<p>Fail: {ex}</p>".format(ex=ex)
+  
+  if res.status_code != 200:
+    logging.warning("Status: %s; code_id: %s;", res.status_code)
+    return "<p>Resp status: {res.status_code}</p>".format(res=res)
+  else:
+    try:
+      json_data = res.json()
+      for v in json_data:
+        v['vacancyView']['description'] = unescape(v['vacancyView']['description'])
+        v['vacancyView']['description'] = cleanhtml(v['vacancyView']['description'])
+      return [template('index', vv=json_data).encode("utf-8")]
+    except Exception as ex:
+      return "<p>Fail: {ex}</p>".format(ex=ex)
+
+def cleanhtml(raw_html):
+  cleanr = re.compile('<.*?>|&([a-z0-9]+|#[0-9]{1,6}|#x[0-9a-f]{1,6});')
+  # cleanr = re.compile('<.*?>')
+  cleantext = re.sub(cleanr, '', raw_html)
+  return cleantext  
 
 @route('/favicon.ico')
-def index():
+def fav():
   return ''
 
 @route('/<vacancy_id>')
@@ -36,7 +60,7 @@ def vacancy(vacancy_id):
     with p.open() as f:
       json_data = json.load(f)
     json_data['vac']['vacancyView']['description'] = unescape(json_data['vac']['vacancyView']['description'])
-    return [template('index', vacancy=json_data, json_tabs=json.dumps(json_data['tabs'])).encode("utf-8")]
+    return [template('vacancy', vacancy=json_data, json_tabs=json.dumps(json_data['tabs'])).encode("utf-8")]
 
   try:
     headers = {'Accept-Encoding': 'identity', 'Content-type': 'application/json; charset=utf-8'}
@@ -49,9 +73,12 @@ def vacancy(vacancy_id):
     logging.warning("Status: %s; code_id: %s;", res.status_code, vacancy_id)
     return "<p>Resp status: {res.status_code}</p>".format(res=res)
   else:
-    json_data = res.json()
-    json_data['vac']['vacancyView']['description'] = unescape(json_data['vac']['vacancyView']['description'])
-    return [template('index', vacancy=json_data, json_tabs=json.dumps(json_data['tabs'])).encode("utf-8")]
+    try:
+      json_data = res.json()
+      json_data['vac']['vacancyView']['description'] = unescape(json_data['vac']['vacancyView']['description'])
+      return [template('vacancy', vacancy=json_data, json_tabs=json.dumps(json_data['tabs'])).encode("utf-8")]
+    except Exception as ex:
+      return "<p>Fail: {ex}</p>".format(ex=ex)
   
   # p = Path('./example.json')
   # with p.open() as json_file:
