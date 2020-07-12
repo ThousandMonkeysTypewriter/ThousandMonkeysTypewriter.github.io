@@ -1,6 +1,6 @@
 #!bin/python3
 
-from bottle import auth_basic, route, run, template, request, static_file
+from bottle import auth_basic, route, run, template, request, static_file, response
 import sys
 import logging
 import json
@@ -22,6 +22,7 @@ def index():
     headers = {'Accept-Encoding': 'identity', 'Content-type': 'application/json; charset=utf-8'}
     res = requests.get('/'.join(['http://prog.ai:1078', 'highlight']), params = {'all':''}, headers = headers)
   except Exception as ex:
+    response.status = 500;
     logging.warning("Exception; vacancies list. Message: %s", ex)
     return "<p>Fail: {ex}</p>".format(ex=ex)
   
@@ -36,6 +37,7 @@ def index():
         v['vacancyView']['description'] = cleanhtml(v['vacancyView']['description'])
       return [template('index', vv=json_data).encode("utf-8")]
     except Exception as ex:
+      response.status = 500;
       return "<p>Fail: {ex}</p>".format(ex=ex)
 
 def cleanhtml(raw_html):
@@ -66,6 +68,7 @@ def vacancy(vacancy_id):
     headers = {'Accept-Encoding': 'identity', 'Content-type': 'application/json; charset=utf-8'}
     res = requests.get('/'.join(['http://prog.ai:1078', 'highlight']), params = {'id':vacancy_id}, headers = headers)
   except Exception as ex:
+    response.status = 500;
     logging.warning("Exception; vacancy_id: %s; message: %s", vacancy_id, ex)
     return "<p>Fail: {ex}</p>".format(ex=ex)
   
@@ -78,6 +81,7 @@ def vacancy(vacancy_id):
       json_data['vac']['vacancyView']['description'] = unescape(json_data['vac']['vacancyView']['description'])
       return [template('vacancy', vacancy=json_data, json_tabs=json.dumps(json_data['tabs'])).encode("utf-8")]
     except Exception as ex:
+      response.status = 500;
       return "<p>Fail: {ex}</p>".format(ex=ex)
   
   # p = Path('./example.json')
