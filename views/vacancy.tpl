@@ -159,13 +159,13 @@ employment = {
       margin: 0;
     }
     .tab-type-recommend p.tab-title:before {
-      background: #007bff;
+      background: #007bff8a;
     }
     .tab-type-fix p.tab-title:before {
-      background: #de3d53;
+      background: #de3d5399;
     }
     .tab-type-analysis p.tab-title:before {
-      background: #3ddec8;
+      background: #3ddec8d4;
     }
     .tab-descr {
       display: none;
@@ -175,7 +175,7 @@ employment = {
       display: block;
     }
     .remark-for {
-      /* box-shadow: 0px 15px 5px -5px #de3d53; */
+      /* box-shadow: 0px 15px 5px -5px #de3d5399; */
       position: relative;
     }
     .remark-for:before {
@@ -191,25 +191,25 @@ employment = {
       opacity: .5;
     }
     .mark-type-analysis:before {
-      background-color: #3ddec8;
-      box-shadow: 0 0 0px 1px #3ddec8;
+      background-color: #3ddec8d4;
+      box-shadow: 0 0 0px 1px #3ddec8d4;
     }
     .mark-type-recommend:before {
-      background-color: #007bff;
-      box-shadow: 0 0 0px 1px #007bff;
+      background-color: #007bff8a;
+      box-shadow: 0 0 0px 1px #007bff8a;
     }
     .mark-type-fix:before {
-      background-color: #de3d53;
-      box-shadow: 0 0 0px 1px #de3d53;
+      background-color: #de3d5399;
+      box-shadow: 0 0 0px 1px #de3d5399;
     }
     .fixes_num {
-      background: #de3d53;
+      background: #de3d5399;
     }
     .recommends_num {
-      background: #007bff;
+      background: #007bff8a;
     }
     .analysis_num {
-      background: #3ddec8;
+      background: #3ddec8d4;
     }
     span[class$='_num-wrapper'] {
       cursor: pointer;
