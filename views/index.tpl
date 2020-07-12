@@ -128,6 +128,9 @@ employment = {
     .tabs-num:last-child {
       margin-right: 0;
     }
+    .tabs-num:hover .num-label {
+      color: #808080;
+    }
     .tabs-wrapper {
       padding: 1rem 0;
     }
@@ -211,6 +214,9 @@ employment = {
     span[class$='_num-wrapper'] {
       cursor: pointer;
     }
+    .tags-list {
+      padding-top: 15px;
+    }
   </style>
   <script>
     $(document).ready(function() {
@@ -282,7 +288,7 @@ employment = {
 <body>
   <div class="container">
     <div class="row">
-      <div class="col-8 vacancy">
+      <div class="col-7 vacancy">
         <div class="title-wrapper">
           <div class="title">
             <h1>{{v['name']}}</h1>
@@ -292,10 +298,11 @@ employment = {
               % if v['compensation']['noCompensation']:
                 з/п не указана
               % else: 
-                % if v['compensation']['to']:
-                  от {{v['compensation']['from']}} до {{v['compensation']['to']}} руб.
-                % else:
-                  {{v['compensation']['from']}} руб.
+                % if 'from' in v['compensation']:
+                  от {{v['compensation']['from']}}&nbsp;
+                % end
+                % if 'to' in v['compensation']:
+                  до {{v['compensation']['to']}} руб.
                 % end
               % end
             </span>
@@ -311,7 +318,9 @@ employment = {
           <div class="company-address">
             % address = []
             % for k in ['city', 'street', 'building']:
-              % address.append(v['address'][k])
+              % if k in v['address']:
+                % address.append(v['address'][k])
+              % end
             % end
             {{', '.join(address)}}
           </div>
@@ -352,14 +361,14 @@ employment = {
           </div>
         </div>
       </div>
-      <div class="col-4 tabs">
+      <div class="col-4 offset-1 tabs">
         <div class="tabs-info">
           % fixes_num = len([t for t in vacancy['tabs'] if t['message_type'] == 'fix'])
           % if fixes_num:
             <span class="tabs-num fixes_num-wrapper" data-selector=".tab-type-fix">
               <span class="badge badge-pill badge-dark fixes_num">
                 {{fixes_num}}
-              </span> Fixes
+              </span> <span class="num-label">Fixes</span>
             </span>
           % end
           % recommends_num = len([t for t in vacancy['tabs'] if t['message_type'] == 'recommend'])
@@ -367,7 +376,7 @@ employment = {
             <span class="tabs-num recommends_num-wrapper" data-selector=".tab-type-recommend">
               <span class="badge badge-pill badge-dark recommends_num">
                 {{recommends_num}}
-              </span> Recommendations
+              </span> <span class="num-label">Recommendations</span>
             </span>
           % end
           % analysis_num = len([t for t in vacancy['tabs'] if t['message_type'] == 'analysis'])
@@ -375,7 +384,7 @@ employment = {
             <span class="tabs-num analysis_num-wrapper" data-selector=".tab-type-analysis">
               <span class="badge badge-pill badge-dark analysis_num">
                 {{analysis_num}}
-              </span> Analysis
+              </span> <span class="num-label">Analysis</span>
             </span>
           % end
         </div>
