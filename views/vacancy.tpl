@@ -217,6 +217,18 @@ employment = {
     .tags-list {
       padding-top: 15px;
     }
+    .active-tab-link {
+      background: #c2c2c2;
+    }
+    .mark-type-analysis.active-tab-link {
+      background-color: #99eee3;
+    }
+    .mark-type-recommend.active-tab-link {
+      background-color: #87baf9;
+    }
+    .mark-type-fix.active-tab-link {
+      background-color: #ea93a5;
+    }
   </style>
   <script>
     $(document).ready(function() {
@@ -224,8 +236,15 @@ employment = {
         const selector = $(el.currentTarget).data('selector');
         $(selector).prependTo($('.tabs-wrapper'));
       });
+      const tabsLinks = [];
       $('.tab .tab-title').on('click', function() {
+        // $('.active-tab-link').removeClass('active-tab-link');
         $(this).parent('.tab').toggleClass('showen');
+        if($(this).parent('.tab').hasClass('showen')) {
+          $(tabsLinks[$(this)[0].dataset.i]).addClass('active-tab-link');
+        } else {
+          $(tabsLinks[$(this)[0].dataset.i]).removeClass('active-tab-link');
+        }
       });
       const tabMark = {
         '1': {
@@ -275,11 +294,14 @@ employment = {
         if(!remarkType.searchText) {
           const cands = document.getElementsByClassName(remarkType.key);
           cands.length && $(cands[0]).addClass('remark-for').addClass('mark-type-'+message_type);
+          tabsLinks.push(cands[0]);
         } else {
           $(".description:contains('"+ remarkType.searchText +"')").html(function(_, html) {
             const regex = new RegExp(remarkType.searchText, 'g');
             return html.replace(regex, '<span class="remark-for mark-type-'+ message_type +'">'+ remarkType.searchText +'</span>');
           });
+          const cands = $('.description .remark-for.mark-type-'+ message_type +'');
+          tabsLinks.push(cands[cands.length-1]);
         }
       }
     });
@@ -389,13 +411,15 @@ employment = {
           % end
         </div>
         <div class="tabs-wrapper">
+          % i = 0;
           % for t in vacancy['tabs']:
             <div class="tab tab-type-{{t['message_type']}}">
-              <p class="tab-title">{{t['title']}}</p>
+              <p class="tab-title" data-i="{{i}}">{{t['title']}}</p>
               <div class="tab-descr">
                 {{!t['text']}}
               </div>
             </div>
+            % i = i+1
           % end
         </div>
       </div>
