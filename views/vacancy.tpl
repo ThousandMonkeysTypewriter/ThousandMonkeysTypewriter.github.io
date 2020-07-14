@@ -241,9 +241,24 @@ employment = {
         // $('.active-tab-link').removeClass('active-tab-link');
         $(this).parent('.tab').toggleClass('showen');
         if($(this).parent('.tab').hasClass('showen')) {
-          $(tabsLinks[$(this)[0].dataset.i]).addClass('active-tab-link');
+          let selector = tabsLinks[$(this)[0].dataset.i];
+          if(Array.isArray(selector)) {
+            // selector = selector.join(', ');
+            for(let i=0,len=selector.length;i<len;i++) {
+              $(selector[i]).addClass('active-tab-link');
+            }
+          } else {
+            $(selector).addClass('active-tab-link');
+          }
         } else {
-          $(tabsLinks[$(this)[0].dataset.i]).removeClass('active-tab-link');
+          let selector = tabsLinks[$(this)[0].dataset.i];
+          if(Array.isArray(selector)) {
+            for(let i=0,len=selector.length;i<len;i++) {
+              $(selector[i]).removeClass('active-tab-link');
+            }
+          } else {
+            $(selector).removeClass('active-tab-link');
+          }
         }
       });
       const tabMark = {
@@ -263,7 +278,7 @@ employment = {
           'key': 'name'
         },
         '5': {
-          'key': 'compensation',
+          'key': ['compensation', 'workExperience'],
         },
         '6': {
           'key': 'SHORT_DESCR'
@@ -292,9 +307,19 @@ employment = {
         const {section, message_type} = tabs[i];
         const remarkType = tabMark[''+section];
         if(!remarkType.searchText) {
-          const cands = document.getElementsByClassName(remarkType.key);
-          cands.length && $(cands[0]).addClass('remark-for').addClass('mark-type-'+message_type);
-          tabsLinks.push(cands[0]);
+          if(Array.isArray(remarkType.key)) {
+            const resCands = [];
+            for(let j=0,len=remarkType.key.length;j<len;j++) {
+              const cands = document.getElementsByClassName(remarkType.key[j]);
+              cands.length && $(cands[0]).addClass('remark-for').addClass('mark-type-'+message_type);
+              resCands.push(cands[0]);
+            }
+            tabsLinks.push(resCands);
+          } else {
+            const cands = document.getElementsByClassName(remarkType.key);
+            cands.length && $(cands[0]).addClass('remark-for').addClass('mark-type-'+message_type);
+            tabsLinks.push(cands[0]);
+          }
         } else {
           $(".description:contains('"+ remarkType.searchText +"')").html(function(_, html) {
             const regex = new RegExp(remarkType.searchText, 'g');
@@ -356,8 +381,10 @@ employment = {
         </div>
         <div class="info">
           <div class="work-wrapper">
-            <div class="work-experience workExperience">
-              Требуемый опыт работы: {{experience[v['workExperience']] if v['workExperience'] in experience else 'Не имеет значения '}}
+            <div class="work-experience">
+              <span class="workExperience">
+                Требуемый опыт работы: {{experience[v['workExperience']] if v['workExperience'] in experience else 'Не имеет значения '}}
+              </span>
             </div>
             <div class="work-shedule">
               <span class="employment">
