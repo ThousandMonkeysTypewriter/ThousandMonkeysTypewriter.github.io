@@ -53,12 +53,15 @@
       </div>
     </div>
     <div class="form-group">
-      <button class="form-control" type="submit">Проверить</button>
+      <button class="form-control" type="submit" id="send">Проверить</button>
     </div>
   </form>
   <span style="display: inline-block;  margin-top: 20px;">Для замечаний и предложений заполните <a href="https://docs.google.com/forms/d/e/1FAIpQLSd-VhYUq6gqRz0yynBAjOxHcXfpx0WZVBt479rdB3B9kq1bNw/viewform?usp=sf_link">эту</a> форму.</span>
 </div>
 <div class="col-sm-8"></div>
+</div>
+<div id="loading_cover">
+  <img class="loading_img" src="/assets/spinner.svg" alt="Loading..." />
 </div>
 <script>
   function setUploadinFilesName(input) {

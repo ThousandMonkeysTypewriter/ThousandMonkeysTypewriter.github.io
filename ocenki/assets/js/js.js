@@ -10,6 +10,7 @@ window['exports'] = {
     function() {
 
       jQuery(document).ready(function () {
+        initSubmitAnimation();
         const code = get_code();
         $('#rand_id').val('_' + Math.random().toString(36).substr(2, 9));
 
@@ -55,6 +56,12 @@ function splitTags(code) {
         $tag = $newTag;
       }
     }
+  });
+}
+
+function initSubmitAnimation() {
+  $('#send').on('click', function () {
+    $('#loading_cover').addClass('show');
   });
 }
 

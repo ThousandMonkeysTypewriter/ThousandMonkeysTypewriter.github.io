@@ -211,3 +211,27 @@ pre.prettyprint {
   cursor: pointer;
   white-space: pre-wrap;
 }
+
+#loading_cover {
+  position: fixed;
+  z-index: 999;
+  background: rgba(0,0,0,.5);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+  opacity: 0;
+  transition: opacity 0.3s, visibility 0.3s;
+}
+#loading_cover.show {
+  display: block;
+  opacity: 1;
+  transition: opacity 0.3s, visibility 0.3s;
+}
+#loading_cover .loading_img {
+  position: absolute;
+  top: 20%;
+  left: calc(50% - 100px);;
+  transition: opacity 0.3s, visibility 0.3s;
+}
