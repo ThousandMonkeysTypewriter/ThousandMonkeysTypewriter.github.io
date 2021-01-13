@@ -24,5 +24,15 @@ function goToUrl(id) {
   const url = new URL(window.location.href);
   url.pathname = 'predict';
   url.searchParams.set('id', id);
-  window.location.href = url.href;
+  // window.location.href = url.href;
+  $('.modal-body').html('<img class="loading_img" src="/assets/spinner.svg" alt="Loading..." />');
+  $('.modal').modal();
+  showModal(url);
+}
+
+async function showModal(url) {
+  const response = await fetch(url.href);
+  const res = await response.text();
+  $('.modal-title').text(`Response for "${url.searchParams.get('id')}"`);
+  $('.modal-body').html(res);
 }
