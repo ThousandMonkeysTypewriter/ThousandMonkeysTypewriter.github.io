@@ -32,7 +32,12 @@ function goToUrl(id) {
 
 async function showModal(url) {
   const response = await fetch(url.href);
-  const res = await response.text();
-  $('.modal-title').text(`Response for "${url.searchParams.get('id')}"`);
-  $('.modal-body').html(res);
+  if (response.ok) { // 200-299
+    const res = await response.text();
+    $('.modal-title').text(`Response for "${url.searchParams.get('id')}"`);
+    $('.modal-body').html(res);
+  } else {
+    $('.modal-title').text('Error');
+    $('.modal-body').html(response.status);
+  }
 }
