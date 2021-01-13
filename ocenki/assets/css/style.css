@@ -2,6 +2,23 @@
   cursor: pointer;
 }
 
-.loading_img {
-  width: 50px;
+#loading_cover {
+  position: fixed;
+  z-index: 999;
+  background: rgba(0,0,0,.5);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+  opacity: 0;
+}
+#loading_cover.show {
+  display: block;
+  opacity: 1;
+}
+#loading_cover .loading_img {
+  position: absolute;
+  top: 20%;
+  left: calc(50% - 100px);;
 }

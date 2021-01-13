@@ -25,8 +25,7 @@ function goToUrl(id) {
   url.pathname = 'predict';
   url.searchParams.set('id', id);
   // window.location.href = url.href;
-  $('.modal-body').html('<img class="loading_img" src="/assets/spinner.svg" alt="Loading..." />');
-  $('.modal').modal();
+  $('#loading_cover').addClass('show');
   showModal(url);
 }
 
@@ -34,10 +33,16 @@ async function showModal(url) {
   const response = await fetch(url.href);
   if (response.ok) { // 200-299
     const res = await response.text();
+    $('.modal-title').text('Loading ...');
+    $('.modal-body').html('');
     $('.modal-title').text(`Response for "${url.searchParams.get('id')}"`);
     $('.modal-body').html(res);
   } else {
     $('.modal-title').text('Error');
     $('.modal-body').html(response.status);
   }
+  $('.modal').modal();
+  setTimeout(() => {
+    $('#loading_cover').removeClass('show');
+  }, 100);
 }

@@ -42,4 +42,7 @@
   </div>
 </div>
 </div>
+<div id="loading_cover">
+  <img class="loading_img" src="/assets/spinner.svg" alt="Loading..." />
+</div>
 % include('footer.tpl', title='Footer')
