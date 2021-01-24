@@ -1,41 +1,28 @@
 jQuery(document).ready(function () {
-  $('#inputUrl').autoComplete({
-    minChars: 1,
-    source: function (term, suggest) {
-      term = term.toLowerCase();
-      var choices = urls;
-      var matches = [];
-      for (i=0; i<choices.length; i++)
-          if (~choices[i].toLowerCase().indexOf(term)) matches.push(choices[i]);
-      suggest(matches);
-    }
-  });
-
-  $('.table td').on('click', function (evt) {
-    const url = evt.target.textContent;
-    goToUrl(url);
-  });
+  
 });
 
-function goToUrl(id) {
-  id = id.trim && id.trim() || id;
-  if (!id)
-    return false;
-  const url = new URL(window.location.href);
-  url.pathname = 'predict';
-  url.searchParams.set('id', id);
-  // window.location.href = url.href;
+async function checkText(text) {
   $('#loading_cover').addClass('show');
-  showModal(url);
+  showModal(text);
 }
 
-async function showModal(url) {
-  const response = await fetch(url.href);
+async function showModal(text) {
+  text = text.trim && text.trim() || text;
+  if (!text)
+    return false;
+  const resp = await fetch('http://178.63.1.195:8421/gec_api', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json;charset=utf-8'
+    },
+    body: JSON.stringify({text:text}),
+  });
   if (response.ok) { // 200-299
-    const res = await response.text();
+    const res = await response.json();
     $('.modal-title').text('Loading ...');
     $('.modal-body').html('');
-    $('.modal-title').text(`Response for "${url.searchParams.get('id')}"`);
+    $('.modal-title').text(`Ответ для: "${text}"`);
     $('.modal-body').html(res);
   } else {
     $('.modal-title').text('Error');
