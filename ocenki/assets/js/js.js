@@ -33,26 +33,41 @@ async function showRes(text) {
 }
 
 function constructRes(res, text) {
+  console.log(JSON.stringify(res, undefined, 2));
   const popoverAliases = {
     'replace': 'Заменить на',
     'delete': 'Удалить'
   };
   if(!res.entities || res.entities.length == 0)
     return `<p>${text}</p>`;
-  const indicies = [];
-  res.entities.reverse();
-  for(i in res.entities) {
-    const ent = res.entities[i];
-    text = `
-      ${text.slice(0, ent.start)}
-        <mark
-          data-trigger="hover"
-          data-placement="bottom"
-          data-content='${ent.entity}:${ent.value}'
-        >${text.slice(ent.start, ent.end)}</mark>
-      ${text.slice(ent.end)}
-    `;
+  const resText = [];
+  for(ind in text) {
+    const letter = text[ind];
+    const marksStart = [];
+    let isMarksEnd = false;
+    for(ind2 in res.entities) {
+      if(ind == res.entities[ind2].end) {
+        isMarksEnd = true;
+      }
+    }
+    for(ind2 in res.entities) {
+      const ent = res.entities[ind2];
+      if(ind == ent.start) {
+        marksStart.push(`${ent.entity}:${ent.value}`);
+      }
+    }
+    // console.log(isMarksEnd, marksStart);
+    isMarksEnd && resText.push('</mark>');
+    if(marksStart.length) {
+      resText.push(`<mark
+        data-trigger="hover"
+        data-placement="bottom"
+        data-html="true"
+        data-content='${marksStart.join('<br />')}'
+      >`);
+    }
+    resText.push(letter);
   }
   
-  return `<p>${text}</p>`;
+  return `<p>${resText.join('')}</p>`;
 }
