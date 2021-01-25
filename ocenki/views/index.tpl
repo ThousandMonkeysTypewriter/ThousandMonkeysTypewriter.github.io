@@ -3,8 +3,8 @@
   <div class="col-12 mt-2 text-center">
     <form class="form-inline justify-content-center mb-2" onsubmit="checkText($('#inputUrl').val()); return false;">
       <div class="form-group mx-sm-3 mb-2">
-        <label for="inputUrl" class="font-weight-bold mr-3">Напишите что нибудь</label>
-        <input autocomplete="off" type="text" class="form-control" id="inputUrl">
+        <label for="inputUrl" class="font-weight-bold mr-3">Текст на проверку</label>
+        <textarea class="form-control" id="inputUrl"></textarea>
       </div>
       <button type="submit" class="btn btn-primary mb-2">Вперед!</button>
     </form>

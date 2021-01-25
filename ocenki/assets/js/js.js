@@ -23,7 +23,8 @@ async function showModal(text) {
     $('.modal-title').text('Loading ...');
     $('.modal-body').html('');
     $('.modal-title').text(`Ответ для: "${text}"`);
-    $('.modal-body').html(res);
+    console.log(res);
+    $('.modal-body').html(`<pre>${JSON.stringify(res, undefined, 2)}</pre>`);
   } else {
     $('.modal-title').text('Error');
     $('.modal-body').html(resp.status);
