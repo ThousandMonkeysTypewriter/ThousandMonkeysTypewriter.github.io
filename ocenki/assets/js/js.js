@@ -48,7 +48,7 @@ function constructRes(res, text) {
         <mark
           data-trigger="hover"
           data-placement="bottom"
-          data-content='${popoverAliases[ent.entity.split('.')[0]] || ent.entity}${ent.value ? ' \"'+ent.value+'\"' : ''}'
+          data-content='${ent.entity}:${ent.value}'
         >${text.slice(ent.start, ent.end)}</mark>
       ${text.slice(ent.end)}
     `;
