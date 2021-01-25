@@ -4,10 +4,10 @@ jQuery(document).ready(function () {
 
 async function checkText(text) {
   $('#loading_cover').addClass('show');
-  showModal(text);
+  showRes(text);
 }
 
-async function showModal(text) {
+async function showRes(text) {
   text = text.trim && text.trim() || text;
   if (!text)
     return false;
@@ -19,18 +19,25 @@ async function showModal(text) {
     body: JSON.stringify({text:text}),
   });
   if (resp.ok) { // 200-299
-    const res = await resp.json();
-    $('.modal-title').text('Loading ...');
-    $('.modal-body').html('');
-    $('.modal-title').text(`Ответ для: "${text}"`);
-    console.log(res);
-    $('.modal-body').html(`<pre>${JSON.stringify(res, undefined, 2)}</pre>`);
+    const res = constructRes(await resp.json(), text);
+    $('.result').html(`${res}`);
   } else {
-    $('.modal-title').text('Error');
-    $('.modal-body').html(resp.status);
+    $('.result').html(`<p style="color: red;">Error ${resp.status}</p>`);
   }
-  $('.modal').modal();
   setTimeout(() => {
     $('#loading_cover').removeClass('show');
   }, 100);
+}
+
+function constructRes(res, text) {
+  if(!res.entities || res.entities.length == 0)
+    return `<p>${text}</p>`;
+  const indicies = [];
+  res.entities.reverse();
+  for(i in res.entities) {
+    const ent = res.entities[i];
+    text = text.slice(0, ent.start) + '<mark>' + text.slice(ent.start, ent.end) + '</mark>' + text.slice(ent.end)
+  }
+  
+  return `<p>${text}</p>`;
 }

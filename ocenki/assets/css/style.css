@@ -1,5 +1,13 @@
-.table td {
-  cursor: pointer;
+.result {
+  height: 50vh;
+  border: 1px solid #ced4da;
+  border-radius: .25rem;
+  padding: .375rem .75rem;
+  color: #495057;
+}
+
+mark {
+  background-color: #fce3e3;
 }
 
 #loading_cover {
