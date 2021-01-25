@@ -1,5 +1,7 @@
 jQuery(document).ready(function () {
-  
+  $('#inputUrl').on('keyup', (evt) => {
+    $('.btn.btn-primary').prop('disabled', !evt.target.value.length);
+  });
 });
 
 async function checkText(text) {

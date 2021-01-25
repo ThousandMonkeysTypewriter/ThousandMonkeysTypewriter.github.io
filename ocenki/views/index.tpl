@@ -6,7 +6,7 @@
         <label for="inputUrl" class="">Текст на проверку</label>
         <textarea class="form-control" id="inputUrl" style="height: 50vh;resize:none;"></textarea>
       </div>
-      <button type="submit" class="btn btn-primary" style="float:right">Вперед!</button>
+      <button type="submit" class="btn btn-primary" disabled style="float:right">Вперед!</button>
     </form>
   </div>
   <div class="col-6">
