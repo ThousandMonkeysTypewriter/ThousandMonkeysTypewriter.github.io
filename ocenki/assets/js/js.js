@@ -18,15 +18,15 @@ async function showModal(text) {
     },
     body: JSON.stringify({text:text}),
   });
-  if (response.ok) { // 200-299
-    const res = await response.json();
+  if (resp.ok) { // 200-299
+    const res = await resp.json();
     $('.modal-title').text('Loading ...');
     $('.modal-body').html('');
     $('.modal-title').text(`Ответ для: "${text}"`);
     $('.modal-body').html(res);
   } else {
     $('.modal-title').text('Error');
-    $('.modal-body').html(response.status);
+    $('.modal-body').html(resp.status);
   }
   $('.modal').modal();
   setTimeout(() => {
