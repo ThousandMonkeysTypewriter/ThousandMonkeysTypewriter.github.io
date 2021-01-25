@@ -23,6 +23,7 @@ async function showRes(text) {
   if (resp.ok) { // 200-299
     const res = constructRes(await resp.json(), text);
     $('.result').html(`${res}`);
+    $('[data-trigger="hover"]').popover();
   } else {
     $('.result').html(`<p style="color: red;">Error ${resp.status}</p>`);
   }
@@ -32,13 +33,25 @@ async function showRes(text) {
 }
 
 function constructRes(res, text) {
+  const popoverAliases = {
+    'replace': 'Заменить на',
+    'delete': 'Удалить'
+  };
   if(!res.entities || res.entities.length == 0)
     return `<p>${text}</p>`;
   const indicies = [];
   res.entities.reverse();
   for(i in res.entities) {
     const ent = res.entities[i];
-    text = text.slice(0, ent.start) + '<mark>' + text.slice(ent.start, ent.end) + '</mark>' + text.slice(ent.end)
+    text = `
+      ${text.slice(0, ent.start)}
+        <mark
+          data-trigger="hover"
+          data-placement="bottom"
+          data-content='${popoverAliases[ent.entity.split('.')[0]] || ent.entity}${ent.value ? ' \"'+ent.value+'\"' : ''}'
+        >${text.slice(ent.start, ent.end)}</mark>
+      ${text.slice(ent.end)}
+    `;
   }
   
   return `<p>${text}</p>`;
