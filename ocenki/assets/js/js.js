@@ -34,10 +34,6 @@ async function showRes(text) {
 
 function constructRes(res, text) {
   console.log(JSON.stringify(res, undefined, 2));
-  const popoverAliases = {
-    'replace': 'Заменить на',
-    'delete': 'Удалить'
-  };
   if(!res.entities || res.entities.length == 0)
     return `<p>${text}</p>`;
   const resText = [];
@@ -53,10 +49,10 @@ function constructRes(res, text) {
     for(ind2 in res.entities) {
       const ent = res.entities[ind2];
       if(ind == ent.start) {
-        marksStart.push(`${ent.entity}:${ent.value}`);
+        marksStart.push(constructMessage(ent));
       }
     }
-    // console.log(isMarksEnd, marksStart);
+
     isMarksEnd && resText.push('</mark>');
     if(marksStart.length) {
       resText.push(`<mark
@@ -70,4 +66,29 @@ function constructRes(res, text) {
   }
   
   return `<p>${resText.join('')}</p>`;
+}
+
+function constructMessage(ent) {
+  const aliases = {
+    ADJ:      {default: "прилагательное",       delete: `Удалить прилагательное`,  replace: `Заменить прилагательное`, insert: `Вставить прилагательное`},
+    ADV:      {default: "наречие",              delete: `Удалить наречие`,         replace: `Заменить наречие`, insert: `Вставить наречие`},
+    DET:      {default: "артикль",              delete: `Удалить артикль`,         replace: `Заменить артикль`, insert: `Вставить артикль`},
+    MORPH:    {default: "MORPH",                delete: `Удалить MORPH`,           replace: `Заменить MORPH`, insert: `Вставить MORPH`},
+    NOUN:     {default: "существительное",      delete: `Удалить существительное`, replace: `Заменить существительное`},
+    NOUNNUM:  {default: "число существительных",                                   replace: `Заменить число существительных`},
+    PREP:     {default: "предлог",              delete: `Удалить предлог`,         replace: `Заменить предлог`},
+    PRON:     {default: "местоимение",          delete: `Удалить местоимение`,     replace: `Заменить местоимение`},
+    PUNCT:    {default: "пунктуацию",           delete: `Удалить пунктуацию`,      replace: `Заменить знак пунктуации`, insert: `Вставить нужный знак пунктуации`},
+    SPELL:    {default: "правописание",                                            replace: `Исправить правописание`},
+    VERB:     {default: "глагол",               delete: `Удалить глагол`,          replace: `Заменить глагол`},
+    VERBFORM: {default: "форму глагола",        delete: `Удалить форму глагола`,   replace: `Заменить форму глагола`, insert: `Вставить форму глагола`},
+    VERBSVA:  {default: "форму глагола",                                           replace: `Заменить форму глагола`},
+    WO:       {default: "порядок слов",                                            replace: `Поменять порядок слов`},
+  };
+  let entityParts = ent.entity.split('.');
+  if(aliases[entityParts[1]] && aliases[entityParts[1]][entityParts[0]]) {
+    return `${aliases[entityParts[1]][entityParts[0]]}${ent.value ? ':'+ent.value : ''}`;
+  } else {
+    return `${ent.entity}:${ent.value}123`;
+  }
 }
