@@ -2,6 +2,9 @@ jQuery(document).ready(function () {
   $('#inputUrl').on('keyup', (evt) => {
     $('.btn.btn-primary').prop('disabled', !evt.target.value.length);
   });
+  $('#togglePopover').on('change', (evt) => {
+    $('[data-trigger="hover"]').popover(evt.target.checked ? 'enable' : 'disable');
+  });
 });
 
 async function checkText(text) {
@@ -23,7 +26,7 @@ async function showRes(text) {
   if (resp.ok) { // 200-299
     const res = constructRes(await resp.json(), text);
     $('.result').html(`${res}`);
-    $('[data-trigger="hover"]').popover();
+    $('#togglePopover').trigger('change');
   } else {
     $('.result').html(`<p style="color: red;">Error ${resp.status}</p>`);
   }
