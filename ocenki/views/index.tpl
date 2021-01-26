@@ -14,7 +14,7 @@
     <div class="result mb-2"></div>
     <div class="form-check">
       <input type="checkbox" class="form-check-input" checked id="togglePopover">
-      <label class="form-check-label" for="togglePopover">Показать подсказки</label>
+      <label class="form-check-label" for="togglePopover">Показать алиасы ошибок</label>
     </div>
   </div>
 </div>

@@ -2,8 +2,14 @@ jQuery(document).ready(function () {
   $('#inputUrl').on('keyup', (evt) => {
     $('.btn.btn-primary').prop('disabled', !evt.target.value.length);
   });
+  $('[data-trigger="hover"]').popover();
   $('#togglePopover').on('change', (evt) => {
-    $('[data-trigger="hover"]').popover(evt.target.checked ? 'enable' : 'disable');
+    $('mark').each((i, m) => {
+      const content = m.attributes['data-content'].value;
+      const contentDefault = m.attributes['data-content-default'].value;
+      m.setAttribute('data-content', contentDefault);
+      m.setAttribute('data-content-default', content);
+    });
   });
 });
 
@@ -26,7 +32,7 @@ async function showRes(text) {
   if (resp.ok) { // 200-299
     const res = constructRes(await resp.json(), text);
     $('.result').html(`${res}`);
-    $('#togglePopover').trigger('change');
+    $('[data-trigger="hover"]').popover();
   } else {
     $('.result').html(`<p style="color: red;">Error ${resp.status}</p>`);
   }
@@ -43,6 +49,7 @@ function constructRes(res, text) {
   for(ind in text) {
     const letter = text[ind];
     const marksStart = [];
+    const defaultMarks = [];
     let isMarksEnd = false;
     for(ind2 in res.entities) {
       if(ind == res.entities[ind2].end) {
@@ -53,16 +60,19 @@ function constructRes(res, text) {
       const ent = res.entities[ind2];
       if(ind == ent.start) {
         marksStart.push(constructMessage(ent));
+        defaultMarks.push(`${ent.entity}:${ent.value}`);
       }
     }
 
+    const isShowAlias = $('#togglePopover')[0].checked;
     isMarksEnd && resText.push('</mark>');
     if(marksStart.length) {
       resText.push(`<mark
         data-trigger="hover"
         data-placement="bottom"
         data-html="true"
-        data-content='${marksStart.join('<br />')}'
+        data-content='${isShowAlias ? marksStart.join('<br />') : defaultMarks.join('<br />')}'
+        data-content-default='${isShowAlias ? defaultMarks.join('<br />') : marksStart.join('<br />')}'
       >`);
     }
     resText.push(letter);
@@ -92,6 +102,6 @@ function constructMessage(ent) {
   if(aliases[entityParts[1]] && aliases[entityParts[1]][entityParts[0]]) {
     return `${aliases[entityParts[1]][entityParts[0]]}${ent.value ? ':'+ent.value : ''}`;
   } else {
-    return `${ent.entity}:${ent.value}123`;
+    return `${ent.entity}:${ent.value}`;
   }
 }
