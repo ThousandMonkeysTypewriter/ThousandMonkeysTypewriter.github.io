@@ -8,6 +8,7 @@
 
 mark {
   background-color: #fce3e3;
+  white-space: nowrap;
 }
 
 #loading_cover {
