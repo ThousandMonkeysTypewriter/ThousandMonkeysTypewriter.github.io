@@ -60,7 +60,7 @@ function constructRes(res, text) {
       const ent = res.entities[ind2];
       if(ind == ent.start) {
         marksStart.push(constructMessage(ent));
-        defaultMarks.push(`${ent.entity}:${ent.value}`);
+        defaultMarks.push(`${ent.entity}: ${ent.value}`);
       }
     }
 
@@ -102,6 +102,6 @@ function constructMessage(ent) {
   if(aliases[entityParts[1]] && aliases[entityParts[1]][entityParts[0]]) {
     return `${aliases[entityParts[1]][entityParts[0]]}${ent.value ? ':'+ent.value : ''}`;
   } else {
-    return `${ent.entity}:${ent.value}`;
+    return `${ent.entity}: ${ent.value}`;
   }
 }

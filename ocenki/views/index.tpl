@@ -11,10 +11,19 @@
   </div>
   <div class="col-6">
     <label>Результат</label>
-    <div class="result mb-2"></div>
-    <div class="form-check">
-      <input type="checkbox" class="form-check-input" checked id="togglePopover">
-      <label class="form-check-label" for="togglePopover">Показать алиасы ошибок</label>
+    <div class="form-group">
+      <div class="result"></div>
+    </div>
+    <div class="form-inline">
+      <div class="form-group form-check">
+        <input type="checkbox" class="form-check-input" checked id="togglePopover">
+        <label class="form-check-label" for="togglePopover">Показать алиасы ошибок</label>
+      </div>
+      <button class="btn btn-success ml-2 mr-1 pl-3 pr-3">Верно</button>
+      <button class="btn btn-danger ml-1 mr-2">Ошибка</button>
+    </div>
+    <div class="form-group mt-4">
+      <textarea class="form-control" placeholder="Комментарий по оценке"></textarea>
     </div>
   </div>
 </div>
