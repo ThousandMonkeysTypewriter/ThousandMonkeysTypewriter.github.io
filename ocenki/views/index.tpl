@@ -19,10 +19,10 @@
         <input type="checkbox" class="form-check-input" checked id="togglePopover">
         <label class="form-check-label" for="togglePopover">Показать алиасы ошибок</label>
       </div>
-      <button class="btn btn-success ml-2 mr-1 pl-3 pr-3">Верно</button>
-      <button class="btn btn-danger ml-1 mr-2">Ошибка</button>
+      <button class="btn btn-success ml-2 mr-1 pl-3 pr-3" style="display:none;">Верно</button>
+      <button class="btn btn-danger ml-1 mr-2" style="display:none;">Ошибка</button>
     </div>
-    <div class="form-group mt-4">
+    <div class="form-group mt-4" style="display:none;">
       <textarea class="form-control" placeholder="Комментарий по оценке"></textarea>
     </div>
   </div>

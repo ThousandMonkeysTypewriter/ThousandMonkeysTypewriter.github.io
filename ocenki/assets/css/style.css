@@ -4,6 +4,7 @@
   border-radius: .25rem;
   padding: .375rem .75rem;
   color: #495057;
+  overflow-y: scroll;
 }
 
 mark {
