@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="assets/css/jquery.auto-complete.css" />
   <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
   <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css">
 
 </head>
 <body>
