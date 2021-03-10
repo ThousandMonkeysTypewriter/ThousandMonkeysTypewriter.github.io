@@ -4,7 +4,7 @@
     <form class="mb-2" onsubmit="checkText($('#inputUrl').val()); return false;">
       <div class="form-group">
         <label for="inputUrl" class="">Текст на проверку</label>
-        <textarea class="form-control" id="inputUrl" style="height: 50vh;resize:none;"></textarea>
+        <textarea class="form-control" id="inputUrl" style="height: 50vh;resize:none;">him breethe healthe</textarea>
       </div>
       <button type="submit" class="btn btn-primary" disabled style="float:right">Вперед!</button>
     </form>
@@ -36,6 +36,7 @@
   <div class="__buttons">
     <button id="remove" title="Remove"><i class="bi bi-trash"></i></button>
     <button id="edit" title="Edit/Add"><i class="bi bi-pencil"></i></button>
+    <button id="approve" title="Approve"><i class="bi bi-check2"></i></button>
   </div>
   <span class="__triangle"></span>
 </div>

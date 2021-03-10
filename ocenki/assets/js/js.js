@@ -15,13 +15,18 @@ window.aliases = {
   WO:       {default: "порядок слов",                                            replace: `Поменять порядок слов`                                                   },
 };
 
+// наводим на ошибку - показываем окошко как в граммарли. на первом месте ошибка. потом кнопка "исправить".
+// потом кнопка с корзиной. 
+ //при наведении на ошибку. из нашего ответа показывать ошибку, кнопку 
+
+
 jQuery(document).ready(function () {
   $('#inputUrl').on('keyup', (evt) => {
     $('.btn.btn-primary').prop('disabled', !evt.target.value.length);
   });
   $('#inputUrl').trigger('keyup');
   // checkText($('#inputUrl').val());
-  // $('[data-trigger="hover"]').popover();
+  $('[data-trigger="hover"]').popover();
   $('#togglePopover').on('change', (evt) => {
     $('mark').each((i, m) => {
       const content = m.attributes['data-content'].value;
@@ -53,10 +58,11 @@ async function showRes(text) {
     body: JSON.stringify({text:text}),
   });
   if (resp.ok) { // 200-299
-    const res = constructRes(await resp.json(), text);
-    window.resOld = res;
+    const r = await resp.json();
+    const res = constructRes(r, text);
+    window.resOld = r;
     $('.result').html(res);
-    // $('[data-trigger="hover"]').popover();
+    $('[data-trigger="hover"]').popover();
   } else {
     $('.result').html(`<span style="color: red;">Error ${resp.status}</span>`);
   }
@@ -69,12 +75,12 @@ async function showRes(text) {
 function renderRes(resp, text) {
   const res = constructRes(resp, text);
   $('.result').html(res);
-  // $('[data-trigger="hover"]').popover();
+  $('[data-trigger="hover"]').popover();
 }
 
 function constructRes(res, text) {
   window.errors = res;
-  // console.log(JSON.stringify(res, undefined, 2));
+  console.log(JSON.stringify(res, undefined, 2));
   if(!res.entities || res.entities.length == 0)
     return `<p>${text}</p>`;
   const resText = [];
@@ -197,7 +203,8 @@ function showMenu(form, classPrefix) {
     }
  
     // 4.
-    var width = ( highlight.rect.width / 2 ) - 42;
+    const num = classPrefix === 'adding' ? 1 : 2;
+    var width = ( highlight.rect.width / num ) - 42;
     /**
      * The "42" is acquired from our sharing buttons width devided by 2.
      */
@@ -237,6 +244,9 @@ jQuery(document).ready(function() {
   $('#remove').on('click', () => {
     const highlight = getHighlight();
     removeError(highlight);
+  });
+  $('#approve').on('click', () => {
+    sendError(errors);
   });
 })
 
